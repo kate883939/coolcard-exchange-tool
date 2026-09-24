@@ -1,0 +1,810 @@
+<title>閃卡規格書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
+
+<style>
+@property --ax{syntax:'<number>';inherits:true;initial-value:0}
+@property --ay{syntax:'<number>';inherits:true;initial-value:0}
+
+:root{
+  --paper:#F1EFF1; --card:#FFFFFF; --card-2:#FAF9FA;
+  --ink:#1A181C; --ink-2:#57525C; --ink-3:#8B858F;
+  --rule:#DBD6DC; --rule-soft:#E7E3E8;
+  --accent:#6B4BD6; --accent-soft:#EDE8FC;
+  --foil:#9A7830; --foil-soft:#F5EEDE;
+  --warn:#B4462E; --warn-soft:#FBEAE5;
+  --stage:#E4E1E7; --dot:rgba(26,24,28,.16);
+  --shadow:0 1px 2px rgba(26,24,28,.05), 0 8px 24px -12px rgba(26,24,28,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#131117; --card:#1C1A22; --card-2:#22202A;
+    --ink:#EDEAF1; --ink-2:#A9A3B2; --ink-3:#78727F;
+    --rule:#332F3C; --rule-soft:#282430;
+    --accent:#A896F5; --accent-soft:#282141;
+    --foil:#D6B268; --foil-soft:#302716;
+    --warn:#E08A72; --warn-soft:#331E18;
+    --stage:#0E0D12; --dot:rgba(237,234,241,.14);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131117; --card:#1C1A22; --card-2:#22202A;
+  --ink:#EDEAF1; --ink-2:#A9A3B2; --ink-3:#78727F;
+  --rule:#332F3C; --rule-soft:#282430;
+  --accent:#A896F5; --accent-soft:#282141;
+  --foil:#D6B268; --foil-soft:#302716;
+  --warn:#E08A72; --warn-soft:#331E18;
+  --stage:#0E0D12; --dot:rgba(237,234,241,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-weight:300;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 28px 120px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+header.mast{padding:72px 0 36px}
+h1{font-family:"Noto Serif TC",Georgia,serif;font-weight:900;font-size:clamp(38px,6.4vw,60px);line-height:1.18;letter-spacing:-.01em;margin:14px 0 0;text-wrap:balance}
+.dek{margin:20px 0 0;font-size:17px;color:var(--ink-2);max-width:36em}
+.diff{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.diff span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;border:1px solid var(--rule);border-radius:2px;padding:4px 9px;color:var(--ink-2)}
+.diff span b{color:var(--accent);font-weight:500;margin-right:4px}
+.diff span.cut b{color:var(--ink-3)}
+.ver{display:inline-block;margin-left:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:1px 7px;vertical-align:middle;letter-spacing:.06em}
+
+section{padding:54px 0 8px;border-top:1px solid var(--rule)}
+.shead{display:flex;gap:16px;align-items:baseline;margin-bottom:10px}
+.snum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.08em;flex:none;padding-top:6px}
+h2{font-family:"Noto Serif TC",Georgia,serif;font-weight:700;font-size:clamp(23px,3.3vw,30px);line-height:1.35;margin:0;letter-spacing:-.005em;text-wrap:balance}
+h3{font-weight:700;font-size:16px;margin:32px 0 8px;line-height:1.6}
+p{margin:0 0 16px;max-width:64ch}
+.in{margin-left:36px}
+@media(max-width:640px){.in{margin-left:0}.shead{gap:12px}}
+strong{font-weight:700}
+em{font-style:normal;background:var(--accent-soft);color:var(--ink);padding:1px 5px;border-radius:3px;font-weight:500}
+ul,ol{padding-left:20px;margin:0 0 16px;max-width:64ch}
+li{margin-bottom:9px}
+code{font-family:"IBM Plex Mono",monospace;font-size:.86em;background:var(--card-2);border:1px solid var(--rule-soft);border-radius:3px;padding:1px 5px;word-break:break-all}
+
+.note{font-size:13.5px;background:var(--accent-soft);border-radius:5px;padding:13px 16px;color:var(--ink);line-height:1.8;margin:0 0 16px;max-width:66ch}
+.note.gold{background:var(--foil-soft)}
+.note.warn{background:var(--warn-soft)}
+.note b{font-weight:700}
+
+.links3{display:grid;gap:14px;margin:26px 0 0}
+@media(min-width:820px){.links3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.l3{background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.l3 .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)}
+.l3 .t{font-weight:700;font-size:15.5px;line-height:1.5}
+.l3 p{font-size:13.5px;color:var(--ink-2);margin:0;line-height:1.75}
+.l3 .fix{font-size:13px;color:var(--ink);border-top:1px solid var(--rule-soft);padding-top:9px;margin-top:auto}
+.l3 .fix b{font-weight:700}
+
+/* ================= card lab ================= */
+.lab{margin:26px 0 8px;background:var(--card);border:1px solid var(--rule);border-radius:10px;overflow:hidden;display:grid;box-shadow:var(--shadow)}
+@media(min-width:840px){.lab{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
+.stage{background-color:var(--stage);background-image:radial-gradient(var(--dot) 1.1px,transparent 1.4px);background-size:14px 14px;
+  display:grid;place-items:center;padding:40px 20px 44px;min-height:470px;position:relative;overflow:hidden}
+.stage-foot{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--ink-3)}
+.playbtn{position:absolute;top:12px;right:12px;font:inherit;font-size:12px;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:99px;padding:4px 12px;cursor:pointer}
+.playbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.scene{--ax:0;--ay:0;perspective:1100px;display:grid;place-items:center;position:relative;
+  animation:swx 7s ease-in-out infinite alternate,swy 5.3s ease-in-out infinite alternate}
+.scene.paused{animation-play-state:paused}
+@keyframes swx{from{--ax:-1}to{--ax:1}}
+@keyframes swy{from{--ay:-1}to{--ay:1}}
+@media (prefers-reduced-motion:reduce){.scene{animation:none;--ax:-.5;--ay:-.35}}
+
+.shadow{position:absolute;left:12%;right:12%;bottom:-26px;height:22px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(10,8,20,.4),transparent);filter:blur(5px);
+  transform:translateX(calc(var(--ax) * -16px)) scaleX(calc(1 - (var(--ax) * var(--ax)) * .12))}
+
+.card3d{--r:12px;--edge:#F4F1EB;--facebg:#fff;--sw:22%;--sa:.14;
+  width:var(--w,280px);height:var(--h,210px);position:relative;transform-style:preserve-3d;
+  transform:rotateX(calc(var(--ay) * -9deg)) rotateY(calc(var(--ax) * 28deg));transition:width .35s ease,height .35s ease}
+.edge{position:absolute;inset:0;border-radius:var(--r);background:var(--edge);
+  transform:translateZ(calc(var(--z) * -0.65px));box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.edge.last{box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.face{position:absolute;inset:0;border-radius:var(--r);overflow:hidden;background:var(--facebg);transform:translateZ(.4px);isolation:isolate}
+.face svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.face .sky{transition:opacity .3s}
+.label{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 11px;background:linear-gradient(to top,rgba(12,10,26,.7),transparent);color:#F4F0FA}
+.label .nm{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;line-height:1.3}
+.label .rl{font-size:10.5px;opacity:.82;margin-top:1px}
+.tex,.holo,.sheen{position:absolute;inset:0;pointer-events:none}
+.tex{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),repeating-linear-gradient(8deg,rgba(90,70,40,.05) 0 1px,transparent 1px 4px);
+  mix-blend-mode:multiply;opacity:0}
+.sheen{background:linear-gradient(110deg,transparent calc(50% - var(--sw)),rgba(255,255,255,var(--sa)) 50%,transparent calc(50% + var(--sw)));
+  background-size:250% 100%;background-position:calc(50% - var(--ax) * 60%) 0}
+.holo{mix-blend-mode:color-dodge;opacity:0}
+
+/* paper */
+.paper-texture{--edge:#EDE3CF}
+.paper-texture .tex{opacity:.42}
+.paper-clear{--edge:rgba(255,255,255,.26);--facebg:rgba(255,255,255,.06)}
+.paper-clear .face{box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+.paper-clear .sky{opacity:.14}
+.paper-clear .edge{box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+/* surface */
+.surface-matte{--sw:26%;--sa:.13}
+.surface-gloss{--sw:7%;--sa:.6}
+.surface-holo{--sw:12%;--sa:.32}
+.surface-holo .holo{opacity:.62}
+/* holo style */
+.holo-flow .holo{background-image:linear-gradient(115deg,transparent 20%,#6fe8d6 34%,#a88cff 44%,#ff9ac4 54%,#ffd98a 62%,transparent 78%);
+  background-size:300% 300%;background-position:calc(50% + var(--ax) * 45%) calc(50% + var(--ay) * 45%)}
+.holo-sparkle .holo{background-image:radial-gradient(circle,#fff 0 1px,transparent 1.6px),radial-gradient(circle,#ffe9b8 0 .8px,transparent 1.4px),radial-gradient(circle,#c8e4ff 0 1.2px,transparent 2px),linear-gradient(115deg,transparent 30%,rgba(168,140,255,.5) 50%,transparent 70%);
+  background-size:37px 29px,23px 31px,53px 47px,300% 300%;
+  background-position:calc(var(--ax) * 8px) calc(var(--ay) * 6px),calc(var(--ax) * -10px) calc(var(--ay) * 7px),calc(var(--ax) * 5px) calc(var(--ay) * -9px),calc(50% + var(--ax) * 45%) 50%;
+  -webkit-mask-image:linear-gradient(110deg,transparent 15%,#000 40%,#000 60%,transparent 85%);mask-image:linear-gradient(110deg,transparent 15%,#000 40%,#000 60%,transparent 85%);
+  -webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:calc(50% - var(--ax) * 60%) 0;mask-position:calc(50% - var(--ax) * 60%) 0}
+.surface-holo.holo-sparkle .holo{opacity:calc(.4 + .55 * var(--ax) * var(--ax))}
+.holo-grid .holo{background-image:repeating-linear-gradient(45deg,transparent 0 7px,rgba(255,255,255,.55) 7px 8px),repeating-linear-gradient(-45deg,transparent 0 7px,rgba(255,255,255,.55) 7px 8px),linear-gradient(115deg,#6fe8d6,#a88cff,#ff9ac4,#ffd98a,#6fe8d6);
+  background-size:auto,auto,300% 300%;background-position:0 0,0 0,calc(50% + var(--ax) * 45%) calc(50% + var(--ay) * 45%);
+  -webkit-mask-image:linear-gradient(110deg,transparent 22%,#000 44%,#000 56%,transparent 78%);mask-image:linear-gradient(110deg,transparent 22%,#000 44%,#000 56%,transparent 78%);
+  -webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:calc(50% - var(--ax) * 60%) 0;mask-position:calc(50% - var(--ax) * 60%) 0}
+.surface-holo.holo-grid .holo{opacity:.7}
+
+/* controls */
+.ctrl{padding:24px 24px 22px;display:flex;flex-direction:column;gap:17px;border-top:1px solid var(--rule)}
+@media(min-width:840px){.ctrl{border-top:0;border-left:1px solid var(--rule)}}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+fieldset[disabled]{opacity:.4}
+legend{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;padding:0}
+legend span{color:var(--ink-2);text-transform:none;letter-spacing:0;font-family:"Noto Sans TC",sans-serif;margin-left:6px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts label{position:relative}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;font-size:13px;padding:5px 12px;border:1px solid var(--rule);border-radius:99px;cursor:pointer;color:var(--ink-2);background:var(--card);transition:border-color .15s,color .15s,background .15s;font-weight:400}
+.opts input:checked + span{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:500}
+.opts input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.opts input:disabled + span{cursor:not-allowed}
+.split{display:flex;gap:18px;flex-wrap:wrap}
+.split fieldset{flex:1 1 auto}
+.tag-sug{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;color:var(--foil);border:1px solid var(--foil);border-radius:2px;padding:0 5px;margin-left:6px;text-transform:none}
+.json{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.7;background:var(--card-2);border:1px solid var(--rule-soft);border-radius:6px;padding:12px 14px;margin:0;color:var(--ink);overflow-x:auto;white-space:pre}
+.json .c{color:var(--ink-3)}
+
+/* tables */
+.tablebox{margin:22px 0 8px;overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:400;background:var(--card-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.k{font-weight:500;white-space:nowrap}
+td.s{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+td.m{font-family:"IBM Plex Mono",monospace;font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+tr.grp td{background:var(--card-2);font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--accent);padding:8px 15px}
+.owner{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;border-radius:2px;padding:2px 7px;white-space:nowrap;border:1px solid}
+.owner.k{color:var(--accent);border-color:var(--accent)}
+.owner.e{color:var(--foil);border-color:var(--foil)}
+.pill{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;border-radius:2px;padding:2px 7px;white-space:nowrap;border:1px solid var(--rule);color:var(--ink-3)}
+.pill.p1{color:var(--ink);border-color:var(--ink-3)}
+.newtag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--accent);margin-left:6px;letter-spacing:.04em}
+
+pre.code{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.75;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;overflow-x:auto;margin:18px 0 16px;color:var(--ink)}
+pre.code .c{color:var(--ink-3)}
+
+figure{margin:26px 0;padding:0}
+.figbox{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px 20px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;color:var(--ink)}
+figcaption{font-size:12.5px;color:var(--ink-3);margin-top:11px;line-height:1.7;max-width:66ch}
+.dnode{fill:none;stroke:currentColor;stroke-opacity:.34}
+.dfill{fill:var(--accent);fill-opacity:.1;stroke:var(--accent);stroke-opacity:.55}
+.dt{fill:currentColor;font-family:"Noto Sans TC",sans-serif;font-size:12.5px;font-weight:500}
+.ds{fill:currentColor;fill-opacity:.62;font-family:"Noto Sans TC",sans-serif;font-size:11px;font-weight:300}
+.dl{fill:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.03em}
+.dline-acc{stroke:var(--accent);fill:none}
+.dfold{stroke:var(--accent);stroke-dasharray:5 4;fill:none}
+
+.two{display:grid;gap:14px;margin:20px 0 8px}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:18px 20px}
+.box .bk{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.box .bt{font-weight:700;font-size:15.5px;margin-bottom:6px}
+.box p,.box li{font-size:13.5px;color:var(--ink-2);line-height:1.75}
+.box p{margin:0 0 8px}
+.box ul{margin:0;padding-left:18px}
+.box li{margin-bottom:5px}
+
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-3)}
+footer p{max-width:none}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">MVP 規格 / 接續〈方向收斂討論稿〉</div>
+  <h1>閃卡規格書<span class="ver">V3</span></h1>
+  <p class="dek">這一版把比例改成 <strong>1:1、3:4、2:3（4×6）</strong>，列印只做 <strong>ibon 買得到的兩種紙</strong>：4×6 專用紙和 A4 厚紙。材質系統沿用上一版：一張有厚度、會自己轉、會反光的卡。</p>
+  <div class="diff">
+    <span><b>改</b>比例 1:1 · 3:4 · 2:3</span>
+    <span><b>改</b>列印＝ibon 4×6 ＋ A4</span>
+    <span><b>＋</b>卡片厚度</span>
+    <span><b>＋</b>自己轉動</span>
+    <span><b>＋</b>材質＝紙質＋效果＋閃法</span>
+    <span class="cut"><b>－</b>4:3 · 16:9</span>
+    <span class="cut"><b>－</b>直橫切換</span>
+    <span class="cut"><b>－</b>自動拼版</span>
+  </div>
+
+  <div class="links3">
+    <div class="l3">
+      <div class="k">這版解掉的 · 橫卡</div>
+      <div class="t">三種比例都是直的（或方的）</div>
+      <p>上一版 16:9 橫卡在直式手機上只剩一半大，所以要加直／橫切換。現在三種比例都是直式，這題直接消失。</p>
+      <div class="fix"><b>決定：</b>MVP 只做直式。橫的圖一樣可以上傳，裁成直的就好。</div>
+    </div>
+    <div class="l3">
+      <div class="k">這版解掉的 · 列印</div>
+      <div class="t">不用自動拼版了，而且卡套又能套了</div>
+      <p>兩種紙 × 三種比例 = 6 個固定版型，每個都能事先排好、試印過。不需要寫程式動態算一頁放幾張。</p>
+      <div class="fix"><b>額外好處：</b>三種卡片寬度都在 58–63mm，高度都在 90mm 以內，<b>一般 TCG 卡套都套得進去</b>。上一版放掉的卡套優點又回來了。</div>
+    </div>
+    <div class="l3">
+      <div class="k">還在的 · 卡框</div>
+      <div class="t">每個卡框要套在三種比例上</div>
+      <p>模板是「卡框＋版面」這一層。如果卡框是畫好的圖檔，三種比例就要畫三次。</p>
+      <div class="fix"><b>建議：</b>卡框用程式畫（邊寬、圓角、顏色、內距幾個參數），任何比例自動套得上。</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 01 material ================= -->
+<section>
+  <div class="shead"><span class="snum">01</span><h2>材質：一張有厚度、會自己轉的卡</h2></div>
+  <div class="in">
+    <p>上一版照著燙印打樣室在想，結果變成在模擬印刷工法。但你們要的不是「這張卡印出來會長怎樣」，而是<em>在螢幕上，它看起來像一張真的拿在手上的卡</em>——有厚度、有紙的質感、光線掃過會反光或閃。</p>
+    <p>所以控制項改成三個，順序就是使用者想事情的順序：這是什麼紙 → 表面是霧的、亮的還是會閃 → 如果會閃，怎麼閃。卡片自己會慢慢轉，不需要滑鼠也不需要傾斜手機。</p>
+  </div>
+
+  <div class="lab in">
+    <div class="stage">
+      <button class="playbtn" id="play" type="button" aria-pressed="false">暫停</button>
+      <div class="scene" id="scene">
+        <div class="card3d paper-smooth surface-holo holo-flow" id="card">
+          <div class="edge last" style="--z:6"></div><div class="edge" style="--z:5"></div><div class="edge" style="--z:4"></div>
+          <div class="edge" style="--z:3"></div><div class="edge" style="--z:2"></div><div class="edge" style="--z:1"></div>
+          <div class="face">
+            <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs><linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2f3369"/><stop offset=".45" stop-color="#6b5898"/><stop offset=".75" stop-color="#d897a0"/><stop offset="1" stop-color="#f2c6a2"/>
+              </linearGradient></defs>
+              <rect class="sky" width="400" height="400" fill="url(#skyg)"/>
+              <circle cx="252" cy="150" r="58" fill="#FFF3D6" fill-opacity=".14"/>
+              <circle cx="252" cy="150" r="40" fill="#FFF3D6"/>
+              <g fill="#fff"><circle cx="70" cy="80" r="2"/><circle cx="130" cy="120" r="1.5"/><circle cx="170" cy="60" r="2.2"/><circle cx="330" cy="70" r="1.6"/><circle cx="110" cy="190" r="1.4"/><circle cx="200" cy="170" r="1.7"/><circle cx="345" cy="220" r="1.5"/><circle cx="40" cy="240" r="1.6"/><circle cx="300" cy="110" r="1.2"/></g>
+              <path d="M0 262 C60 232 110 244 160 222 C210 200 256 222 306 208 C340 198 372 204 400 210 L400 400 L0 400 Z" fill="#43477e" fill-opacity=".88"/>
+              <path d="M0 298 C52 278 100 286 148 270 C196 254 246 272 300 262 C340 254 372 262 400 266 L400 400 L0 400 Z" fill="#2c2f5e"/>
+              <path d="M0 336 C66 320 132 330 190 316 C250 302 322 322 400 312 L400 400 L0 400 Z" fill="#1b1d40"/>
+              <path d="M112 318 L112 280 M112 290 L100 280 M112 297 L125 285 M112 304 L103 297" stroke="#1b1d40" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+            <div class="label"><div class="nm">汐見</div><div class="rl">插畫 ／ 本次攤位 B22</div></div>
+            <div class="tex"></div>
+            <div class="holo"></div>
+            <div class="sheen"></div>
+          </div>
+        </div>
+        <div class="shadow"></div>
+      </div>
+      <div class="stage-foot">卡片會自己轉 · 不需要滑鼠或傾斜</div>
+    </div>
+
+    <form class="ctrl" id="ctrl" onsubmit="return false">
+      <fieldset>
+        <legend>比例<span>印出來的實際尺寸</span></legend>
+        <div class="opts">
+          <label><input type="radio" name="ratio" value="1:1"><span>1:1 · 63×63</span></label>
+          <label><input type="radio" name="ratio" value="3:4" checked><span>3:4 · 63×84</span></label>
+          <label><input type="radio" name="ratio" value="2:3"><span>2:3 · 58×87</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>紙質<span>這是什麼卡</span></legend>
+        <div class="opts">
+          <label><input type="radio" name="paper" value="smooth" checked><span>光滑卡紙</span></label>
+          <label><input type="radio" name="paper" value="texture"><span>紋理紙</span></label>
+          <label><input type="radio" name="paper" value="clear"><span>半透卡</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>效果<span>表面怎麼反光</span></legend>
+        <div class="opts">
+          <label><input type="radio" name="surface" value="matte"><span>霧面</span></label>
+          <label><input type="radio" name="surface" value="gloss"><span>亮面</span></label>
+          <label><input type="radio" name="surface" value="holo" checked><span>閃閃</span></label>
+        </div>
+      </fieldset>
+      <fieldset id="holofs">
+        <legend>閃法<span>選了閃閃才出現</span></legend>
+        <div class="opts">
+          <label><input type="radio" name="holo" value="flow" checked><span>流光</span></label>
+          <label><input type="radio" name="holo" value="sparkle"><span>星砂</span></label>
+          <label><input type="radio" name="holo" value="grid"><span>格紋</span></label>
+        </div>
+      </fieldset>
+      <pre class="json" id="json"></pre>
+    </form>
+  </div>
+
+  <div class="in">
+    <h3>每個選項在做什麼</h3>
+  </div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th>選項</th><th>看起來</th><th>厚度側邊</th><th>印出來</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">紙質</td></tr>
+        <tr><td class="k">光滑卡紙</td><td class="s">乾淨、沒有紋理。預設值。</td><td class="s">白色側邊</td><td class="s">原圖</td></tr>
+        <tr><td class="k">紋理紙</td><td class="s">細細的紙纖維，像美術紙或厚磅卡。</td><td class="s">米色側邊</td><td class="s">原圖（紋理不印，紙讓使用者自己選）</td></tr>
+        <tr><td class="k">半透卡</td><td class="s">背景變透明，只留下主體，後面的東西透得過來。</td><td class="s">透明亮邊</td><td class="s">白底</td></tr>
+        <tr class="grp"><td colspan="4">效果</td></tr>
+        <tr><td class="k">霧面</td><td class="s">很淡、很寬的一片柔光掃過。最安靜。</td><td class="s">—</td><td class="s">原圖</td></tr>
+        <tr><td class="k">亮面</td><td class="s">一道窄而亮的反光帶，像護貝過的卡。</td><td class="s">—</td><td class="s">原圖</td></tr>
+        <tr><td class="k">閃閃</td><td class="s">打開下面的閃法選項。</td><td class="s">—</td><td class="s">閃光消失，印原圖</td></tr>
+        <tr class="grp"><td colspan="4">閃法（只有選「閃閃」時出現）</td></tr>
+        <tr><td class="k">流光</td><td class="s">彩虹色帶隨轉動滑過整張卡。最接近那個 CodePen。</td><td class="s">—</td><td class="s">—</td></tr>
+        <tr><td class="k">星砂</td><td class="s">細小亮點，轉到兩側時最亮，像撒了亮粉。</td><td class="s">—</td><td class="s">—</td></tr>
+        <tr><td class="k">格紋</td><td class="s">菱格紋反光帶掃過，像碎鏡或鐳射卡。</td><td class="s">—</td><td class="s">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="in">
+    <h3>從上一版拿掉的東西，以及為什麼</h3>
+    <ul>
+      <li><strong>燙金、燙銀</strong>——那是印刷工法，不是卡片材質。拿掉之後，「燙金不能選整張」這種要特別擋的規則也跟著消失。</li>
+      <li><strong>閃的範圍（卡框／亮部／整張）</strong>——閃法本身就決定了閃的樣子，再加一層範圍，使用者要做的決定太多。之後真的需要，範圍可以做成模板的一部分，而不是使用者的選項。</li>
+      <li><strong>強度滑桿</strong>——變成內部預設值。每種閃法的強度你在調參頁調到最好看就固定住，使用者不用煩惱。</li>
+    </ul>
+    <div class="note gold"><b>QA 變簡單很多：</b>上一版是 4 × 5 × 3 = 60 種組合。這一版是 3 種紙 × （霧面、亮面、3 種閃法）= <b>15 種組合</b>，兩個人可以每種都在真機上看過。最要注意的兩組：<b>半透卡 × 流光</b>（名字最容易被彩虹蓋過去）、<b>紋理紙 × 星砂</b>（紙紋加亮點可能看起來髒）。</div>
+
+    <h3>厚度怎麼做</h3>
+    <p>把卡片的形狀在背後疊六層、每層往後推一點點，轉動時側邊就會露出來，看起來像一張 0.5–1mm 厚的卡。側邊的顏色跟著紙質走。這個做法很便宜，不需要 WebGL。</p>
+    <p>要注意的一點：<strong>厚度只有在卡片轉動時才看得到</strong>。如果之後某些畫面是靜止的（例如卡冊縮圖），可以固定停在一個微微側轉的角度，一樣看得出厚度。</p>
+
+    <h3>交給工程的格式</h3>
+    <p>使用者存下來的，就是示範右下角那段。你在調參頁調的是另一份：</p>
+  </div>
+  <pre class="code in"><span class="c">// materials.json — 你調、工程讀。使用者看不到這份。</span>
+{
+  "paper": {
+    "smooth":  { "edge": "#F4F1EB", "texture": 0 },
+    "texture": { "edge": "#EDE3CF", "texture": 0.42 },
+    "clear":   { "edge": "rgba(255,255,255,.26)", "bgOpacity": 0.14 }
+  },
+  "surface": {
+    "matte": { "glareWidth": 0.26, "glare": 0.13 },
+    "gloss": { "glareWidth": 0.07, "glare": 0.60 }
+  },
+  "holo": {
+    "flow":    { "stops": ["#6FE8D6", "#A88CFF", "#FF9AC4", "#FFD98A"], "opacity": 0.62 },
+    "sparkle": { "opacity": [0.40, 0.95] },  <span class="c">// 轉到正面最暗、轉到兩側最亮</span>
+    "grid":    { "cell": 8, "opacity": 0.70 }
+  },
+  "motion": {
+    "swingY": 28, "swingX": 9,          <span class="c">// 左右、上下擺幅（度）</span>
+    "periodY": 7, "periodX": 5.3,       <span class="c">// 秒；兩個週期故意不整除，動作才不會機械重複</span>
+    "heroFrame": [-0.5, -0.35]          <span class="c">// 曬卡靜圖與縮圖停的那一格，見第 07 節</span>
+  }
+}</pre>
+  <div class="in">
+    <div class="note">示範用的是 CSS 疊圖，跟那個 CodePen 同一類做法。星砂在示範裡是規則排列的點，實作時建議換成一張隨機分佈的亮點貼圖（CodePen 用的是閃粉 GIF），會自然很多。</div>
+  </div>
+</section>
+
+<!-- ================= 02 crop ================= -->
+<section>
+  <div class="shead"><span class="snum">02</span><h2>裁切與比例</h2></div>
+  <div class="in">
+    <p>把裁切加回來是對的。一旦有三種比例，同一張圖在 1:1 和 2:3 下要保留的部分完全不同，使用者一定需要自己框。</p>
+    <p>1:1、3:4、2:3 這三個比例剛好對應<em>大家手上最常見的圖</em>：1:1 是 IG 貼文、3:4 是手機直拍、2:3 是相機直拍和 4×6 相片。大部分人的圖裁下去損失很少，而且三個都是直式或方形，跟卡片、手機螢幕的方向一致。</p>
+
+    <h3>裁切工具的範圍</h3>
+    <ul>
+      <li><strong>固定比例的裁切框</strong>，先選比例再裁。不做自由比例。</li>
+      <li><strong>兩個手勢：拖曳移動、雙指（或滑桿）縮放。</strong>不做旋轉、不做翻轉。</li>
+      <li>切換比例時，裁切框自動重新置中，不要保留上一個比例的位置——那幾乎一定是錯的。</li>
+      <li>用現成套件（例如 Cropper.js），不要自己寫。手機上的雙指縮放很容易做出 bug。</li>
+    </ul>
+
+    <h3>裁完之後存什麼</h3>
+  </div>
+  <div class="two in">
+    <div class="box">
+      <div class="bk">建議 · MVP</div>
+      <div class="bt">只上傳裁好的圖</div>
+      <p>在瀏覽器裡裁好、轉成 WebP、長邊 1200，再上傳。後端只存這一張。</p>
+      <ul>
+        <li>儲存量跟上一版一樣小</li>
+        <li>後端完全不用知道裁切這件事</li>
+        <li>代價：之後想換比例，要重新上傳原圖</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="bk">之後再說</div>
+      <div class="bt">存原圖＋裁切座標</div>
+      <p>原圖存起來，另外記一組裁切框的位置，顯示時才裁。</p>
+      <ul>
+        <li>可以隨時改比例、改框</li>
+        <li>但原圖可能一張好幾 MB，R2 用量會大好幾倍</li>
+        <li>每次顯示都要多算一次</li>
+      </ul>
+    </div>
+  </div>
+  <div class="in">
+    <div class="note">第一版選左邊。「改比例要重傳」在編輯頁寫清楚就好，以使用頻率來看不是大問題。另外裁完如果長邊不到 1200px，提示一句「這張圖印出來可能會糊」——只影響列印，不要擋。</div>
+
+    <h3>各比例的版面規則（你要定的）</h3>
+    <p>名字、身分、背面的連結清單和 QR，在每種比例上的位置都要先定好。最擠的是 <strong>1:1 的背面</strong>（63×63mm）：放一個 2.5cm 的 QR 之後，連結清單大概只剩三行，建議只放 QR 加前三個連結，其他留給掃進去之後的線上版。</p>
+  </div>
+</section>
+
+<!-- ================= 03 editor ================= -->
+<section>
+  <div class="shead"><span class="snum">03</span><h2>卡片編輯器：流程與兩條連結</h2></div>
+  <div class="in">
+    <p>建議順序：<strong>上傳 → 選比例並裁切 → 選模板 → 選材質 → 填資訊與 tag → 發布</strong>。材質還是放在填資訊之前，讓使用者先看到自己的圖變成一張會轉的閃卡，再做無聊的部分。發布那一刻同時產生兩條連結。</p>
+    <h3>上傳規格（建議值）</h3>
+  </div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th>項目</th><th>規格</th><th>為什麼</th></tr></thead>
+      <tbody>
+        <tr><td class="k">格式白名單</td><td class="m">JPG · PNG · WebP</td><td class="s">PNG 一定要收，半透卡需要去背的圖。不收 GIF、HEIC、SVG（SVG 可以塞程式碼）。</td></tr>
+        <tr><td class="k">原檔上限</td><td class="m">8 MB</td><td class="s">在前端就擋，不要傳到後端才擋。</td></tr>
+        <tr><td class="k">裁切</td><td class="m">1:1 · 3:4 · 2:3</td><td class="s">在瀏覽器裡完成，見第 02 節。</td></tr>
+        <tr><td class="k">轉檔</td><td class="m">WebP · 長邊 1200 · q82</td><td class="s">裁完才轉。WebP 保留透明背景。1200 是為了列印時夠清楚。</td></tr>
+        <tr><td class="k">後端再驗一次</td><td class="m">格式 · 大小 · 比例</td><td class="s">前端的檢查可以被繞過，後端一定要重驗。</td></tr>
+        <tr><td class="k">限流</td><td class="m">每 IP 每小時 20 次</td><td class="s">防止被當免費圖床。上線看數據再調。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="in">
+    <h3>兩條連結要長得完全不一樣</h3>
+  </div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th></th><th>分享連結（1-2）</th><th>編輯連結（1-1）</th></tr></thead>
+      <tbody>
+        <tr><td class="k">給誰</td><td class="s">粉絲、朋友、所有人</td><td class="s">只有你自己</td></tr>
+        <tr><td class="k">網址長相</td><td class="m">網域/c/AbC123</td><td class="m">網域/e/AbC123#k=長一串亂碼</td></tr>
+        <tr><td class="k">QR 裡放哪個</td><td class="s">這個</td><td class="s">永遠不放</td></tr>
+        <tr><td class="k">外流的後果</td><td class="s">沒事，本來就公開</td><td class="s">拿到的人可以改你的卡</td></tr>
+        <tr><td class="k">畫面上的樣子</td><td class="s">卡片圖示、「分享」</td><td class="s">鑰匙圖示、警示色、「不要給別人」</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="in">
+    <div class="note"><b>給工程：</b>金鑰放在網址 <code>#</code> 後面，不會送到伺服器、不會進存取紀錄、不會透過 Referer 外洩；前端讀出來再放進請求。D1 只存金鑰的雜湊值。</div>
+    <p><strong>讓使用者真的把編輯連結存下來，三道保險：</strong>複製連結；存一張「鑰匙卡」圖到相簿（大部分人比較會留相簿的圖）；這台裝置自動記住做過的卡。發布前勾「我已經存好編輯連結」才放行。</p>
+  </div>
+</section>
+
+<!-- ================= 04 QR ================= -->
+<section>
+  <div class="shead"><span class="snum">04</span><h2>QR 怎麼放才不破壞畫面</h2></div>
+  <div class="in">
+    <p>三條原則不變：<strong>QR 不上正面、QR 不做任何閃光、永遠深色碼配淺色底</strong>。而且這一版卡片會自己轉，QR 就更不能在卡面上了——轉動中的 QR 掃不到。</p>
+  </div>
+
+  <figure class="in">
+    <div class="figbox">
+      <svg viewBox="0 0 560 330" role="img" aria-label="手機掃碼情境：卡片展示頁正面不放 QR、卡片持續轉動；點「出示」後卡片停止轉動並縮到上方，下方是白底大 QR。">
+        <defs>
+          <pattern id="qmA" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" fill="#111"/><rect x="2" y="1" width="1" height="2" fill="#111"/>
+            <rect x="1" y="3" width="2" height="1" fill="#111"/><rect x="3" y="2" width="1" height="1" fill="#111"/>
+          </pattern>
+          <symbol id="qrA" viewBox="0 0 29 29">
+            <rect width="29" height="29" fill="#fff"/>
+            <rect x="2" y="2" width="25" height="25" fill="url(#qmA)"/>
+            <g><rect x="1" y="1" width="9" height="9" fill="#fff"/><rect x="2" y="2" width="7" height="7" fill="#111"/><rect x="3" y="3" width="5" height="5" fill="#fff"/><rect x="4" y="4" width="3" height="3" fill="#111"/></g>
+            <g><rect x="19" y="1" width="9" height="9" fill="#fff"/><rect x="20" y="2" width="7" height="7" fill="#111"/><rect x="21" y="3" width="5" height="5" fill="#fff"/><rect x="22" y="4" width="3" height="3" fill="#111"/></g>
+            <g><rect x="1" y="19" width="9" height="9" fill="#fff"/><rect x="2" y="20" width="7" height="7" fill="#111"/><rect x="3" y="21" width="5" height="5" fill="#fff"/><rect x="4" y="22" width="3" height="3" fill="#111"/></g>
+          </symbol>
+          <marker id="arA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,1.5 9,5 0,8.5" fill="var(--accent)"/>
+          </marker>
+        </defs>
+        <rect class="dnode" x="50" y="10" width="160" height="284" rx="22"/>
+        <rect class="dfill" x="72" y="60" width="116" height="130" rx="8" transform="rotate(-4 130 125)"/>
+        <text class="ds" x="130" y="122" text-anchor="middle">卡片・自己轉</text>
+        <text class="ds" x="130" y="138" text-anchor="middle">（不放 QR）</text>
+        <rect x="95" y="232" width="70" height="28" rx="14" fill="var(--accent)"/>
+        <text x="130" y="251" text-anchor="middle" fill="#fff" font-family="Noto Sans TC, sans-serif" font-size="12.5" font-weight="500">出示</text>
+        <text class="dt" x="130" y="318" text-anchor="middle">展示模式</text>
+
+        <line class="dline-acc" x1="222" y1="152" x2="332" y2="152" marker-end="url(#arA)"/>
+        <text class="dl" x="277" y="142" text-anchor="middle">點「出示」</text>
+        <text class="ds" x="277" y="172" text-anchor="middle">停止轉動・螢幕調亮</text>
+
+        <rect class="dnode" x="344" y="10" width="160" height="284" rx="22"/>
+        <rect class="dfill" x="394" y="34" width="60" height="45" rx="5"/>
+        <text class="ds" x="424" y="100" text-anchor="middle">汐見・B22</text>
+        <rect x="360" y="114" width="128" height="150" rx="10" fill="#fff" stroke="currentColor" stroke-opacity=".2"/>
+        <use href="#qrA" x="376" y="126" width="96" height="96"/>
+        <text x="424" y="248" text-anchor="middle" fill="#555" font-family="Noto Sans TC, sans-serif" font-size="10.5">掃我收卡（示意）</text>
+        <text class="dt" x="424" y="318" text-anchor="middle">出示模式</text>
+      </svg>
+    </div>
+    <figcaption>手機情境：展示頁的卡片持續轉動、不放 QR；點「出示」後卡片停下、縮到上方，讓掃的人確認是誰，下方白底大 QR。背面也放一個小 QR 當備援。</figcaption>
+  </figure>
+
+  <div class="in">
+    <h3>印出來的情境：QR 邊長 ≈ 掃描距離 ÷ 10</h3>
+  </div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th>情境</th><th>掃描距離</th><th>QR 最小邊長</th><th>放在哪</th></tr></thead>
+      <tbody>
+        <tr><td class="k">手遞手的卡片</td><td class="m">20–30 cm</td><td class="m">2.5 cm</td><td class="s">卡片背面。最小的 1:1 卡是 6.3cm 見方，放得下。</td></tr>
+        <tr><td class="k">攤桌立牌</td><td class="m">50–100 cm</td><td class="m">7.5 cm 以上</td><td class="s">A6 立牌，只放卡片縮圖、名字、大 QR。</td></tr>
+        <tr><td class="k">攤位海報</td><td class="m">約 1.5 m</td><td class="m">15 cm</td><td class="s">不在 MVP，立牌版型放大可用。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="in">
+    <div class="note">網址只放短碼（<code>/c/AbC123</code>）要守住：網址越短，QR 格子越少、每格越大，展場昏暗燈光下越好掃。之後不要為了追蹤在網址後面加參數。</div>
+  </div>
+</section>
+
+<!-- ================= 05 print ================= -->
+<section>
+  <div class="shead"><span class="snum">05</span><h2>列印版：只做 ibon 的兩種紙</h2></div>
+  <div class="in">
+    <p>只支援 7-11 ibon 買得到的紙，是很好的收斂：攤主不用有印表機、不用買紙，走到超商就能印。而且兩種紙剛好分成兩種用途：</p>
+  </div>
+  <div class="two in">
+    <div class="box">
+      <div class="bk">精緻款 · 少量</div>
+      <div class="bt">4×6 專用紙</div>
+      <p>一張紙印一張卡：正面和背面並排，剪下來對折黏起來。209 磅對折之後是兩層厚，拿在手上很像一張真的卡。</p>
+      <ul>
+        <li>一張 6 元＝一張卡 6 元</li>
+        <li>適合攤位展示、送給熟客的那幾張</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="bk">量產款 · 發放</div>
+      <div class="bt">A4 厚紙</div>
+      <p>一張印 9–12 張，正面在第 1 頁、背面在第 2 頁，用雙面列印。剪開就好，不用折不用黏。</p>
+      <ul>
+        <li>彩色一張 15 元，平均一張卡 1.3–1.7 元</li>
+        <li>適合攤位前大量發放</li>
+      </ul>
+    </div>
+  </div>
+
+  <figure class="in">
+    <div class="figbox">
+      <svg viewBox="0 0 600 548" role="img" aria-label="列印版型：左邊是三張 4×6 專用紙，每張放一組正背並排、中間是折線；右邊是 A4 厚紙，3:4 的卡片一頁排九張，背面在第二頁。圖中兩種紙依同一比例尺繪製。">
+        <text class="dt" x="123.6" y="18" text-anchor="middle">ibon 4×6 專用紙（對折）</text>
+        <text class="dt" x="434.2" y="18" text-anchor="middle">A4 厚紙（雙面列印）</text>
+
+        <g>
+          <rect class="dnode" x="20" y="30" width="207.2" height="140" rx="2"/>
+          <rect x="27" y="37" width="193.2" height="126" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-dasharray="2 3"/>
+          <rect class="dfill" x="35.4" y="55.9" width="88.2" height="88.2"/><rect class="dnode" x="123.6" y="55.9" width="88.2" height="88.2"/>
+          <text class="ds" x="79.5" y="104" text-anchor="middle">正</text><text class="ds" x="167.7" y="104" text-anchor="middle">背</text>
+          <line class="dfold" x1="123.6" y1="48" x2="123.6" y2="152"/>
+          <text class="ds" x="123.6" y="190" text-anchor="middle">1:1 · 63×63mm</text>
+        </g>
+        <g>
+          <rect class="dnode" x="20" y="200" width="207.2" height="140" rx="2"/>
+          <rect x="27" y="207" width="193.2" height="126" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-dasharray="2 3"/>
+          <rect class="dfill" x="35.4" y="211.2" width="88.2" height="117.6"/><rect class="dnode" x="123.6" y="211.2" width="88.2" height="117.6"/>
+          <text class="ds" x="79.5" y="274" text-anchor="middle">正</text><text class="ds" x="167.7" y="274" text-anchor="middle">背</text>
+          <line class="dfold" x1="123.6" y1="205" x2="123.6" y2="335"/>
+          <text class="ds" x="123.6" y="360" text-anchor="middle">3:4 · 63×84mm</text>
+        </g>
+        <g>
+          <rect class="dnode" x="20" y="370" width="207.2" height="140" rx="2"/>
+          <rect x="27" y="377" width="193.2" height="126" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-dasharray="2 3"/>
+          <rect class="dfill" x="42.4" y="379.1" width="81.2" height="121.8"/><rect class="dnode" x="123.6" y="379.1" width="81.2" height="121.8"/>
+          <text class="ds" x="83" y="444" text-anchor="middle">正</text><text class="ds" x="164.2" y="444" text-anchor="middle">背</text>
+          <line class="dfold" x1="123.6" y1="372" x2="123.6" y2="508"/>
+          <text class="ds" x="123.6" y="530" text-anchor="middle">2:3 · 58×87mm</text>
+        </g>
+
+        <g>
+          <rect class="dnode" x="287.2" y="30" width="294" height="415.8" rx="2"/>
+          <rect x="294.2" y="37" width="280" height="401.8" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-dasharray="2 3"/>
+          <rect class="dfill" x="296.3" y="55.9" width="88.2" height="117.6"/><rect class="dfill" x="390.1" y="55.9" width="88.2" height="117.6"/><rect class="dfill" x="483.9" y="55.9" width="88.2" height="117.6"/>
+          <rect class="dfill" x="296.3" y="179.1" width="88.2" height="117.6"/><rect class="dfill" x="390.1" y="179.1" width="88.2" height="117.6"/><rect class="dfill" x="483.9" y="179.1" width="88.2" height="117.6"/>
+          <rect class="dfill" x="296.3" y="302.3" width="88.2" height="117.6"/><rect class="dfill" x="390.1" y="302.3" width="88.2" height="117.6"/><rect class="dfill" x="483.9" y="302.3" width="88.2" height="117.6"/>
+          <text class="ds" x="434.2" y="470" text-anchor="middle">3:4 · 每頁 9 張正面，背面在第 2 頁</text>
+          <text class="ds" x="434.2" y="490" text-anchor="middle">1:1 每頁 12 張 · 2:3 每頁 9 張</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>兩種紙用同一個比例尺畫。灰色點線是 ibon 大約 5mm 的白邊，內容一定要在點線內；白邊剪卡片時本來就會剪掉，所以不影響成品。</figcaption>
+  </figure>
+
+  <div class="in">
+    <h3>6 個固定版型</h3>
+  </div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th>比例</th><th>卡片實際尺寸</th><th>4×6 專用紙</th><th>A4 厚紙</th><th>A4 每張卡成本</th></tr></thead>
+      <tbody>
+        <tr><td class="k">1:1</td><td class="m">63 × 63 mm</td><td class="s">1 張雙面（對折）</td><td class="s">12 張，雙面列印</td><td class="m">約 1.3 元</td></tr>
+        <tr><td class="k">3:4</td><td class="m">63 × 84 mm</td><td class="s">1 張雙面（對折）</td><td class="s">9 張，雙面列印</td><td class="m">約 1.7 元</td></tr>
+        <tr><td class="k">2:3（4×6）</td><td class="m">58 × 87 mm</td><td class="s">1 張雙面（對折）</td><td class="s">9 張，雙面列印</td><td class="m">約 1.7 元</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="in">
+    <p>尺寸是反推出來的：4×6 紙扣掉白邊，可印範圍大約 90×138mm。正背並排要塞得進去，卡片高度就不能超過 90mm、寬度不能超過 69mm。在這個範圍裡取整數，2:3 再縮一點留餘裕（60×90 會剛好頂到白邊，沒有容錯），順便讓三種卡都放得進一般 TCG 卡套。</p>
+    <div class="note"><b>關於「4×6」這個名字：</b>建議在介面上叫「2:3」，旁邊小字寫「4×6 相片比例」。因為印出來的卡片是 58×87mm，不是 4×6 相片那麼大——4×6 紙要留一半給背面。如果使用者要的是「整張 4×6 都是正面」，那張卡就沒有背面、沒有 QR，建議不做。</div>
+
+    <h3>給工程的細節</h3>
+    <ul>
+      <li><strong>4×6 輸出 JPG，不是 PDF。</strong>ibon 的 4×6 專用紙只收圖片檔。畫布就是 10×14.8cm，300dpi 約 1181×1748px，在瀏覽器裡用 canvas 畫好直接存圖。</li>
+      <li><strong>A4 輸出兩頁的 PDF</strong>（例如用 pdf-lib）：第 1 頁全部正面，第 2 頁全部背面。</li>
+      <li><strong>第 2 頁的背面要左右鏡像排列。</strong>雙面列印沿長邊翻頁時，第 1 頁最左邊那張的背面，會出現在第 2 頁的最右邊。排錯的話，每張卡的正背會對不上人。</li>
+      <li><strong>雙面列印正背會偏移 1–2mm。</strong>背面的設計不要貼邊放框線或色塊，四周留 3mm 以上的安全距離；卡片之間留 4mm 間距，剪歪也不會剪到隔壁。</li>
+      <li><strong>平面化規則不變：</strong>閃閃拿掉、霧面亮面沒差、紋理不印、半透卡變白底。下載前讓使用者看平面化預覽，寫「印出來不會閃、不會轉」。</li>
+    </ul>
+    <div class="note warn"><b>開工前一定要實際去印一次。</b>上面的白邊、雙面偏移、4×6 只收圖片，是從網路上的 ibon 攻略整理來的，機台實際行為要自己驗證——特別是 4×6 上傳時會不會被自動縮放、A4 雙面在厚紙上的偏移有多大。做兩個測試檔（一張 4×6 JPG、一份 A4 雙面 PDF）去 7-11 印，總共 21 元，能省掉後面很多來回。</div>
+    <p><strong>A6 攤位立牌放 P2</strong>，可以直接用 4×6 專用紙印，一張 6 元。</p>
+  </div>
+</section>
+
+<!-- ================= 06 motion ================= -->
+<section>
+  <div class="shead"><span class="snum">06</span><h2>自己轉：順便解掉三個問題</h2></div>
+  <div class="in">
+    <p>「卡片自己轉、不用滑也不用傾斜」這個決定，比看起來的更划算。它直接解掉上一版的三個麻煩：</p>
+    <ol>
+      <li><strong>iPhone 的傾斜授權不用做了。</strong>上一版要設計一個「點一下讓卡片動起來」的引導，因為 iOS 不給網頁直接讀感應器。現在完全不需要讀感應器。</li>
+      <li><strong>每個人看到的都一樣。</strong>不管電腦、手機、截圖還是縮圖，卡片都是閃的。不會有「在我手機上不會動」的回報。</li>
+      <li><strong>曬卡動畫變好做。</strong>卡片的動作只跟時間有關，要錄一段剛好接得起來的循環就很簡單（第 07 節）。</li>
+    </ol>
+
+    <h3>動作規格（建議值，在調參頁上調）</h3>
+    <ul>
+      <li>左右擺 ±28°、上下擺 ±9°。再大就會看到卡片側邊太多，像在翻而不是在晃。</li>
+      <li>兩個方向用不同的週期（7 秒和 5.3 秒），合起來的軌跡才不會一眼看出在重複。</li>
+      <li>光線、反光帶、閃光的位置全部跟著同一個角度算，<strong>只有一個動畫來源</strong>。這樣不會出現卡片往左轉、光卻往右跑的怪狀況。</li>
+      <li>點卡片可以翻到背面看連結清單，翻過去之後繼續轉。</li>
+      <li>系統設定「減少動態效果」的使用者，卡片停在最美的那一格，不轉。</li>
+    </ul>
+    <div class="note warn"><b>效能要先講好：</b>一直在轉的卡很吃電。規則是<b>畫面上同時只有一張卡在轉</b>——展示頁那一張、卡冊裡被點開的那一張。卡冊的格子、列表都是停在最美那一格的靜止縮圖。切到別的分頁或螢幕關掉時，動畫也要停。</div>
+  </div>
+</section>
+
+<!-- ================= 07 share ================= -->
+<section>
+  <div class="shead"><span class="snum">07</span><h2>曬卡輸出：QR 跟 OG 都要</h2></div>
+  <div class="two in">
+    <div class="box">
+      <div class="bk">貼連結的時候</div>
+      <div class="bt">OG 預覽圖</div>
+      <ul>
+        <li>1200×630。卡片擺在橫的底圖上，旁邊放名字和場次。三種比例都要排得好看。</li>
+        <li>卡片停在最美的那一格，看得出厚度和閃光。</li>
+        <li><strong>發布時由前端畫好、跟卡片一起上傳 R2</strong>，不做伺服器即時產圖。</li>
+        <li>卡片修改後 OG 圖要換檔名，平台會把舊預覽快取很久。</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="bk">貼圖片的時候</div>
+      <div class="bt">曬卡圖片／動畫</div>
+      <ul>
+        <li>用手機滑到的人掃不了自己螢幕上的 QR，所以<strong>放清楚的短網址文字＋角落小 QR</strong>，不要大 QR。</li>
+        <li>短網址文字能活過截圖和轉貼。</li>
+        <li>尺寸 1080×1350（4:5），卡片置中，旁邊留出轉動的空間。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="in">
+    <h3>靜圖與動畫</h3>
+    <p><strong>靜圖（P1）</strong>：停在 <code>heroFrame</code> 那一格。這一格由你決定——轉到哪個角度時厚度最明顯、光線最漂亮。</p>
+    <p><strong>動畫（P2）</strong>：因為卡片會自己轉，動畫輸出就是「把轉動錄下來」。但有一個細節：展示頁用的 7 秒和 5.3 秒不整除，錄出來的影片接不回原點，循環播放時會跳一下。</p>
+    <div class="note gold"><b>解法：</b>錄影時切換成能整除的週期，例如左右 3 秒、上下 1.5 秒，這樣 6 秒剛好走完一整圈、回到起點，循環播放完全看不出接縫。展示頁繼續用不整除的週期，看起來比較自然。</div>
+  </div>
+</section>
+
+<!-- ================= 08 claim + album ================= -->
+<section>
+  <div class="shead"><span class="snum">08</span><h2>領取流程與卡冊：補三點</h2></div>
+  <div class="in">
+    <ul>
+      <li><strong>卡冊裡會混著三種比例。</strong>建議卡冊用統一大小的格子，卡片在格子裡置中、按原比例縮放，不要硬裁成同一個比例——那等於把創作者裁好的圖又裁一次。</li>
+      <li><strong>快照連材質和比例一起存。</strong>創作者之後把流光改成霧面，你手上那張還是流光的——就是「絕版卡」。</li>
+      <li><strong>開卡動畫結束的那一刻，卡片開始轉。</strong>這是很自然的收尾：拆開、翻過來、它就活了。所有卡用同一段開卡動畫，不因材質而不同。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 09 tasks ================= -->
+<section>
+  <div class="shead"><span class="snum">09</span><h2>更新後的工作清單</h2></div>
+  <div class="in"><p>每一項只有一個人負責到底。標 <span class="newtag">NEW</span> 的是這一版新增或改動的。</p></div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th>工作</th><th>負責</th><th>對應</th><th>優先</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">最先做，其他都卡在這裡</td></tr>
+        <tr><td class="k">材質與動作調參頁</td><td><span class="owner e">工程</span></td><td class="s">01・06</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">上傳、轉檔、後端重驗、限流</td><td><span class="owner e">工程</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">裁切工具（固定比例、縮放、拖曳）<span class="newtag">NEW</span></td><td><span class="owner e">工程</span></td><td class="s">02</td><td><span class="pill p1">P1</span></td></tr>
+        <tr class="grp"><td colspan="4">材質、比例、動作</td></tr>
+        <tr><td class="k">15 組材質預設值 <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">01</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">轉動擺幅、週期、heroFrame <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">06</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">卡片厚度與卡框（程式繪製）<span class="newtag">NEW</span></td><td><span class="owner e">工程</span></td><td class="s">01・牽動一</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">各比例的正背面版面規則 <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">02</td><td><span class="pill p1">P1</span></td></tr>
+        <tr class="grp"><td colspan="4">編輯器與連結</td></tr>
+        <tr><td class="k">編輯器畫面與文案</td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">兩條連結：網址設計、金鑰雜湊</td><td><span class="owner e">工程</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">編輯連結的三道保險與鑰匙卡</td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr class="grp"><td colspan="4">展示、QR、列印</td></tr>
+        <tr><td class="k">展示頁兩個狀態、出示模式、翻面</td><td><span class="owner e">工程</span></td><td class="s">04・06</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">列印檔：4×6 JPG、A4 雙面 PDF（6 個固定版型）<span class="newtag">NEW</span></td><td><span class="owner e">工程</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">去 7-11 試印兩個測試檔 <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">列印版型與平面化預覽</td><td><span class="owner k">你</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">A6 攤位立牌</td><td><span class="owner k">你</span></td><td class="s">04・05</td><td><span class="pill">P2</span></td></tr>
+        <tr class="grp"><td colspan="4">曬卡、領取、卡冊</td></tr>
+        <tr><td class="k">OG 圖產生與上傳</td><td><span class="owner e">工程</span></td><td class="s">07</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">曬卡靜圖（heroFrame）</td><td><span class="owner e">工程</span></td><td class="s">07</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">曬卡動畫（整除週期）</td><td><span class="owner e">工程</span></td><td class="s">07</td><td><span class="pill">P2</span></td></tr>
+        <tr><td class="k">領取流程（開卡動畫）</td><td><span class="owner k">你</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">卡冊（混合比例的格子、材質快照）</td><td><span class="owner k">你</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="in">
+    <div class="note" style="margin-top:22px"><b>範圍的變化：</b>P1 變成 18 項，多的那一項是試印，21 元、半小時。更重要的是<b>列印從最重變成相對輕</b>：不用寫自動拼版，只要做 6 個固定版型，而且每個都能事先驗證。上一版說時間不夠就先砍列印，這一版不用了——列印的成本已經降到值得留在第一場。</div>
+  </div>
+</section>
+
+<footer>
+  <p>V3，接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var card=document.getElementById('card'), scene=document.getElementById('scene'), form=document.getElementById('ctrl');
+  var json=document.getElementById('json'), holofs=document.getElementById('holofs');
+  var play=document.getElementById('play');
+  var R={'1:1':1,'3:4':3/4,'2:3':2/3};
+  function val(n){var e=form.querySelector('input[name="'+n+'"]:checked');return e?e.value:null;}
+  function setClass(prefix,v){
+    card.className.split(' ').forEach(function(c){ if(c.indexOf(prefix+'-')===0) card.classList.remove(c); });
+    if(v) card.classList.add(prefix+'-'+v);
+  }
+  function apply(){
+    var ratio=val('ratio'), paper=val('paper'), surface=val('surface'), holo=val('holo');
+    var square=(ratio==='1:1');
+    holofs.disabled=(surface!=='holo');
+    var r=R[ratio];
+    var max=Math.min(330, (card.parentNode.parentNode.clientWidth||340)-60), w, h;
+    if(square){ w=h=Math.round(max*0.72); }
+    else { h=max; w=Math.round(max*r); }
+    card.style.setProperty('--w',w+'px'); card.style.setProperty('--h',h+'px');
+    setClass('paper',paper); setClass('surface',surface); setClass('holo',surface==='holo'?holo:null);
+    var cw=r>=1?1:r, ch=r>=1?1/r:1;
+    var crop={x:+((1-cw)/2).toFixed(3),y:+((1-ch)/2).toFixed(3),w:+cw.toFixed(3),h:+ch.toFixed(3)};
+    var out={ratio:ratio,crop:crop,paper:paper,surface:surface,holo:surface==='holo'?holo:null};
+    json.innerHTML='<span class="c">// 使用者存下來的就是這些</span>\n'+JSON.stringify(out,null,2).replace(/\{\n\s+"x": ([\d.]+),\n\s+"y": ([\d.]+),\n\s+"w": ([\d.]+),\n\s+"h": ([\d.]+)\n\s+\}/,'{ "x": $1, "y": $2, "w": $3, "h": $4 }');
+  }
+  form.addEventListener('change',apply);
+  window.addEventListener('resize',apply);
+  apply();
+  play.addEventListener('click',function(){
+    var p=scene.classList.toggle('paused');
+    play.textContent=p?'播放':'暫停'; play.setAttribute('aria-pressed',p?'true':'false');
+  });
+})();
+</script>
