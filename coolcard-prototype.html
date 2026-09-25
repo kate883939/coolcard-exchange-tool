@@ -755,11 +755,11 @@ var PREV_BOX=[168,224];   // 填正面、填背面上方的預覽大小
 function demoCards(){
   var im=function(n){return {type:"img",src:"assets/demo-"+n+".webp",w:720,h:1080,alpha:false};};
   var demo=[
-   {id:"h1",code:"Qp7m2R",art:im(1),ratio:"3:4",zoom:1,cx:.5,cy:.42,tpl:"badge",paper:"smooth",surface:"holo",holo:"sparkle",name:"夜貓 Nyx",role:"插畫 ／ 攤位 D12",tag:"FF44",links:[{l:"IG",v:"@nyx_draws"}]},
-   {id:"h2",code:"Zk4v8N",art:im(2),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"texture",surface:"matte",holo:"flow",name:"紅心魔術師",role:"同人插畫 ／ 攤位 B03",tag:"CWT68",links:[{l:"X",v:"@heart_joker"}]},
-   {id:"h3",code:"Wd9s3T",art:im(3),ratio:"3:4",zoom:1,cx:.5,cy:.4,tpl:"white",paper:"smooth",surface:"gloss",holo:"grid",name:"晴天滑板",role:"插畫 ／ 委託開放中",tag:"開拓動漫祭",links:[{l:"噗浪",v:"sunny_skate"}]},
-   {id:"h4",code:"Lm2x7P",art:im(4),ratio:"3:4",zoom:1,cx:.5,cy:.4,tpl:"white",paper:"texture",surface:"holo",holo:"flow",name:"紫苑信箋",role:"插畫 ／ 攤位 E07",tag:"PF40",links:[{l:"IG",v:"@shion_letter"}]},
-   {id:"h5",code:"Rt6c1K",art:im(5),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"smooth",surface:"holo",holo:"sparkle",name:"晴空製圖",role:"同人插畫 ／ 攤位 A22",tag:"CWT68",tags:["咒術迴戰","五條悟","同人插畫"],links:[{l:"X",v:"@clear_sky_art"}]}
+   {id:"h1",code:"Qp7m2R",art:im(1),ratio:"3:4",zoom:1,cx:.5,cy:.42,tpl:"badge",paper:"smooth",surface:"holo",holo:"sparkle",name:"夜貓 Nyx",role:"插畫 ／ 攤位 D12",tag:"FF44",links:[{p:"ig",l:"IG",v:"@nyx_draws"},{p:"plurk",l:"噗浪",v:"nyx_draws"},{p:"other",l:"委託",v:"表單開放中"}]},
+   {id:"h2",code:"Zk4v8N",art:im(2),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"texture",surface:"matte",holo:"flow",name:"紅心魔術師",role:"同人插畫 ／ 攤位 B03",tag:"CWT68",links:[{p:"x",l:"X",v:"@heart_joker"},{p:"ig",l:"IG",v:"@heart.joker"},{p:"other",l:"通販",v:"booth.pm/joker"}]},
+   {id:"h3",code:"Wd9s3T",art:im(3),ratio:"3:4",zoom:1,cx:.5,cy:.4,tpl:"white",paper:"smooth",surface:"gloss",holo:"grid",name:"晴天滑板",role:"插畫 ／ 委託開放中",tag:"開拓動漫祭",links:[{p:"plurk",l:"噗浪",v:"sunny_skate"},{p:"threads",l:"Threads",v:"@sunny.skate"},{p:"ig",l:"IG",v:"@sunny.skate"}]},
+   {id:"h4",code:"Lm2x7P",art:im(4),ratio:"3:4",zoom:1,cx:.5,cy:.4,tpl:"white",paper:"texture",surface:"holo",holo:"flow",name:"紫苑信箋",role:"插畫 ／ 攤位 E07",tag:"PF40",links:[{p:"ig",l:"IG",v:"@shion_letter"},{p:"x",l:"X",v:"@shion_letter"},{p:"other",l:"Pixiv",v:"shion_letter"}]},
+   {id:"h5",code:"Rt6c1K",art:im(5),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"smooth",surface:"holo",holo:"sparkle",name:"晴空製圖",role:"同人插畫 ／ 攤位 A22",tag:"CWT68",tags:["咒術迴戰","五條悟","同人插畫"],links:[{p:"x",l:"X",v:"@clear_sky_art"},{p:"plurk",l:"噗浪",v:"clearsky"},{p:"other",l:"委託",v:"表單開放中"}]}
   ];
   return demo;
 }
@@ -788,9 +788,9 @@ RENDER["home"]=function(){
    '<button class="proto" data-go="r-landing">模擬：我是粉絲，剛掃到一張卡</button></div>',
    mount:function(){
      var i=0,front=document.getElementById("heroFront"),pl=document.getElementById("peekL"),pr=document.getElementById("peekR"),dots=document.getElementById("dots"),hero=document.getElementById("hero");
-     var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches,t=null,busy=false;
+     var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches,T=[],busy=false,swiped=false;
      function paint(){
-       front.innerHTML=liveCard(cards[i],[186,244],{noflip:true,still:reduce});
+       front.innerHTML=liveCard(cards[i],[186,244],{still:reduce});   // 點中間那張可以自己翻面
        pl.innerHTML=flatCard(cards[(i+1)%cards.length],[150,196]);
        pr.innerHTML=flatCard(cards[(i+2)%cards.length],[150,196]);
        Array.prototype.forEach.call(dots.children,function(d,k){d.classList.toggle("on",k===i);d.setAttribute("aria-current",k===i?"true":"false");});
@@ -803,8 +803,15 @@ RENDER["home"]=function(){
        setTimeout(function(){i=n;front.classList.remove("out");front.classList.add("in");paint();busy=false;
          requestAnimationFrame(function(){requestAnimationFrame(function(){front.classList.remove("in");});});},400);
      }
-     // 自動輪播：減少動態效果時不轉；手動切換後重新計時
-     function restart(){clearInterval(t);if(!reduce)t=setInterval(function(){show(i+1);},3800);}
+     // 自動輪播，每張：正面 2.2 秒 → 翻到背面（看連結和 QR）約 2 秒 → 翻回正面 → 換下一張，一張約 5.6 秒
+     // 減少動態效果時不自動轉也不自動翻；手動切換或翻面後重新計時
+     function flip(on){var f=front.querySelector(".flipper");if(f)f.classList.toggle("flipped",on);}
+     function restart(){
+       T.forEach(clearTimeout);T=[];if(reduce)return;
+       T.push(setTimeout(function(){flip(true);},2200));
+       T.push(setTimeout(function(){flip(false);},4600));
+       T.push(setTimeout(function(){show(i+1);restart();},5600));
+     }
      paint();restart();
      // 其他示範卡先在背景載好，滑到的時候不用等
      cards.forEach(function(c){var src=imgSrc(c.art);if(src&&src.indexOf("data:")!==0){var im=new Image();im.src=src;}});
@@ -812,9 +819,11 @@ RENDER["home"]=function(){
      var sx=null,sy=0;
      hero.addEventListener("pointerdown",function(e){sx=e.clientX;sy=e.clientY;});
      hero.addEventListener("pointerup",function(e){if(sx==null)return;var dx=e.clientX-sx,dy=e.clientY-sy;sx=null;
-       if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){show(dx<0?i+1:i-1);restart();}});
+       if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){swiped=true;show(dx<0?i+1:i-1);restart();}});
      hero.addEventListener("pointercancel",function(){sx=null;});
-     cleanup=function(){clearInterval(t);};
+     // 滑動完不要順便觸發翻面；自己點卡片翻面的話，重新計時，不會馬上被自動翻回去
+     hero.addEventListener("click",function(e){if(swiped){swiped=false;e.stopPropagation();return;}if(e.target.closest(".flipper"))restart();},true);
+     cleanup=function(){T.forEach(clearTimeout);};
    }};
 };
 RENDER["c-upload"]=function(){
@@ -1173,7 +1182,7 @@ RENDER["p-guide"]=function(){
 /* ---------------- router ---------------- */
 var screenEl=document.getElementById("screen"),toastEl=document.getElementById("toast"),navEl=document.getElementById("nav"),noteEl=document.getElementById("note");
 // 原型選單裡的診斷資訊：版本、開啟方式、螢幕和各種高度（手機上排查版面問題用）
-var PROTO_VER="v0.33-dev";
+var PROTO_VER="v0.33";
 function diag(){
   var el=document.getElementById("diag");if(!el)return;
   var p=document.createElement("div");p.style.cssText="position:fixed;top:0;left:0;width:0;height:100dvh;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);visibility:hidden";

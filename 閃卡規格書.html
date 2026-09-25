@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>閃卡規格書 v0.32</title>
+<title>閃卡規格書 v0.33</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
@@ -194,6 +194,8 @@ tr.grp td{background:var(--card-2);font-family:"IBM Plex Mono",monospace;font-si
 .diff.vrow span b{color:var(--foil)}
 .vtag.v031{background:#0E9FB8}
 .vtag.v032{background:#C2410C}
+.vtag.v033{background:#15803D}
+.diff.vrow33 span b{color:#4ADE80}
 .diff.vrow32 span b{color:#EA7A45}
 .diff.vrow31 span b{color:#0E9FB8}
 
@@ -230,10 +232,17 @@ footer p{max-width:none}
 
 <header class="mast">
   <div class="eyebrow">MVP 規格 / app 名稱 Cooca / 版號跟原型一致</div>
-  <h1>閃卡規格書<span class="ver">v0.32</span></h1>
-  <p class="dek"><b>v0.32</b>：首頁示範圖縮小並預先載入、加入主畫面後底部黑條與裁切頁文字被切的修正、卡背連結站位、不能捲的畫面不回彈。標 <span class="vtag v032">v0.32</span> 的段落是這一版改的。</p>
+  <h1>閃卡規格書<span class="ver">v0.33</span></h1>
+  <p class="dek"><b>v0.33</b>：修正加入主畫面後底部還有黑條、首頁輪播會翻到背面展示連結和 QR、示範卡各有 3 個連結、原型選單加入診斷資訊。標 <span class="vtag v033">v0.33</span> 的段落是這一版改的。</p>
+  <p class="dek" style="margin-top:10px"><b>v0.32</b>：首頁示範圖縮小並預先載入、加入主畫面後底部黑條與裁切頁文字被切的修正、卡背連結站位、不能捲的畫面不回彈。標 <span class="vtag v032">v0.32</span> 的段落是這一版改的。</p>
   <p class="dek" style="margin-top:10px"><b>v0.31</b>：app 改名 <strong>Cooca</strong>、支援<strong>加入主畫面（PWA）</strong>、首頁輪播可以手動切換、修正 iPhone 上畫面被切到的問題。標 <span class="vtag v031">v0.31</span> 的段落是這一版改的。</p>
   <p class="dek" style="margin-top:10px"><b>v0.3</b>：做卡改成 <strong>選卡框 → 裁切 → 選材質 → 填正面 → 填背面</strong>，收卡改成 <strong>網頁內掃描＋卡套收藏章動畫</strong>，卡冊改成 <strong>瀑布流、依收卡日分組</strong>，卡背與出示模式改用 <strong>深色底＋白色 QR</strong>。比例、列印、材質系統沿用 V3。標 <span class="vtag">v0.3</span> 的段落是 v0.3 改的。<br><small style="color:var(--ink-3);font-size:13px">從 v0.3 起，規格書和原型用同一個版號（GitHub tag）。v0.1、v0.2 時的規格書是「V3」，內文提到的「V3」指的就是那一版。</small></p>
+  <div class="diff vrow vrow33">
+    <span><b>v0.33</b>主畫面模式底部黑條修正</span>
+    <span><b>v0.33</b>輪播展示背面</span>
+    <span><b>v0.33</b>示範卡 3 個連結</span>
+    <span><b>v0.33</b>原型診斷資訊</span>
+  </div>
   <div class="diff vrow vrow32">
     <span><b>v0.32</b>示範圖縮小＋預先載入</span>
     <span><b>v0.32</b>修正底部黑條</span>
@@ -746,6 +755,7 @@ footer p{max-width:none}
       <li>點卡片可以翻到背面看連結清單，翻過去之後繼續轉。</li>
       <li>系統設定「減少動態效果」的使用者，卡片停在最美的那一格，不轉。</li>
       <li><strong>首頁輪播</strong><span class="vtag v031">v0.31</span>：任何人都可以左右滑、或點下方圓點（每個點擊範圍 28×44）切換卡片；沒開「減少動態效果」的人每 3.8 秒自動換一張，手動切換後重新計時；有開的人不自動輪播，手動切換時直接換、沒有滑動動畫。<b>不能只把輪播停掉</b>——那樣使用者就完全看不到其他卡。</li>
+      <li><strong>輪播展示背面</strong><span class="vtag v033">v0.33</span>：每張卡正面約 2.2 秒 → 翻到背面約 2 秒（看得到連結和 QR，讓人知道這張卡能拿來做什麼）→ 翻回正面 → 換下一張，一張約 5.6 秒。點中間那張可以自己翻面，點完重新計時；滑動不會順便觸發翻面。減少動態效果時不自動翻面。示範卡每張都有 3 個連結，涵蓋 IG、噗浪、X、Threads 和「其他」（委託、通販、Pixiv）。</li>
     </ul>
     <div class="note warn"><b>效能要先講好：</b>一直在轉的卡很吃電。規則是<b>畫面上同時只有一張卡在轉</b>——展示頁那一張、卡冊裡被點開的那一張。卡冊的格子、列表都是停在最美那一格的靜止縮圖。切到別的分頁或螢幕關掉時，動畫也要停。</div>
   </div>
@@ -830,6 +840,8 @@ footer p{max-width:none}
       <li><strong>離線</strong>：目前不做，打開時要有網路。之後要做再加 service worker。</li>
     </ul>
     <div class="note warn"><b>手機版的 app 畫面直接貼滿螢幕四邊</b><span class="vtag v032">v0.32</span>（<code>position:fixed; inset:0</code>），不用 <code>100vh</code> 或 <code>100dvh</code> 算高度：<code>100vh</code> 在 Safari 工具列出現時會比螢幕長一截（v0.3 收卡畫面頂端被切）；<code>100dvh</code> 在加入主畫面（透明狀態列）時會少算狀態列那一截（v0.31 底部多一條黑色）。上方讓開瀏海／動態島；底部不整塊讓開，只在可捲內容的最後、底部按鈕列和收卡訊息區多留 Home 指示條的空間。</div>
+    <div class="note warn"><b>從主畫面打開時改用 <code>100vh</code></b><span class="vtag v033">v0.33</span>：實機發現這個模式下 iPhone 回報的整個視窗（包括 <code>position:fixed</code> 的四邊）都少了透明狀態列那一截，貼滿四邊還是露出底部黑條。這個模式沒有瀏覽器工具列，所以用 <code>@media (display-mode: standalone)</code> 把 app 畫面高度設成 <code>100vh</code>（整個螢幕）；在 Safari 裡開維持貼滿四邊。已在 iPhone 實機確認。</div>
+    <p><strong>原型的診斷資訊</strong><span class="vtag v033">v0.33</span>：原型選單最下面顯示版本、開啟方式（主畫面／瀏覽器）、螢幕和視窗大小、<code>vh</code>／<code>dvh</code>、安全區、app 畫面實際範圍。手機上遇到版面問題時截圖回報，不用猜。</p>
     <ul>
       <li><strong>不能捲的畫面不回彈</strong><span class="vtag v032">v0.32</span>：整頁關掉回彈（<code>overscroll-behavior: none</code>），內容區捲到頂或底時不帶動整頁。</li>
       <li><strong>首頁圖片要快</strong><span class="vtag v032">v0.32</span>：示範圖用 720×1080 WebP（5 張約 45 萬 bytes，原本 1.27MB）；輪播一開始看得到的三張用 <code>preload</code> 跟 HTML 同時下載，其他的首頁畫好後在背景先載。內嵌的預設主圖也用 720×1080（列印 58×87mm @300dpi 約需 685×1028，夠用）。</li>
@@ -885,7 +897,8 @@ footer p{max-width:none}
     </table>
   </div>
   <div class="in">
-    <div class="note" style="margin-top:22px"><b>v0.32 範圍的變化：</b>沒有新增工作項目，都是修正和效能改善，歸在既有的 P1 項目裡。</div>
+    <div class="note" style="margin-top:22px"><b>v0.33 範圍的變化：</b>沒有新增工作項目。</div>
+    <div class="note"><b>v0.32 範圍的變化：</b>沒有新增工作項目，都是修正和效能改善，歸在既有的 P1 項目裡。</div>
     <div class="note"><b>v0.31 範圍的變化：</b>P1 從 22 項變成 25 項，新增加入主畫面、logo 與 App 圖示、首頁輪播手動切換。離線可用放 P2。</div>
     <div class="note"><b>v0.3 範圍的變化：</b>P1 從 18 項變成 22 項，新增標籤、連結平台、反白 QR 實機測試、網頁內收卡掃描；「開卡動畫」換成「收卡動畫」。官方活動清單和「我創作的卡」列表放 P2。</div>
     <div class="note"><b>V3 範圍的變化：</b>P1 變成 18 項，多的那一項是試印，21 元、半小時。更重要的是<b>列印從最重變成相對輕</b>：不用寫自動拼版，只要做 6 個固定版型，而且每個都能事先驗證。上一版說時間不夠就先砍列印，這一版不用了——列印的成本已經降到值得留在第一場。</div>
@@ -893,7 +906,7 @@ footer p{max-width:none}
 </section>
 
 <footer>
-  <p>v0.32，依原型同步，版號跟原型一致（app 名稱 Cooca，v0.3 以前叫 coolee）；V3 接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
+  <p>v0.33，依原型同步，版號跟原型一致（app 名稱 Cooca，v0.3 以前叫 coolee）；V3 接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
 </footer>
 
 </div>
