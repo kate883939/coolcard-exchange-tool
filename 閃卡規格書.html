@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>閃卡規格書 v0.31</title>
+<title>閃卡規格書 v0.32</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
@@ -193,6 +193,8 @@ tr.grp td{background:var(--card-2);font-family:"IBM Plex Mono",monospace;font-si
 .vtag{font-family:"IBM Plex Mono",monospace;font-size:10px;color:#fff;background:var(--accent);border-radius:2px;padding:1px 6px;margin-left:8px;letter-spacing:.06em;vertical-align:2px;font-weight:500}
 .diff.vrow span b{color:var(--foil)}
 .vtag.v031{background:#0E9FB8}
+.vtag.v032{background:#C2410C}
+.diff.vrow32 span b{color:#EA7A45}
 .diff.vrow31 span b{color:#0E9FB8}
 
 pre.code{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.75;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;overflow-x:auto;margin:18px 0 16px;color:var(--ink)}
@@ -228,9 +230,17 @@ footer p{max-width:none}
 
 <header class="mast">
   <div class="eyebrow">MVP 規格 / app 名稱 Cooca / 版號跟原型一致</div>
-  <h1>閃卡規格書<span class="ver">v0.31</span></h1>
-  <p class="dek"><b>v0.31</b>：app 改名 <strong>Cooca</strong>、支援<strong>加入主畫面（PWA）</strong>、首頁輪播可以手動切換、修正 iPhone 上畫面被切到的問題。標 <span class="vtag v031">v0.31</span> 的段落是這一版改的。</p>
+  <h1>閃卡規格書<span class="ver">v0.32</span></h1>
+  <p class="dek"><b>v0.32</b>：首頁示範圖縮小並預先載入、加入主畫面後底部黑條與裁切頁文字被切的修正、卡背連結站位、不能捲的畫面不回彈。標 <span class="vtag v032">v0.32</span> 的段落是這一版改的。</p>
+  <p class="dek" style="margin-top:10px"><b>v0.31</b>：app 改名 <strong>Cooca</strong>、支援<strong>加入主畫面（PWA）</strong>、首頁輪播可以手動切換、修正 iPhone 上畫面被切到的問題。標 <span class="vtag v031">v0.31</span> 的段落是這一版改的。</p>
   <p class="dek" style="margin-top:10px"><b>v0.3</b>：做卡改成 <strong>選卡框 → 裁切 → 選材質 → 填正面 → 填背面</strong>，收卡改成 <strong>網頁內掃描＋卡套收藏章動畫</strong>，卡冊改成 <strong>瀑布流、依收卡日分組</strong>，卡背與出示模式改用 <strong>深色底＋白色 QR</strong>。比例、列印、材質系統沿用 V3。標 <span class="vtag">v0.3</span> 的段落是 v0.3 改的。<br><small style="color:var(--ink-3);font-size:13px">從 v0.3 起，規格書和原型用同一個版號（GitHub tag）。v0.1、v0.2 時的規格書是「V3」，內文提到的「V3」指的就是那一版。</small></p>
+  <div class="diff vrow vrow32">
+    <span><b>v0.32</b>示範圖縮小＋預先載入</span>
+    <span><b>v0.32</b>修正底部黑條</span>
+    <span><b>v0.32</b>卡背連結站位</span>
+    <span><b>v0.32</b>裁切頁自動縮放</span>
+    <span><b>v0.32</b>不能捲就不回彈</span>
+  </div>
   <div class="diff vrow vrow31">
     <span><b>v0.31</b>改名 Cooca</span>
     <span><b>v0.31</b>＋加入主畫面（PWA）</span>
@@ -438,6 +448,7 @@ footer p{max-width:none}
       <li><strong>兩個手勢：拖曳移動、雙指（或滑桿）縮放。</strong>不做旋轉、不做翻轉。</li>
       <li>切換比例時，裁切框自動重新置中，不要保留上一個比例的位置——那幾乎一定是錯的。</li>
       <li><strong>裁切框跟著已選的卡框</strong><span class="vtag">v0.3</span>：流程改成先選卡框再裁切，裁切框上直接疊著卡框（名字標籤、徽章圈、白邊）。白邊卡框的圖片區比整張卡扁（卡寬 88% × 卡高 73%），裁切框就是這個圖片區，框內＝卡片上實際出現的畫面。圖片一律等比例裁切，不拉伸。</li>
+      <li><strong>裁切頁整頁放得下、不用捲</strong><span class="vtag v032">v0.32</span>：裁切區最高 360pt，螢幕矮時自動縮小（最小 220pt）。縮放滑桿上的手勢只拿來縮放，不會帶動頁面捲動。</li>
       <li>比例選項在介面上只寫 <strong>1:1、3:4、2:3（明信片）</strong><span class="vtag">v0.3</span>，不寫毫米尺寸。</li>
       <li>用現成套件（例如 Cropper.js），不要自己寫。手機上的雙指縮放很容易做出 bug。</li>
     </ul>
@@ -515,7 +526,7 @@ footer p{max-width:none}
     </table>
   </div>
   <div class="in">
-    <div class="note"><b>沒填的欄位怎麼顯示：</b>做卡的編輯步驟（上傳～填背面）裡，沒填的欄位顯示淡色站位文字（「你的名字」「身分 ／ 攤位位置」「場次」），方便看版面。從「發布前」開始，以及發布後的卡、曬卡圖、列印檔，沒填的就<b>完全不畫</b>；名字和身分都沒填時，連名字的底框也拿掉，卡面只剩圖。</div>
+    <div class="note"><b>沒填的欄位怎麼顯示：</b>做卡的編輯步驟（上傳～填背面）裡，沒填的欄位顯示淡色站位文字（「你的名字」「身分 ／ 攤位位置」「場次」；卡背三列連結顯示平台圖示＋「你的帳號」，「其他」顯示「你的連結」<span class="vtag v032">v0.32</span>），方便看版面。從「發布前」開始，以及發布後的卡、曬卡圖、列印檔，沒填的就<b>完全不畫</b>；名字和身分都沒填時，連名字的底框也拿掉，卡面只剩圖。</div>
     <div class="note"><b>介面規則：</b>app 畫面裡所有可點的東西至少 44×44px（Apple HIG、WCAG 2.5.5）；按鈕等重要文字 ≥ 14px，其他文字 ≥ 12px。</div>
     <h3>兩條連結要長得完全不一樣</h3>
   </div>
@@ -818,7 +829,11 @@ footer p{max-width:none}
       <li><strong>品牌素材</strong>：<code>assets/logo/</code> 放 header logo（兩張交疊的卡＋「Cooca」字標）和 favicon。</li>
       <li><strong>離線</strong>：目前不做，打開時要有網路。之後要做再加 service worker。</li>
     </ul>
-    <div class="note warn"><b>手機版高度一定要用 <code>100dvh</code>：</b>用 <code>100vh</code> 的話，Safari 工具列出現時頁面會比螢幕長一截，整頁被往上推、頂端被切掉（v0.3 的收卡畫面就是這樣）。手機上整頁固定成目前看得到的高度、不讓整頁捲動，只捲內容區。</div>
+    <div class="note warn"><b>手機版的 app 畫面直接貼滿螢幕四邊</b><span class="vtag v032">v0.32</span>（<code>position:fixed; inset:0</code>），不用 <code>100vh</code> 或 <code>100dvh</code> 算高度：<code>100vh</code> 在 Safari 工具列出現時會比螢幕長一截（v0.3 收卡畫面頂端被切）；<code>100dvh</code> 在加入主畫面（透明狀態列）時會少算狀態列那一截（v0.31 底部多一條黑色）。上方讓開瀏海／動態島；底部不整塊讓開，只在可捲內容的最後、底部按鈕列和收卡訊息區多留 Home 指示條的空間。</div>
+    <ul>
+      <li><strong>不能捲的畫面不回彈</strong><span class="vtag v032">v0.32</span>：整頁關掉回彈（<code>overscroll-behavior: none</code>），內容區捲到頂或底時不帶動整頁。</li>
+      <li><strong>首頁圖片要快</strong><span class="vtag v032">v0.32</span>：示範圖用 720×1080 WebP（5 張約 45 萬 bytes，原本 1.27MB）；輪播一開始看得到的三張用 <code>preload</code> 跟 HTML 同時下載，其他的首頁畫好後在背景先載。內嵌的預設主圖也用 720×1080（列印 58×87mm @300dpi 約需 685×1028，夠用）。</li>
+    </ul>
   </div>
 </section>
 
@@ -870,14 +885,15 @@ footer p{max-width:none}
     </table>
   </div>
   <div class="in">
-    <div class="note" style="margin-top:22px"><b>v0.31 範圍的變化：</b>P1 從 22 項變成 25 項，新增加入主畫面、logo 與 App 圖示、首頁輪播手動切換。離線可用放 P2。</div>
+    <div class="note" style="margin-top:22px"><b>v0.32 範圍的變化：</b>沒有新增工作項目，都是修正和效能改善，歸在既有的 P1 項目裡。</div>
+    <div class="note"><b>v0.31 範圍的變化：</b>P1 從 22 項變成 25 項，新增加入主畫面、logo 與 App 圖示、首頁輪播手動切換。離線可用放 P2。</div>
     <div class="note"><b>v0.3 範圍的變化：</b>P1 從 18 項變成 22 項，新增標籤、連結平台、反白 QR 實機測試、網頁內收卡掃描；「開卡動畫」換成「收卡動畫」。官方活動清單和「我創作的卡」列表放 P2。</div>
     <div class="note"><b>V3 範圍的變化：</b>P1 變成 18 項，多的那一項是試印，21 元、半小時。更重要的是<b>列印從最重變成相對輕</b>：不用寫自動拼版，只要做 6 個固定版型，而且每個都能事先驗證。上一版說時間不夠就先砍列印，這一版不用了——列印的成本已經降到值得留在第一場。</div>
   </div>
 </section>
 
 <footer>
-  <p>v0.31，依原型同步，版號跟原型一致（app 名稱 Cooca，v0.3 以前叫 coolee）；V3 接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
+  <p>v0.32，依原型同步，版號跟原型一致（app 名稱 Cooca，v0.3 以前叫 coolee）；V3 接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
 </footer>
 
 </div>
