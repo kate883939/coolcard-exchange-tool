@@ -60,6 +60,7 @@ input,textarea,select{font:inherit;color:inherit}
 .noteBox{margin-top:22px;padding:14px 15px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
 .noteBox .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:5px}
 .noteBox p{margin:0;font-size:12.5px;color:var(--text);line-height:1.7}
+#diag{white-space:pre-line;font-size:12px;margin-top:10px}
 .panel .meta{margin-top:18px;font-size:11.5px;color:var(--dim);line-height:1.7}
 .resetBtn{margin-top:12px;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--muted);cursor:pointer}
 .resetBtn:hover{color:var(--text)}
@@ -472,6 +473,12 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
   .open-msg{bottom:calc(20px + env(safe-area-inset-bottom))}
   .menubtn{bottom:calc(14px + env(safe-area-inset-bottom))}
 }
+/* 從主畫面打開（沒有瀏覽器工具列）：iPhone 回報的視窗高度會少算透明狀態列那一截，
+   貼滿四邊也一樣短、底部露出黑色；這個模式直接用整個螢幕高度（100vh） */
+@media (display-mode: standalone) and (pointer:coarse){
+  html,body{height:100vh}
+  .device{bottom:auto;height:100vh}
+}
 </style>
 
 <div class="shell">
@@ -480,7 +487,8 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
     <p class="sub">三條流程的可點原型。不接後端，卡片和卡冊只存在這個瀏覽器裡。</p>
     <nav id="nav"></nav>
     <div class="noteBox"><div class="k">這個畫面</div><p id="note"></p></div>
-    <div class="meta">app 名稱 Cooca，網址用 cooca.example 示意。<br>對應文件：〈閃卡規格書 V3〉。</div>
+    <div class="meta">app 名稱 Cooca，網址用 cooca.example 示意。<br>對應文件：〈閃卡規格書〉，版號跟原型一致。</div>
+    <div class="meta mono" id="diag"></div>
     <button class="resetBtn" id="reset" type="button">重設原型</button>
   </aside>
   <main class="stagewrap">
@@ -1164,12 +1172,26 @@ RENDER["p-guide"]=function(){
 
 /* ---------------- router ---------------- */
 var screenEl=document.getElementById("screen"),toastEl=document.getElementById("toast"),navEl=document.getElementById("nav"),noteEl=document.getElementById("note");
+// 原型選單裡的診斷資訊：版本、開啟方式、螢幕和各種高度（手機上排查版面問題用）
+var PROTO_VER="v0.33-dev";
+function diag(){
+  var el=document.getElementById("diag");if(!el)return;
+  var p=document.createElement("div");p.style.cssText="position:fixed;top:0;left:0;width:0;height:100dvh;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);visibility:hidden";
+  document.body.appendChild(p);var cs=getComputedStyle(p),st=parseFloat(cs.paddingTop)||0,sb=parseFloat(cs.paddingBottom)||0,dvh=p.offsetHeight-st-sb;
+  p.style.height="100vh";var vh=p.offsetHeight-st-sb;p.remove();
+  var standalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  var d=document.getElementById("device").getBoundingClientRect();
+  el.textContent=PROTO_VER+"・"+(standalone?"主畫面":"瀏覽器")+"\n螢幕 "+screen.width+"×"+screen.height+"・視窗 "+innerWidth+"×"+innerHeight+
+    "\nvh "+Math.round(vh)+"・dvh "+Math.round(dvh)+"・安全區 上"+Math.round(st)+" 下"+Math.round(sb)+
+    "\napp 畫面 "+Math.round(d.top)+"～"+Math.round(d.bottom);
+}
 function fitDevice(){
   var w=document.querySelector(".stagewrap"),cs=getComputedStyle(w);
   var aw=w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-22,ah=innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-22;
   document.documentElement.style.setProperty("--fit",Math.min(1,aw/393,ah/852).toFixed(3));
 }
 fitDevice();addEventListener("resize",fitDevice);
+diag();addEventListener("resize",diag);document.getElementById("menubtn").addEventListener("click",diag);
 function go(id){if(!RENDER[id])return;S.screen=id;render();}
 function render(){
   if(cleanup){try{cleanup();}catch(e){}cleanup=null;}
