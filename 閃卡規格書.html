@@ -1,4 +1,6 @@
-<title>閃卡規格書</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>閃卡規格書 v0.3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
@@ -188,6 +190,8 @@ tr.grp td{background:var(--card-2);font-family:"IBM Plex Mono",monospace;font-si
 .pill{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;border-radius:2px;padding:2px 7px;white-space:nowrap;border:1px solid var(--rule);color:var(--ink-3)}
 .pill.p1{color:var(--ink);border-color:var(--ink-3)}
 .newtag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--accent);margin-left:6px;letter-spacing:.04em}
+.vtag{font-family:"IBM Plex Mono",monospace;font-size:10px;color:#fff;background:var(--accent);border-radius:2px;padding:1px 6px;margin-left:8px;letter-spacing:.06em;vertical-align:2px;font-weight:500}
+.diff.vrow span b{color:var(--foil)}
 
 pre.code{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.75;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;overflow-x:auto;margin:18px 0 16px;color:var(--ink)}
 pre.code .c{color:var(--ink-3)}
@@ -221,9 +225,20 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="mast">
-  <div class="eyebrow">MVP 規格 / 接續〈方向收斂討論稿〉</div>
-  <h1>閃卡規格書<span class="ver">V3</span></h1>
-  <p class="dek">這一版把比例改成 <strong>1:1、3:4、2:3（4×6）</strong>，列印只做 <strong>ibon 買得到的兩種紙</strong>：4×6 專用紙和 A4 厚紙。材質系統沿用上一版：一張有厚度、會自己轉、會反光的卡。</p>
+  <div class="eyebrow">MVP 規格 / app 名稱 coolee / 版號跟原型一致</div>
+  <h1>閃卡規格書<span class="ver">v0.3</span></h1>
+  <p class="dek">v0.3 依原型同步：做卡改成 <strong>選卡框 → 裁切 → 選材質 → 填正面 → 填背面</strong>，收卡改成 <strong>網頁內掃描＋卡套收藏章動畫</strong>，卡冊改成 <strong>瀑布流、依收卡日分組</strong>，卡背與出示模式改用 <strong>深色底＋白色 QR</strong>。比例、列印、材質系統沿用 V3。標 <span class="vtag">v0.3</span> 的段落是這一版改的。<br><small style="color:var(--ink-3);font-size:13px">從 v0.3 起，規格書和原型用同一個版號（GitHub tag）。v0.1、v0.2 時的規格書是「V3」，內文提到的「V3」指的就是那一版。</small></p>
+  <div class="diff vrow">
+    <span><b>v0.3</b>流程：選卡框 → 裁切</span>
+    <span><b>v0.3</b>填正面／填背面</span>
+    <span><b>v0.3</b>＋標籤（hashtag）</span>
+    <span><b>v0.3</b>＋連結平台圖示</span>
+    <span><b>v0.3</b>卡背深色＋白色 QR</span>
+    <span><b>v0.3</b>出示＝卡片＋票根</span>
+    <span><b>v0.3</b>＋網頁內收卡</span>
+    <span><b>v0.3</b>收卡動畫＝卡套＋收藏章</span>
+    <span><b>v0.3</b>卡冊＝瀑布流・依收卡日</span>
+  </div>
   <div class="diff">
     <span><b>改</b>比例 1:1 · 3:4 · 2:3</span>
     <span><b>改</b>列印＝ibon 4×6 ＋ A4</span>
@@ -346,7 +361,7 @@ footer p{max-width:none}
         <tr><td class="k">紋理紙</td><td class="s">細細的紙纖維，像美術紙或厚磅卡。</td><td class="s">米色側邊</td><td class="s">原圖（紋理不印，紙讓使用者自己選）</td></tr>
         <tr><td class="k">半透卡</td><td class="s">背景變透明，只留下主體，後面的東西透得過來。</td><td class="s">透明亮邊</td><td class="s">白底</td></tr>
         <tr class="grp"><td colspan="4">效果</td></tr>
-        <tr><td class="k">霧面</td><td class="s">很淡、很寬的一片柔光掃過。最安靜。</td><td class="s">—</td><td class="s">原圖</td></tr>
+        <tr><td class="k">霧面</td><td class="s">很淡、很寬的一片柔光掃過。最安靜。<b>預設值</b>（v0.3）：先給最樸素的樣子，想要反光或閃的人再自己加。</td><td class="s">—</td><td class="s">原圖</td></tr>
         <tr><td class="k">亮面</td><td class="s">一道窄而亮的反光帶，像護貝過的卡。</td><td class="s">—</td><td class="s">原圖</td></tr>
         <tr><td class="k">閃閃</td><td class="s">打開下面的閃法選項。</td><td class="s">—</td><td class="s">閃光消失，印原圖</td></tr>
         <tr class="grp"><td colspan="4">閃法（只有選「閃閃」時出現）</td></tr>
@@ -412,6 +427,8 @@ footer p{max-width:none}
       <li><strong>固定比例的裁切框</strong>，先選比例再裁。不做自由比例。</li>
       <li><strong>兩個手勢：拖曳移動、雙指（或滑桿）縮放。</strong>不做旋轉、不做翻轉。</li>
       <li>切換比例時，裁切框自動重新置中，不要保留上一個比例的位置——那幾乎一定是錯的。</li>
+      <li><strong>裁切框跟著已選的卡框</strong><span class="vtag">v0.3</span>：流程改成先選卡框再裁切，裁切框上直接疊著卡框（名字標籤、徽章圈、白邊）。白邊卡框的圖片區比整張卡扁（卡寬 88% × 卡高 73%），裁切框就是這個圖片區，框內＝卡片上實際出現的畫面。圖片一律等比例裁切，不拉伸。</li>
+      <li>比例選項在介面上只寫 <strong>1:1、3:4、2:3（明信片）</strong><span class="vtag">v0.3</span>，不寫毫米尺寸。</li>
       <li>用現成套件（例如 Cropper.js），不要自己寫。手機上的雙指縮放很容易做出 bug。</li>
     </ul>
 
@@ -451,7 +468,7 @@ footer p{max-width:none}
 <section>
   <div class="shead"><span class="snum">03</span><h2>卡片編輯器：流程與兩條連結</h2></div>
   <div class="in">
-    <p>建議順序：<strong>上傳 → 選比例並裁切 → 選模板 → 選材質 → 填資訊與 tag → 發布</strong>。材質還是放在填資訊之前，讓使用者先看到自己的圖變成一張會轉的閃卡，再做無聊的部分。發布那一刻同時產生兩條連結。</p>
+    <p>順序<span class="vtag">v0.3</span>：<strong>上傳 → 選卡框 → 裁切與比例 → 選材質 → 填正面 → 填背面 → 發布前（存好編輯連結）→ 發布</strong>，共 7 步。卡框放在裁切前面，裁切時才能看到卡框蓋住哪裡（第 02 節）。材質還是放在填資訊之前，讓使用者先看到自己的圖變成一張會轉的閃卡，再做無聊的部分。發布那一刻同時產生兩條連結。</p>
     <h3>上傳規格（建議值）</h3>
   </div>
   <div class="tablebox in">
@@ -469,6 +486,27 @@ footer p{max-width:none}
   </div>
 
   <div class="in">
+    <h3>填正面、填背面<span class="vtag">v0.3</span></h3>
+    <p>原本的「填資訊」拆成兩步。每一步上方都有<strong>即時預覽</strong>（填正面看正面、填背面看背面），打字時立刻更新，預覽是靜止的、不自動轉。</p>
+  </div>
+  <div class="tablebox in">
+    <table>
+      <thead><tr><th>步驟</th><th>欄位</th><th>規則</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="3">填正面</td></tr>
+        <tr><td class="k">名字</td><td class="s">選填，20 字</td><td class="s">做認親卡時不一定會填，所以全部選填。</td></tr>
+        <tr><td class="k">身分・一句話</td><td class="s">選填，28 字</td><td class="s">例如「插畫 ／ 攤位 A15」。</td></tr>
+        <tr><td class="k">活動名稱／場次</td><td class="s">選填，16 字</td><td class="s">徽章卡框右上角會顯示。下方的快選膠囊只列<strong>這台裝置之前發布過的卡填過的名稱</strong>（最新在前、最多 5 個）；沒有紀錄就不顯示。上線後可以加官方活動清單，讓名稱統一。</td></tr>
+        <tr><td class="k">標籤</td><td class="s">選填，最多 10 個</td><td class="s">像 hashtag，<strong>不印在卡上</strong>，用來分類、分析和之後的搜尋。輸入後按 Enter 或逗號加入；自動去掉開頭的 #、空白，每個最長 20 字；英文不分大小寫去重。卡冊的卡片詳情會顯示標籤。</td></tr>
+        <tr class="grp"><td colspan="3">填背面</td></tr>
+        <tr><td class="k">背面底色</td><td class="s">5 個固定深色</td><td class="s">深夜藍（預設）、墨黑、深紫、酒紅、森綠。文字和 QR 一律白色（見第 04 節）。不做從圖片取色、不做淺色底。</td></tr>
+        <tr><td class="k">連結 ×3</td><td class="s">選填</td><td class="s">每一列先選平台：<strong>IG、噗浪、X、Threads、其他</strong>，預設第一列 IG、第二列噗浪、第三列其他。「其他」可以自己取名（例如「委託」）。卡背和列印檔上，已知平台顯示<strong>平台圖示</strong>，「其他」顯示自己取的名稱。上線前圖示要換成各平台官方的品牌素材。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="in">
+    <div class="note"><b>沒填的欄位怎麼顯示：</b>做卡的編輯步驟（上傳～填背面）裡，沒填的欄位顯示淡色站位文字（「你的名字」「身分 ／ 攤位位置」「場次」），方便看版面。從「發布前」開始，以及發布後的卡、曬卡圖、列印檔，沒填的就<b>完全不畫</b>；名字和身分都沒填時，連名字的底框也拿掉，卡面只剩圖。</div>
+    <div class="note"><b>介面規則：</b>app 畫面裡所有可點的東西至少 44×44px（Apple HIG、WCAG 2.5.5）；按鈕等重要文字 ≥ 14px，其他文字 ≥ 12px。</div>
     <h3>兩條連結要長得完全不一樣</h3>
   </div>
   <div class="tablebox in">
@@ -485,7 +523,8 @@ footer p{max-width:none}
   </div>
   <div class="in">
     <div class="note"><b>給工程：</b>金鑰放在網址 <code>#</code> 後面，不會送到伺服器、不會進存取紀錄、不會透過 Referer 外洩；前端讀出來再放進請求。D1 只存金鑰的雜湊值。</div>
-    <p><strong>讓使用者真的把編輯連結存下來，三道保險：</strong>複製連結；存一張「鑰匙卡」圖到相簿（大部分人比較會留相簿的圖）；這台裝置自動記住做過的卡。發布前勾「我已經存好編輯連結」才放行。</p>
+    <p><strong>讓使用者真的把編輯連結存下來</strong><span class="vtag">v0.3</span>：畫面上只放兩個方法——複製連結、存一張「鑰匙卡」圖到相簿（大部分人比較會留相簿的圖）。「我已經存好編輯連結」的勾選<strong>放在發布按鈕正上方</strong>，勾了才能按。</p>
+    <p><strong>一個人可以做很多張卡</strong><span class="vtag">v0.3</span>：每張卡都有自己的分享連結和編輯連結。這台裝置會在背景記住做過的卡，但目前還沒有「我創作的卡」列表，所以畫面上不提「這台裝置會記住」，避免使用者以為不用存連結。回去改舊的卡，靠編輯連結。</p>
   </div>
 </section>
 
@@ -493,7 +532,14 @@ footer p{max-width:none}
 <section>
   <div class="shead"><span class="snum">04</span><h2>QR 怎麼放才不破壞畫面</h2></div>
   <div class="in">
-    <p>三條原則不變：<strong>QR 不上正面、QR 不做任何閃光、永遠深色碼配淺色底</strong>。而且這一版卡片會自己轉，QR 就更不能在卡面上了——轉動中的 QR 掃不到。</p>
+    <p>兩條原則不變：<strong>QR 不上正面、QR 不做任何閃光</strong>。而且卡片會自己轉，QR 就更不能在卡面上了——轉動中的 QR 掃不到。</p>
+    <p><strong>顏色改了</strong><span class="vtag">v0.3</span>：V3 的「永遠深色碼配淺色底」改成<strong>深色底＋白色碼（反白 QR）</strong>，跟卡背和整個 app 的深色風格一致。</p>
+    <ul>
+      <li><strong>卡背</strong>：底色是 5 個固定深色之一，文字和 QR 都是白色，QR 沒有白底框。</li>
+      <li><strong>出示模式</strong>：卡片下面接一截<strong>同寬的票根</strong>（接縫有撕線和兩側半圓缺口，像從卡片延伸出來），票根深色、QR 白色。卡片靜止不轉、螢幕調到最亮，卡片大小依畫面高度自動放到最大（iPhone 15 Pro 上 QR 約 208px）。</li>
+      <li><strong>保險</strong>：票根下方有「掃不到？換成白底」，一鍵換成白底黑碼，這台裝置會記住。</li>
+    </ul>
+    <div class="note warn"><b>反白 QR 的風險要驗證：</b>iPhone 相機、Google Lens 讀得到反白 QR，但部分舊的掃描 App 讀不到。原型已用瀏覽器內建辨識器測過 5 個底色、畫面與列印檔都讀得到，<b>上線前還要實際印幾張，用 iPhone 相機、LINE 掃描、Android 相機各試一次</b>。coolee 自己的收卡掃描要開啟反白 QR 辨識（第 08 節）。</div>
   </div>
 
   <figure class="in">
@@ -536,7 +582,7 @@ footer p{max-width:none}
         <text class="dt" x="424" y="318" text-anchor="middle">出示模式</text>
       </svg>
     </div>
-    <figcaption>手機情境：展示頁的卡片持續轉動、不放 QR；點「出示」後卡片停下、縮到上方，讓掃的人確認是誰，下方白底大 QR。背面也放一個小 QR 當備援。</figcaption>
+    <figcaption>手機情境：展示頁的卡片持續轉動、不放 QR；點「出示」後卡片停下，下面接一截同寬票根放大 QR，讓掃的人先確認是誰再掃。v0.3 起票根預設深色、QR 白色，可一鍵換成白底黑碼（圖為示意）。背面也放一個小 QR 當備援。</figcaption>
   </figure>
 
   <div class="in">
@@ -644,7 +690,7 @@ footer p{max-width:none}
   </div>
   <div class="in">
     <p>尺寸是反推出來的：4×6 紙扣掉白邊，可印範圍大約 90×138mm。正背並排要塞得進去，卡片高度就不能超過 90mm、寬度不能超過 69mm。在這個範圍裡取整數，2:3 再縮一點留餘裕（60×90 會剛好頂到白邊，沒有容錯），順便讓三種卡都放得進一般 TCG 卡套。</p>
-    <div class="note"><b>關於「4×6」這個名字：</b>建議在介面上叫「2:3」，旁邊小字寫「4×6 相片比例」。因為印出來的卡片是 58×87mm，不是 4×6 相片那麼大——4×6 紙要留一半給背面。如果使用者要的是「整張 4×6 都是正面」，那張卡就沒有背面、沒有 QR，建議不做。</div>
+    <div class="note"><b>關於名字</b><span class="vtag">v0.3</span>：介面上叫「<b>2:3（明信片）</b>」。2:3 和 4×6 吋相紙（101.6×152.4mm）比例完全相同，也接近一般明信片（100×148mm）。但印出來的卡片是 58×87mm，不是明信片那麼大——4×6 紙要留一半給背面。「2:3 整張印成 4×6 明信片」是之後可以考慮的選項（沒有背面、沒有 QR），MVP 不做。</div>
 
     <h3>給工程的細節</h3>
     <ul>
@@ -653,6 +699,7 @@ footer p{max-width:none}
       <li><strong>第 2 頁的背面要左右鏡像排列。</strong>雙面列印沿長邊翻頁時，第 1 頁最左邊那張的背面，會出現在第 2 頁的最右邊。排錯的話，每張卡的正背會對不上人。</li>
       <li><strong>雙面列印正背會偏移 1–2mm。</strong>背面的設計不要貼邊放框線或色塊，四周留 3mm 以上的安全距離；卡片之間留 4mm 間距，剪歪也不會剪到隔壁。</li>
       <li><strong>平面化規則不變：</strong>閃閃拿掉、霧面亮面沒差、紋理不印、半透卡變白底。下載前讓使用者看平面化預覽，寫「印出來不會閃、不會轉」。</li>
+      <li><strong>卡背照畫面印</strong><span class="vtag">v0.3</span>：底色、白色文字、白色 QR（沒有白底）、連結的平台圖示都照印。圖示和畫面共用同一份路徑資料，印出來和螢幕上一樣。沒填的名字、身分、場次不印。</li>
     </ul>
     <div class="note warn"><b>開工前一定要實際去印一次。</b>上面的白邊、雙面偏移、4×6 只收圖片，是從網路上的 ibon 攻略整理來的，機台實際行為要自己驗證——特別是 4×6 上傳時會不會被自動縮放、A4 雙面在厚紙上的偏移有多大。做兩個測試檔（一張 4×6 JPG、一份 A4 雙面 PDF）去 7-11 印，總共 21 元，能省掉後面很多來回。</div>
     <p><strong>A6 攤位立牌放 P2</strong>，可以直接用 4×6 專用紙印，一張 6 元。</p>
@@ -690,7 +737,7 @@ footer p{max-width:none}
       <div class="bk">貼連結的時候</div>
       <div class="bt">OG 預覽圖</div>
       <ul>
-        <li>1200×630。卡片擺在橫的底圖上，旁邊放名字和場次。三種比例都要排得好看。</li>
+        <li>1200×630。卡片擺在橫的底圖上，旁邊放名字和場次。三種比例都要排得好看。沒填名字時標題寫「一張 coolee 卡」<span class="vtag">v0.3</span>。</li>
         <li>卡片停在最美的那一格，看得出厚度和閃光。</li>
         <li><strong>發布時由前端畫好、跟卡片一起上傳 R2</strong>，不做伺服器即時產圖。</li>
         <li>卡片修改後 OG 圖要換檔名，平台會把舊預覽快取很久。</li>
@@ -716,12 +763,34 @@ footer p{max-width:none}
 
 <!-- ================= 08 claim + album ================= -->
 <section>
-  <div class="shead"><span class="snum">08</span><h2>領取流程與卡冊：補三點</h2></div>
+  <div class="shead"><span class="snum">08</span><h2>收卡流程與卡冊<span class="vtag">v0.3</span></h2></div>
   <div class="in">
+    <h3>收卡入口</h3>
     <ul>
-      <li><strong>卡冊裡會混著三種比例。</strong>建議卡冊用統一大小的格子，卡片在格子裡置中、按原比例縮放，不要硬裁成同一個比例——那等於把創作者裁好的圖又裁一次。</li>
+      <li><strong>首頁有「收卡」按鈕</strong>，和「我的卡冊」並排。按下去直接在網頁裡開相機掃 QR，不用切到手機的相機 App，掃完也留在 coolee 裡。</li>
+      <li>掃描要開啟<strong>反白 QR 辨識</strong>（卡背和出示模式預設是白色碼）。</li>
+      <li>相機權限被拒或現場不好掃時，可以<strong>輸入卡片代碼</strong>（分享連結最後那一段 <code>/c/AbC123</code>）。</li>
+    </ul>
+    <h3>收卡動畫：卡片滑進卡套＋蓋收藏章</h3>
+    <p>V3 的「拆卡包」拿掉了：粉絲是當面掃的，上一頁已經看過這張卡，沒有抽卡的驚喜，再裝進卡包拆一次反而奇怪。改成讓「收下」這個動作有感覺：</p>
+    <ol>
+      <li>空的透明卡套出現</li>
+      <li>卡片從上方滑進卡套（從卡套後面滑進去，看得出被套住）</li>
+      <li>落定，光澤掃過卡套</li>
+      <li>「活動名稱・日期・收藏」的圓章蓋在<strong>卡套右上角</strong>、一半壓在卡套邊緣——蓋在卡套上，不蓋到卡面和名字。沒填活動名稱就只蓋日期。</li>
+      <li>出現「收進卡冊了」、創作者連結、「查看全部小卡」</li>
+    </ol>
+    <ul>
+      <li>全長約 2 秒；動畫中點畫面可以跳過；「減少動態效果」直接顯示結果。</li>
+      <li>卡片依畫面高度自動置中在訊息區上方，小螢幕自動縮小。</li>
+      <li>所有卡用同一段動畫，不因材質而不同。</li>
+    </ul>
+    <h3>卡冊</h3>
+    <ul>
+      <li><strong>兩欄瀑布流</strong>：卡片保留原比例、不裁切，每張卡放進目前比較短的那一欄，1:1、3:4、2:3 混在一起也能上下接好。拿掉格子外框和卡片下方的文字（卡面上已經有名字）。剛收到的卡有紫色光暈和 NEW 標籤。</li>
+      <li><strong>「全部」或「依收卡日」</strong>：全部＝依收到時間新到舊；依收卡日＝照粉絲收卡的日期分組。<b>不依創作者填的活動名稱分組</b>——那是每個人自己打的，寫法不一（CWT70、cwt 70、CWT70 台北）或沒填都會拆組。</li>
       <li><strong>快照連材質和比例一起存。</strong>創作者之後把流光改成霧面，你手上那張還是流光的——就是「絕版卡」。</li>
-      <li><strong>開卡動畫結束的那一刻，卡片開始轉。</strong>這是很自然的收尾：拆開、翻過來、它就活了。所有卡用同一段開卡動畫，不因材質而不同。</li>
+      <li>格子裡的卡都是靜止的，只有點開的那張會轉（第 06 節）。卡片詳情顯示收到時間、活動名稱、標籤、材質快照、比例和只有自己看得到的備註。</li>
     </ul>
   </div>
 </section>
@@ -729,7 +798,7 @@ footer p{max-width:none}
 <!-- ================= 09 tasks ================= -->
 <section>
   <div class="shead"><span class="snum">09</span><h2>更新後的工作清單</h2></div>
-  <div class="in"><p>每一項只有一個人負責到底。標 <span class="newtag">NEW</span> 的是這一版新增或改動的。</p></div>
+  <div class="in"><p>每一項只有一個人負責到底。標 <span class="vtag">v0.3</span> 的是這一版新增或改動的。</p></div>
   <div class="tablebox in">
     <table>
       <thead><tr><th>工作</th><th>負責</th><th>對應</th><th>優先</th></tr></thead>
@@ -737,38 +806,45 @@ footer p{max-width:none}
         <tr class="grp"><td colspan="4">最先做，其他都卡在這裡</td></tr>
         <tr><td class="k">材質與動作調參頁</td><td><span class="owner e">工程</span></td><td class="s">01・06</td><td><span class="pill p1">P1</span></td></tr>
         <tr><td class="k">上傳、轉檔、後端重驗、限流</td><td><span class="owner e">工程</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">裁切工具（固定比例、縮放、拖曳）<span class="newtag">NEW</span></td><td><span class="owner e">工程</span></td><td class="s">02</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">裁切工具（固定比例、縮放、拖曳）</td><td><span class="owner e">工程</span></td><td class="s">02</td><td><span class="pill p1">P1</span></td></tr>
         <tr class="grp"><td colspan="4">材質、比例、動作</td></tr>
-        <tr><td class="k">15 組材質預設值 <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">01</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">轉動擺幅、週期、heroFrame <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">06</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">卡片厚度與卡框（程式繪製）<span class="newtag">NEW</span></td><td><span class="owner e">工程</span></td><td class="s">01・牽動一</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">各比例的正背面版面規則 <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">02</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">15 組材質預設值</td><td><span class="owner k">你</span></td><td class="s">01</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">轉動擺幅、週期、heroFrame</td><td><span class="owner k">你</span></td><td class="s">06</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">卡片厚度與卡框（程式繪製）</td><td><span class="owner e">工程</span></td><td class="s">01・牽動一</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">各比例的正背面版面規則</td><td><span class="owner k">你</span></td><td class="s">02</td><td><span class="pill p1">P1</span></td></tr>
         <tr class="grp"><td colspan="4">編輯器與連結</td></tr>
-        <tr><td class="k">編輯器畫面與文案</td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">編輯器畫面與文案（7 步、填正面／填背面、即時預覽）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">標籤欄位與整理規則（之後給搜尋用）<span class="vtag">v0.3</span></td><td><span class="owner e">工程</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">連結平台選單與平台圖示（換官方素材）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
         <tr><td class="k">兩條連結：網址設計、金鑰雜湊</td><td><span class="owner e">工程</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">編輯連結的三道保險與鑰匙卡</td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">編輯連結的保險與鑰匙卡（勾選放發布按鈕上方）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill p1">P1</span></td></tr>
         <tr class="grp"><td colspan="4">展示、QR、列印</td></tr>
-        <tr><td class="k">展示頁兩個狀態、出示模式、翻面</td><td><span class="owner e">工程</span></td><td class="s">04・06</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">列印檔：4×6 JPG、A4 雙面 PDF（6 個固定版型）<span class="newtag">NEW</span></td><td><span class="owner e">工程</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">去 7-11 試印兩個測試檔 <span class="newtag">NEW</span></td><td><span class="owner k">你</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">展示頁、出示模式（卡片＋票根、一鍵白底）、翻面<span class="vtag">v0.3</span></td><td><span class="owner e">工程</span></td><td class="s">04・06</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">反白 QR 實機掃描測試（卡背、出示、列印）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">04</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">列印檔：4×6 JPG、A4 雙面 PDF（6 個固定版型）</td><td><span class="owner e">工程</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">去 7-11 試印兩個測試檔</td><td><span class="owner k">你</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
         <tr><td class="k">列印版型與平面化預覽</td><td><span class="owner k">你</span></td><td class="s">05</td><td><span class="pill p1">P1</span></td></tr>
         <tr><td class="k">A6 攤位立牌</td><td><span class="owner k">你</span></td><td class="s">04・05</td><td><span class="pill">P2</span></td></tr>
         <tr class="grp"><td colspan="4">曬卡、領取、卡冊</td></tr>
         <tr><td class="k">OG 圖產生與上傳</td><td><span class="owner e">工程</span></td><td class="s">07</td><td><span class="pill p1">P1</span></td></tr>
         <tr><td class="k">曬卡靜圖（heroFrame）</td><td><span class="owner e">工程</span></td><td class="s">07</td><td><span class="pill p1">P1</span></td></tr>
         <tr><td class="k">曬卡動畫（整除週期）</td><td><span class="owner e">工程</span></td><td class="s">07</td><td><span class="pill">P2</span></td></tr>
-        <tr><td class="k">領取流程（開卡動畫）</td><td><span class="owner k">你</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
-        <tr><td class="k">卡冊（混合比例的格子、材質快照）</td><td><span class="owner k">你</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">網頁內收卡掃描（反白 QR 辨識、輸入代碼）<span class="vtag">v0.3</span></td><td><span class="owner e">工程</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">收卡動畫（卡套＋收藏章）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">卡冊（瀑布流、全部／依收卡日、材質快照）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">08</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td class="k">官方活動清單（讓活動名稱統一）<span class="vtag">v0.3</span></td><td><span class="owner e">工程</span></td><td class="s">03</td><td><span class="pill">P2</span></td></tr>
+        <tr><td class="k">「我創作的卡」列表（用背景記住的資料）<span class="vtag">v0.3</span></td><td><span class="owner k">你</span></td><td class="s">03</td><td><span class="pill">P2</span></td></tr>
       </tbody>
     </table>
   </div>
   <div class="in">
-    <div class="note" style="margin-top:22px"><b>範圍的變化：</b>P1 變成 18 項，多的那一項是試印，21 元、半小時。更重要的是<b>列印從最重變成相對輕</b>：不用寫自動拼版，只要做 6 個固定版型，而且每個都能事先驗證。上一版說時間不夠就先砍列印，這一版不用了——列印的成本已經降到值得留在第一場。</div>
+    <div class="note" style="margin-top:22px"><b>v0.3 範圍的變化：</b>P1 從 18 項變成 22 項，新增標籤、連結平台、反白 QR 實機測試、網頁內收卡掃描；「開卡動畫」換成「收卡動畫」。官方活動清單和「我創作的卡」列表放 P2。</div>
+    <div class="note"><b>V3 範圍的變化：</b>P1 變成 18 項，多的那一項是試印，21 元、半小時。更重要的是<b>列印從最重變成相對輕</b>：不用寫自動拼版，只要做 6 個固定版型，而且每個都能事先驗證。上一版說時間不夠就先砍列印，這一版不用了——列印的成本已經降到值得留在第一場。</div>
   </div>
 </section>
 
 <footer>
-  <p>V3，接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
+  <p>v0.3，依原型同步，版號跟原型一致（app 名稱 coolee）；V3 接續〈名片交換專案｜方向收斂討論稿〉與〈兩個人怎麼分工〉。卡片效果參考 simeydotme 的 CodePen（Pokémon Card Holo Effect）。示範用 CSS 做，是為了說明參數怎麼分層；最終要不要換 WebGL，看中階 Android 的效能驗證結果。卡片上的人名與攤位為虛構。ibon 紙材規格整理自網路攻略（BALIMAN 情報局），以實地試印為準。</p>
 </footer>
 
 </div>
