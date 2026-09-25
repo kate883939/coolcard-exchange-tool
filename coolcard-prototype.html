@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>coolee 原型</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +18,8 @@
   --btn:#232A3B; --btn-h:#293042; --surface:#1E2434; --ic:#2A3144;
   --edge:#5F6A82; --edge-h:#7F8AA3; --muted-2:#8791AA;
 }
-/* 字級規則（app 畫面內）：按鈕等重要文字 ≥ 14px，其他文字 ≥ 12px。
+/* 觸控規則（app 畫面內）：所有可點的東西至少 44×44px（Apple HIG、WCAG 2.5.5）。
+   字級規則（app 畫面內）：按鈕等重要文字 ≥ 14px，其他文字 ≥ 12px。
    例外：卡面上的字（跟著卡片尺寸等比縮放）、左側原型選單與「原型工具」按鈕。 */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
@@ -57,8 +59,8 @@ input,textarea,select{font:inherit;color:inherit}
 .hdr .t{flex:1;text-align:center;font-weight:500;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brandhdr{padding:10px 20px 0}
 .wordmark{font-size:22px;font-weight:700;letter-spacing:.02em;background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hdr .step{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted-2);min-width:40px;text-align:right}
-.iconbtn{width:40px;height:40px;border-radius:12px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--text)}
+.hdr .step{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted-2);min-width:44px;text-align:right}
+.iconbtn{width:44px;height:44px;border-radius:12px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--text)}
 .iconbtn:hover{background:var(--panel)}
 .iconbtn:focus-visible{outline:2px solid var(--f2)}
 .iconbtn svg{width:20px;height:20px}
@@ -71,7 +73,7 @@ input,textarea,select{font:inherit;color:inherit}
 .btn.primary{background:var(--accent);color:var(--on-accent);border:0}
 .btn.primary:hover{filter:brightness(1.06)}
 .btn[disabled]{opacity:.35;cursor:not-allowed;filter:none}
-.btn.sm{height:38px;font-size:14px;border-radius:11px;flex:none}
+.btn.sm{height:44px;font-size:14px;border-radius:11px;flex:none}
 .btn svg{width:18px;height:18px}
 
 .proto{display:flex;align-items:center;gap:8px;width:100%;margin-top:14px;padding:10px 12px;border:1px dashed #3d4560;border-radius:12px;background:transparent;color:var(--muted);font-size:12.5px;cursor:pointer;text-align:left}
@@ -82,8 +84,8 @@ h2.big{font-size:24px;line-height:1.35;margin:10px 0 6px;font-weight:700;text-wr
 .lead{color:var(--muted);margin:0 0 18px;font-size:13.5px}
 .lbl{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#FFFFFF;margin:18px 0 8px;display:flex;gap:6px;align-items:baseline}
 .lbl span{font-family:"Noto Sans TC",sans-serif;letter-spacing:0;text-transform:none;color:#B4BCCD}
-.pills{display:flex;flex-wrap:wrap;gap:7px}
-.pill{border:1px solid var(--edge);background:var(--surface);border-radius:99px;padding:6px 13px;font-size:14px;cursor:pointer;color:#B4BCCD}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:56px;border:1px solid var(--edge);background:var(--surface);border-radius:99px;padding:0 16px;font-size:14px;cursor:pointer;color:#B4BCCD}
 .pill:hover{color:var(--text)}
 .pill.on{border-color:var(--accent);color:#fff;background:rgba(168,140,255,.18)}
 .pill:focus-visible{outline:2px solid var(--f2);outline-offset:2px}
@@ -95,7 +97,29 @@ h2.big{font-size:24px;line-height:1.35;margin:10px 0 6px;font-weight:700;text-wr
 .input{width:100%;height:44px;border-radius:11px;border:1px solid var(--line);background:var(--panel);padding:0 12px;font-size:14px}
 .input:focus{outline:none;border-color:var(--f2)}
 textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
-.linkrow{display:grid;grid-template-columns:76px 1fr;gap:8px;margin-bottom:8px}
+.tagbox{display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;min-height:36px;padding:0 4px 0 14px;border-radius:99px;background:rgba(168,140,255,.14);border:1px solid rgba(168,140,255,.45);color:#E6DFFF;font-size:14px}
+.chips .chip{padding:0 14px}
+.chipx{width:44px;height:44px;margin:-4px -4px -4px 0;border:0;background:none;color:#CFC2FF;display:grid;place-items:center;cursor:pointer;border-radius:99px}
+.chipx svg{width:14px;height:14px}
+.chipx:focus-visible{outline:2px solid var(--accent);outline-offset:-6px}
+.taginput{width:100%;height:44px;border-radius:11px;border:1px solid var(--line);background:var(--panel);padding:0 12px;font-size:14px}
+.taginput:focus{outline:none;border-color:var(--f2)}
+.taginput:disabled{opacity:.5}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);cursor:pointer;padding:0;background-size:cover;background-position:center;position:relative}
+.sw.on{box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--accent)}
+.sw:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.editprev{position:relative;display:flex;justify-content:center;margin:4px 0 18px}
+.editprev .side{position:absolute;left:0;top:0;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted-2);letter-spacing:.08em}
+.linkrow{display:grid;grid-template-columns:118px 1fr;gap:8px;margin-bottom:8px}
+.linkrow.other{grid-template-columns:118px 72px 1fr}
+.plat{position:relative;display:block;height:44px}
+.plat select{appearance:none;-webkit-appearance:none;width:100%;height:44px;border-radius:11px;border:1px solid var(--line);background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238791AA' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E") right 8px center/16px no-repeat;padding:0 26px 0 38px;font-size:14px;color:var(--text);cursor:pointer}
+.plat select:focus{outline:none;border-color:var(--f2)}
+.picon{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--text);pointer-events:none}
+.picon svg{width:20px;height:20px;display:block}
 
 .toast{position:absolute;left:50%;bottom:100px;transform:translate(-50%,10px);background:#EDEAF7;color:#11131b;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:30;white-space:nowrap}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -149,10 +173,12 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .face.back .bn{font-weight:700;font-size:1.3em;line-height:1.3}
 .face.back .br{font-size:.74em;opacity:.7;margin-top:.15em}
 .face.back .bt{align-self:flex-start;margin-top:.7em;font-family:"IBM Plex Mono",monospace;font-size:.6em;letter-spacing:.06em;border:1px solid currentColor;opacity:.7;border-radius:99px;padding:.1em .7em}
-.face.back .bl{margin-top:auto;display:flex;flex-direction:column;gap:.35em;max-width:52%}
+.face.back .bl{margin-top:auto;display:flex;flex-direction:column;gap:.35em;max-width:50%}
 .face.back .bl div{font-size:.66em;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.face.back .bl .bi{display:inline-block;width:1.3em;height:1.3em;vertical-align:-.3em;margin-right:.45em;opacity:.8}
+.face.back .bl .bi svg{display:block;width:100%;height:100%}
 .face.back .bl i{font-style:normal;font-family:"IBM Plex Mono",monospace;opacity:.55;margin-right:.4em}
-.face.back .bq{position:absolute;right:8%;bottom:8%;width:38%;aspect-ratio:1;background:#fff;border-radius:.4em;padding:3%}
+.face.back .bq{position:absolute;right:7%;bottom:7%;width:40%;aspect-ratio:1}
 .face.back .bq svg{display:block;width:100%;height:100%}
 /* paper */
 .paper-texture{--edge:#EDE3CF;--paperc:#F2EADB}
@@ -211,6 +237,21 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .entry small{color:var(--muted-2);font-size:12.5px}
 .entry.hero{background:rgba(168,140,255,.10);border:1.5px solid var(--accent)}
 .entry.hero .ic{background:var(--accent);color:var(--on-accent)}
+.entryrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.entryrow .entry{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:0}
+.viewfinder{position:relative;aspect-ratio:1/1;margin:8px 0 0;border-radius:22px;overflow:hidden;background:radial-gradient(120% 90% at 30% 20%,#2a2f45,#0a0c12 70%)}
+.viewfinder i{position:absolute;width:44px;height:44px;border:3px solid #fff;border-radius:6px}
+.viewfinder .tl{top:18%;left:18%;border-right:0;border-bottom:0}
+.viewfinder .tr{top:18%;right:18%;border-left:0;border-bottom:0}
+.viewfinder .bl{bottom:18%;left:18%;border-right:0;border-top:0}
+.viewfinder .br{bottom:18%;right:18%;border-left:0;border-top:0}
+.vf-line{position:absolute;left:20%;right:20%;top:20%;height:2px;background:var(--accent);box-shadow:0 0 12px 2px rgba(168,140,255,.7);animation:vfscan 2.2s ease-in-out infinite alternate}
+@keyframes vfscan{to{top:80%}}
+@media (prefers-reduced-motion:reduce){.vf-line{animation:none;top:50%}}
+.vf-tip{text-align:center;margin:12px 0 0;font-size:14px;color:var(--text)}
+.coderow{display:flex;gap:8px}
+.coderow .input{flex:1;min-width:0;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em}
+.coderow .btn.sm{height:44px}
 
 .uploadbox{border:1.5px dashed var(--line);border-radius:18px;padding:16px;display:flex;gap:14px;align-items:center;background:var(--panel)}
 .uploadbox img{width:96px;height:96px;object-fit:cover;border-radius:10px;flex:none}
@@ -232,7 +273,7 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .crop-frame::before{left:33.33%;right:33.33%}
 .crop-frame::after{top:33.33%;bottom:33.33%;border-width:1px 0}
 .zoomrow{display:flex;align-items:center;gap:12px;margin-top:14px}
-.zoomrow input{flex:1;accent-color:var(--f2)}
+.zoomrow input{flex:1;height:44px;margin:0;accent-color:var(--f2);cursor:pointer}
 .zoomrow svg{width:18px;height:18px;color:var(--muted);flex:none}
 
 .tplgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -259,6 +300,9 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .safe li .btn{margin-left:auto}
 .check{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--edge);cursor:pointer;font-size:14px}
 .check input{width:18px;height:18px;accent-color:var(--f1)}
+.foot.stack{flex-direction:column;gap:6px}
+.foot.stack .btn{flex:none;width:100%}
+.check.plain{min-height:44px;padding:0 4px;background:none;border:0}
 
 .done-top{height:360px;margin:0 -20px;display:grid;place-items:center;position:relative}
 .sharebar{margin-top:8px}
@@ -269,16 +313,24 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .tile b{font-weight:500;font-size:14px}
 .tile small{color:var(--muted-2);font-size:12px;line-height:1.5}
 
-.show{background:#F4F5F9;color:#141722}
-.show .iconbtn{color:#141722}
-.show .iconbtn:hover{background:#e5e7ee}
-.qrpanel{background:#fff;border-radius:22px;padding:22px;box-shadow:0 20px 40px -24px rgba(20,23,34,.45);text-align:center}
-.qrpanel svg{width:100%;height:auto;display:block}
-.qrpanel b{display:block;margin-top:12px;font-size:16px}
-.qrpanel small{color:#6b7085;font-size:12px}
+.showbody{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding-top:0}
+.ticket{position:relative;filter:drop-shadow(0 22px 26px rgba(0,0,0,.55))}
+.ticket .flat .face{border-radius:var(--r) var(--r) 0 0;box-shadow:none}
+.ticket .stub{position:relative;background:#1C2233;color:#F4F5F9;border-radius:0 0 16px 16px;padding:16px 16px 12px;text-align:center}
+.ticket .stub::before{content:"";position:absolute;left:14px;right:14px;top:0;border-top:2px dashed rgba(255,255,255,.28)}
+.ticket .stub svg{display:block;width:100%;height:auto}
+.ticket .stub b{display:block;margin-top:8px;font-size:15px}
+.ticket .stub small{display:block;font-size:12px;color:var(--muted-2)}
+.ticket::before,.ticket::after{content:"";position:absolute;top:calc(var(--ch) - 9px);width:18px;height:18px;border-radius:50%;background:var(--ink);z-index:3}
+.ticket::before{left:-9px}
+.ticket::after{right:-9px}
+.ticket.light .stub{background:#fff;color:#141722}
+.ticket.light .stub::before{border-top-color:#d7dae3}
+.ticket.light .stub small{color:#6b7085}
+.showhint{margin:0;font-size:12px;color:var(--muted-2)}
 
 .tabs{display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:14px}
-.tabs button{flex:1;border:0;background:transparent;border-radius:9px;padding:7px 0;font-size:14px;color:#B4BCCD;cursor:pointer}
+.tabs button{flex:1;min-height:44px;border:0;background:transparent;border-radius:9px;padding:0;font-size:14px;color:#B4BCCD;cursor:pointer}
 .tabs button.on{background:var(--ic);color:#fff;box-shadow:inset 0 0 0 1px var(--edge)}
 .genimg{width:100%;border-radius:12px;display:block;box-shadow:0 18px 36px -18px #000}
 .ogmock{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
@@ -294,33 +346,34 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .evchip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:12px;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--muted)}
 
 .open-stage{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
-.pack{position:absolute;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#2a2f45,#171b29);box-shadow:0 30px 60px -20px #000;transition:transform .7s cubic-bezier(.3,.7,.2,1),opacity .6s;z-index:3}
-.pack::before{content:"";position:absolute;inset:0;background:var(--foil);opacity:.55;mix-blend-mode:screen}
-.pack::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(100deg,rgba(255,255,255,.18) 0 2px,transparent 2px 7px)}
-.pack .pl{position:absolute;left:0;right:0;top:44%;text-align:center;z-index:2;color:#fff;font-weight:700;letter-spacing:.2em;font-size:15px;text-shadow:0 2px 10px rgba(0,0,0,.4)}
-.pack .pl small{display:block;font-weight:400;letter-spacing:.04em;font-size:12px;opacity:.85;margin-top:4px}
-.packtop{position:absolute;left:0;right:0;top:0;height:13%;z-index:4;background:linear-gradient(135deg,#dfe2ff,#ffd4e8);transition:transform .5s ease-in,opacity .5s;
-  -webkit-mask:linear-gradient(#000,#000) top/100% 80% no-repeat,radial-gradient(circle at 5px 0,transparent 4px,#000 4.5px) bottom/10px 20% repeat-x;mask:linear-gradient(#000,#000) top/100% 80% no-repeat,radial-gradient(circle at 5px 0,transparent 4px,#000 4.5px) bottom/10px 20% repeat-x}
-.cardslot{position:relative;z-index:2;transition:transform .8s cubic-bezier(.3,.7,.2,1),opacity .4s}
-.open-stage.s0 .pack{transform:translateY(-120%) rotate(-6deg);opacity:0}
-.open-stage.s0 .cardslot{opacity:0}
-.open-stage.s1 .pack{transform:none;opacity:1}
-.open-stage.s1 .cardslot{opacity:0}
-.open-stage.s2 .pack{animation:shake .45s ease-in-out}
-.open-stage.s2 .cardslot{opacity:0}
-.open-stage.s3 .packtop{transform:translate(40px,-70px) rotate(20deg);opacity:0}
-.open-stage.s3 .cardslot{opacity:1;transform:translateY(0)}
-.open-stage.s4 .pack{transform:translateY(130%);opacity:0}
-.open-stage.s4 .packtop{transform:translate(40px,-70px) rotate(20deg);opacity:0}
-.open-stage.s4 .cardslot{opacity:1;transform:translateY(-4%)}
-@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-3deg)}40%{transform:rotate(3deg)}60%{transform:rotate(-2deg)}80%{transform:rotate(2deg)}}
+/* 收卡動畫：空卡套出現 → 卡片滑進卡套 → 光澤掃過 → 在卡套上蓋場次章。
+   stage 的 class 會累加（s1 s2 s3…），跳過時直接加到 s5 就是最後的樣子 */
+.cardslot{position:relative;z-index:2;transition:transform .8s cubic-bezier(.3,.7,.2,1)}
+.sleeve-wrap{position:relative}
+.sleeve-wrap .incard{position:absolute;left:8px;top:8px;z-index:1;transform:translateY(-560px) rotate(-5deg);transition:transform .7s cubic-bezier(.25,.9,.3,1.12)}
+.sleeve-wrap .incard .face{box-shadow:none}
+.sleeve{position:absolute;inset:0;z-index:2;border-radius:14px;border:1.5px solid rgba(255,255,255,.55);background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.04) 45%,rgba(255,255,255,.1));box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 24px 40px -18px #000;overflow:hidden;opacity:0;transform:scale(.96);transition:opacity .35s,transform .35s;pointer-events:none}
+.sleeve::before{content:"";position:absolute;left:0;right:0;top:0;height:16px;border-bottom:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.16)}
+.sleeve .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);background-size:260% 100%;background-position:120% 0;transition:background-position .6s ease-out}
+.cstamp{position:absolute;z-index:3;right:-44px;top:18px;width:96px;height:96px;border-radius:50%;border:3px solid #FF9AC4;color:#FF9AC4;background:rgba(14,17,25,.4);display:grid;place-items:center;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.3;opacity:0;transform:rotate(-14deg) scale(2.6);transition:transform .32s cubic-bezier(.5,0,.8,1.2),opacity .2s;pointer-events:none}
+.cstamp::before{content:"";position:absolute;inset:5px;border-radius:50%;border:1px dashed rgba(255,154,196,.8)}
+.cstamp.noev{font-size:14px;line-height:1.35}
+.cstamp b{display:block;font-size:14px;letter-spacing:.02em;max-width:78px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .burst{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(168,140,255,.5),rgba(111,232,214,.15) 50%,transparent);opacity:0;transform:scale(.4);transition:opacity .6s,transform 1s;z-index:1}
-.open-stage.s4 .burst{opacity:1;transform:scale(1)}
+.open-stage.s1 .sleeve{opacity:1;transform:none}
+.open-stage.s2 .incard{transform:none}
+.open-stage.s3 .shine{background-position:-60% 0}
+.open-stage.s3 .sleeve-wrap{animation:settle .45s ease-out}
+.open-stage.s3 .burst{opacity:.7;transform:scale(1)}
+.open-stage.s4 .cstamp{opacity:.95;transform:rotate(-14deg) scale(1)}
+.open-stage.s4 .sleeve-wrap{animation:thud .3s ease-out .28s}
+@keyframes settle{0%,100%{transform:none}40%{transform:translateY(5px) scale(.985)}}
+@keyframes thud{0%,100%{transform:none}35%{transform:translateY(4px) scale(.98)}}
+@media (prefers-reduced-motion:reduce){.open-stage *{transition:none!important;animation:none!important}}
 .open-msg{position:absolute;left:20px;right:20px;bottom:20px;z-index:5;opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s;text-align:center}
 .open-stage.s5 .open-msg{opacity:1;transform:none}
-.open-stage.s5 .pack,.open-stage.s5 .packtop{opacity:0;transform:translateY(130%)}
-.open-stage.s5 .cardslot{opacity:1;transform:translateY(-24%)}
-.open-stage.s5 .burst{opacity:.7;transform:scale(1)}
+.open-stage.s5 .cardslot{transform:var(--place,translateY(-24%))}
+.open-stage.s5 .skip{display:none}
 .open-msg b{display:block;font-size:17px}
 .open-msg small{color:var(--muted);display:block;margin:2px 0 0;font-size:13px}
 .links2{display:flex;flex-direction:column;gap:7px;margin:14px 0 12px;text-align:left}
@@ -329,7 +382,7 @@ textarea.input{height:auto;min-height:74px;padding:10px 12px;resize:vertical}
 .linkbtn i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--muted);border:1px solid var(--edge);border-radius:5px;padding:2px 7px;flex:none}
 .linkbtn b{font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .linkbtn svg{width:15px;height:15px;color:var(--dim);margin-left:auto;flex:none}
-.skip{position:absolute;top:12px;right:14px;z-index:6;font-size:14px;color:var(--muted-2);background:none;border:0;cursor:pointer}
+.skip{position:absolute;top:8px;right:8px;z-index:6;min-width:56px;min-height:44px;padding:0 12px;border-radius:12px;font-size:14px;color:var(--muted-2);background:none;border:0;cursor:pointer}
 
 .albumhead{display:flex;align-items:flex-end;justify-content:space-between;margin:4px 0 6px}
 .albumhead b{font-size:24px}
@@ -448,7 +501,7 @@ function defaultCard(){
     art:{type:"img",src:"default",w:1024,h:1536,alpha:false},
     ratio:"3:4",zoom:1,cx:.5,cy:.45,
     tpl:"badge",paper:"smooth",surface:"matte",holo:"flow",
-    name:"",role:"",tag:"",
+    name:"",role:"",tag:"",tags:[],backColor:"#131726",   // tag＝場次；tags＝標籤（hashtag，分析和搜尋用，不印在卡面）
     links:[]};
 }
 var saved=lsGet("cc_proto_state");
@@ -491,15 +544,15 @@ function fit(ratio,maxW,maxH){var r=RATIO[ratio],w=maxW,h=w/r;if(h>maxH){h=maxH;
 
 /* ---------------- QR ---------------- */
 function qrMatrix(text){var q=qrcode(0,"M");q.addData(text);q.make();var n=q.getModuleCount(),m=[];for(var r=0;r<n;r++){m[r]=[];for(var c=0;c<n;c++)m[r][c]=q.isDark(r,c);}return m;}
-function qrSvg(text,margin){
-  margin=margin==null?2:margin;var m=qrMatrix(text),n=m.length,d="";
+function qrSvg(text,margin,fg,bg){
+  margin=margin==null?2:margin;fg=fg||"#111318";bg=bg===undefined?"#fff":bg;var m=qrMatrix(text),n=m.length,d="";
   for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(m[r][c])d+="M"+(c+margin)+" "+(r+margin)+"h1v1h-1z";
   var s=n+margin*2;
-  return '<svg viewBox="0 0 '+s+' '+s+'" shape-rendering="crispEdges" aria-hidden="true"><rect width="'+s+'" height="'+s+'" fill="#fff"/><path d="'+d+'" fill="#111318"/></svg>';
+  return '<svg viewBox="0 0 '+s+' '+s+'" shape-rendering="crispEdges" aria-hidden="true">'+(bg?'<rect width="'+s+'" height="'+s+'" fill="'+bg+'"/>':'')+'<path d="'+d+'" fill="'+fg+'"/></svg>';
 }
-function drawQR(ctx,text,x,y,size,margin){
-  margin=margin==null?2:margin;var m=qrMatrix(text),n=m.length,cell=size/(n+margin*2);
-  ctx.fillStyle="#fff";ctx.fillRect(x,y,size,size);ctx.fillStyle="#111318";
+function drawQR(ctx,text,x,y,size,margin,fg,bg){
+  margin=margin==null?2:margin;fg=fg||"#111318";bg=bg===undefined?"#fff":bg;var m=qrMatrix(text),n=m.length,cell=size/(n+margin*2);
+  if(bg){ctx.fillStyle=bg;ctx.fillRect(x,y,size,size);}ctx.fillStyle=fg;
   for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(m[r][c])ctx.fillRect(Math.floor(x+(c+margin)*cell),Math.floor(y+(r+margin)*cell),Math.ceil(cell),Math.ceil(cell));
 }
 function shareUrl(c){return "https://"+DOMAIN+"/c/"+c.code;}
@@ -507,23 +560,86 @@ function editUrl(c){return "https://"+DOMAIN+"/e/"+c.code+"#k="+c.key;}
 
 /* ---------------- card markup ---------------- */
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});}
-// 還沒填資訊時顯示的站位文字（畫面上會變淡，見 .ph）
-function nm(c){return c.name||"你的名字";}
-function rl(c){return c.role||"身分 ／ 攤位位置";}
+// 名字、身分、場次都可以留空（例如認親卡）。
+// 做卡的編輯步驟（上傳～填背面）才顯示淡色站位文字；發布前、發布後、下載和列印都照實際內容，空的就不畫
+var EDIT_STEPS=["c-upload","c-template","c-crop","c-material","c-info","c-back"],EDITING=false;
+function nm(c){return c.name||(EDITING?"你的名字":"");}
+function rl(c){return c.role||(EDITING?"身分 ／ 攤位位置":"");}
+function tg(c){return c.tag||(EDITING?"場次":"");}
+// 標籤：去掉開頭的 #、空白，最長 20 字；英文不分大小寫去重；最多 10 個
+var TAG_MAX=10;
+function cleanTag(t){return String(t||"").replace(/^[#＃]+/,"").replace(/\s+/g,"").slice(0,20);}
+function addTags(c,raw){
+  c.tags=c.tags||[];
+  String(raw).split(/[,，、\n]+/).map(cleanTag).forEach(function(t){
+    if(t&&c.tags.length<TAG_MAX&&!c.tags.some(function(x){return x.toLowerCase()===t.toLowerCase();}))c.tags.push(t);
+  });
+}
+function tagChips(tags,removable){
+  return (tags||[]).map(function(t,i){return '<span class="chip">#'+esc(t)+(removable?'<button type="button" class="chipx" data-act="tagDel" data-v="'+i+'" aria-label="移除標籤 '+esc(t)+'">'+I.close+'</button>':'')+'</span>';}).join("");
+}
+// 背面連結：每一列先選平台（預設 IG、噗浪、其他），再填帳號。卡背上顯示的是平台的簡稱
+// 圖示是 24×24 的線條路徑（dot＝要塗實心的小圓點）。畫面上轉成 SVG，下載和列印用 canvas 畫同一份
+var PLATS={
+  ig:{l:"IG",name:"IG",ph:"帳號，例如 @coolee",d:"M8.5 3.5h7a5 5 0 0 1 5 5v7a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-7a5 5 0 0 1 5-5zM16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z",dot:[17.2,6.8,1]},
+  plurk:{l:"噗浪",name:"噗浪",ph:"帳號",d:"M20.5 12a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0zM9 17V7.5h3.6a2.8 2.8 0 0 1 0 5.6H9"},
+  x:{l:"X",name:"X",ph:"帳號，例如 @coolee",d:"M5 4.5l14 15M19 4.5l-14 15"},
+  threads:{l:"Threads",name:"Threads",ph:"帳號",d:"M15.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM15.5 12v1.3a2.7 2.7 0 0 0 5.2 1A8.5 8.5 0 1 0 17 19.4"},
+  other:{l:"",name:"其他",ph:"網址或帳號",d:"M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"}
+};
+Object.keys(PLATS).forEach(function(k){var P=PLATS[k];
+  P.ic='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="'+P.d+'"/>'+(P.dot?'<circle cx="'+P.dot[0]+'" cy="'+P.dot[1]+'" r="'+P.dot[2]+'" fill="currentColor" stroke="none"/>':'')+'</svg>';});
+function drawPlatIcon(ctx,k,x,y,size,color){
+  var P=PLATS[k];ctx.save();ctx.translate(x,y);ctx.scale(size/24,size/24);
+  ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=1.8;ctx.lineCap="round";ctx.lineJoin="round";ctx.stroke(new Path2D(P.d));
+  if(P.dot){ctx.beginPath();ctx.arc(P.dot[0],P.dot[1],P.dot[2],0,Math.PI*2);ctx.fill();}
+  ctx.restore();
+}
+var PLAT_ORDER=["ig","plurk","x","threads","other"],PLAT_DEFAULT=["ig","plurk","other"];
+function platOf(l){if(l.p&&PLATS[l.p])return l.p;var t=(l.l||"").toLowerCase();for(var k in PLATS){if(k!=="other"&&PLATS[k].l.toLowerCase()===t)return k;}return "other";}
+function linkRows(c){
+  return [0,1,2].map(function(i){
+    var l=c.links[i]||{p:PLAT_DEFAULT[i],l:PLATS[PLAT_DEFAULT[i]].l,v:""},k=platOf(l),P=PLATS[k];
+    return '<div class="linkrow'+(k==="other"?" other":"")+'"><label class="plat"><span class="picon">'+P.ic+'</span>'+
+      '<select data-plat="'+i+'" aria-label="第 '+(i+1)+' 個連結的平台">'+PLAT_ORDER.map(function(o){return '<option value="'+o+'"'+(o===k?" selected":"")+'>'+PLATS[o].name+'</option>';}).join("")+'</select></label>'+
+      (k==="other"?'<input class="input" data-link="'+i+'" data-f="l" value="'+esc(l.l)+'" maxlength="6" placeholder="名稱" aria-label="第 '+(i+1)+' 個連結的名稱">':'')+
+      '<input class="input" data-link="'+i+'" data-f="v" value="'+esc(l.v)+'" placeholder="'+P.ph+'" aria-label="第 '+(i+1)+' 個連結的帳號或網址"></div>';
+  }).join("");
+}
+function bindFields(c,paint){
+  var t=null;document.querySelectorAll("#screen [data-f]").forEach(function(inp){
+    inp.addEventListener("input",function(){
+      var f=inp.getAttribute("data-f"),li=inp.getAttribute("data-link");
+      if(li!=null){var i=+li;c.links[i]=c.links[i]||{p:PLAT_DEFAULT[i],l:PLATS[PLAT_DEFAULT[i]].l,v:""};c.links[i][f]=inp.value;}else c[f]=inp.value;
+      clearTimeout(t);t=setTimeout(function(){paint();persist();},150);
+    });
+  });
+}
+function tagboxInner(c){
+  var full=(c.tags||[]).length>=TAG_MAX;
+  return '<input class="taginput" id="tagIn" maxlength="21" placeholder="'+(full?"最多 "+TAG_MAX+" 個標籤":"例如：原創、貓、咒術迴戰")+'" aria-label="新增標籤" enterkeyhint="done"'+(full?" disabled":"")+'>'+
+    ((c.tags||[]).length?'<div class="chips">'+tagChips(c.tags,true)+'</div>':'');
+}
+function labHtml(c){
+  if(!nm(c)&&!rl(c))return "";
+  return '<div class="lab">'+(nm(c)?'<div class="nm'+ph(c.name)+'">'+esc(nm(c))+'</div>':'')+(rl(c)?'<div class="rl'+ph(c.role)+'">'+esc(rl(c))+'</div>':'')+'</div>';
+}
 function ph(v){return v?"":" ph";}
 function cls(c){return "paper-"+c.paper+" surface-"+c.surface+(c.surface==="holo"?" holo-"+c.holo:"")+" tpl-"+c.tpl;}
 function frontInner(c){
   var h='<div class="art" style="'+artStyle(c)+'"></div>';
   if(c.tpl==="badge")h+='<div class="ring"></div>';
-  h+='<div class="lab"><div class="nm'+ph(c.name)+'">'+esc(nm(c))+'</div><div class="rl'+ph(c.role)+'">'+esc(rl(c))+'</div></div>';
-  h+='<div class="tg'+ph(c.tag)+'">'+esc(c.tag||"場次")+'</div>';
+  h+=labHtml(c);
+  if(tg(c))h+='<div class="tg'+ph(c.tag)+'">'+esc(tg(c))+'</div>';
   h+='<div class="tex"></div><div class="holo"></div><div class="sheen"></div>';
   return h;
 }
 function backInner(c){
-  var links=(c.links||[]).filter(function(l){return l.v;}).slice(0,3).map(function(l){return '<div><i>'+esc(l.l)+'</i>'+esc(l.v)+'</div>';}).join("");
-  return '<div class="bn'+ph(c.name)+'">'+esc(nm(c))+'</div><div class="br'+ph(c.role)+'">'+esc(rl(c))+'</div>'+'<div class="bt'+ph(c.tag)+'">'+esc(c.tag||"場次")+'</div>'+
-    '<div class="bl">'+links+'</div><div class="bq">'+qrSvg(shareUrl(c),1)+'</div><div class="sheen"></div>';
+  // 已知平台顯示圖示；「其他」沒有圖示，顯示使用者自己取的名稱
+  var links=(c.links||[]).filter(function(l){return l&&l.v;}).slice(0,3).map(function(l){var k=platOf(l);
+    return '<div>'+(k!=="other"?'<span class="bi" role="img" aria-label="'+esc(PLATS[k].name)+'">'+PLATS[k].ic+'</span>':(l.l?'<i>'+esc(l.l)+'</i>':''))+esc(l.v)+'</div>';}).join("");
+  return (nm(c)?'<div class="bn'+ph(c.name)+'">'+esc(nm(c))+'</div>':'')+(rl(c)?'<div class="br'+ph(c.role)+'">'+esc(rl(c))+'</div>':'')+(tg(c)?'<div class="bt'+ph(c.tag)+'">'+esc(tg(c))+'</div>':'')+
+    '<div class="bl">'+links+'</div><div class="bq">'+qrSvg(shareUrl(c),2,backColors(c).fg,null)+'</div><div class="sheen"></div>';
 }
 function liveCard(c,box,opts){
   opts=opts||{};
@@ -531,15 +647,26 @@ function liveCard(c,box,opts){
   var edges="";for(var z=6;z>=1;z--)edges+='<div class="edge" style="--z:'+z+'"></div>';
   return '<div class="scene'+(opts.still?" still":"")+'" data-scene><div class="flipper'+(opts.flipped?" flipped":"")+'" '+(opts.noflip?"":'data-act="flip" role="button" tabindex="0" aria-label="翻面"')+'>'+
    '<div class="card3d '+cls(c)+'" style="--w:'+s.w+'px;--h:'+s.h+'px;--r:'+r+'px;font-size:'+fs+'px">'+edges+
-   '<div class="face front">'+frontInner(c)+'</div><div class="face back">'+backInner(c)+'</div></div></div><div class="shadow"></div></div>';
+   '<div class="face front">'+frontInner(c)+'</div><div class="face back" style="'+backStyle(c)+'">'+backInner(c)+'</div></div></div><div class="shadow"></div></div>';
 }
 // 裁切畫面用：只畫卡框（名字、徽章圈、白邊），圖片的位置挖空讓底下的圖透出來
 function tplOverlay(c,s){
   var fs=s.w*0.056,r=Math.max(4,Math.round(s.w*0.045)),h='<div class="hole"></div>';
   if(c.tpl==="badge")h+='<div class="ring"></div>';
-  h+='<div class="lab"><div class="nm'+ph(c.name)+'">'+esc(nm(c))+'</div><div class="rl'+ph(c.role)+'">'+esc(rl(c))+'</div></div>';
-  h+='<div class="tg'+ph(c.tag)+'">'+esc(c.tag||"場次")+'</div>';
+  h+=labHtml(c);
+  if(tg(c))h+='<div class="tg'+ph(c.tag)+'">'+esc(tg(c))+'</div>';
   return '<div class="flat card3d '+cls(c)+'" style="--w:'+s.w+'px;--h:'+s.h+'px;--r:'+r+'px;font-size:'+fs+'px;transform:none"><div class="face front">'+h+'</div></div>';
+}
+// 卡背底色：幾個固定的深色，文字和 QR 一律白色、QR 沒有白底（反白 QR；和規格書 §04 不同，收卡掃描要開反白辨識）
+var BACK_SWATCHES=[["#131726","深夜藍"],["#16161A","墨黑"],["#2A2150","深紫"],["#5A1F2E","酒紅"],["#1F3A2E","森綠"]];
+function backColors(c){
+  var ok=BACK_SWATCHES.some(function(o){return o[0]===c.backColor;});
+  return {bg:ok?c.backColor:"#131726",fg:"#F4F5F9"};
+}
+function backStyle(c){var b=backColors(c);return 'background:'+b.bg+(c.paper==="clear"?"99":"")+';color:'+b.fg;}
+function flatBack(c,box){
+  var s=fit(c.ratio,box[0],box[1]),fs=s.w*0.056,r=Math.max(4,Math.round(s.w*0.045));
+  return '<div class="flat card3d '+cls(c)+'" style="--w:'+s.w+'px;--h:'+s.h+'px;--r:'+r+'px;font-size:'+fs+'px;transform:none"><div class="face back" style="'+backStyle(c)+'">'+backInner(c)+'</div></div>';
 }
 function flatCard(c,box){
   var s=fit(c.ratio,box[0],box[1]),fs=s.w*0.056,r=Math.max(4,Math.round(s.w*0.045));
@@ -549,8 +676,8 @@ function flatCard(c,box){
 /* ---------------- screens ---------------- */
 var FLOWS=[
  {n:"0",t:"入口",items:[["home","首頁"]]},
- {n:"1",t:"創作者：做卡＋分享",items:[["c-upload","上傳主圖"],["c-template","選卡框"],["c-crop","裁切與比例"],["c-material","選材質"],["c-info","填資訊"],["c-key","編輯鑰匙・發布"],["c-done","完成・展示頁"],["c-show","出示 QR"],["c-share","曬卡圖・連結預覽"]]},
- {n:"2",t:"接收者：收卡＋卡冊",items:[["r-landing","掃到卡片"],["r-open","開卡動畫"],["r-album","卡冊"],["r-detail","卡片詳情"]]},
+ {n:"1",t:"創作者：做卡＋分享",items:[["c-upload","上傳主圖"],["c-template","選卡框"],["c-crop","裁切與比例"],["c-material","選材質"],["c-info","填正面"],["c-back","填背面"],["c-key","編輯鑰匙・發布"],["c-done","完成・展示頁"],["c-show","出示 QR"],["c-share","曬卡圖・連結預覽"]]},
+ {n:"2",t:"接收者：收卡＋卡冊",items:[["r-scan","收卡（掃 QR）"],["r-landing","掃到卡片"],["r-open","開卡動畫"],["r-album","卡冊"],["r-detail","卡片詳情"]]},
  {n:"3",t:"列印",items:[["p-paper","選紙"],["p-preview","平面化預覽"],["p-guide","7-11 列印步驟"]]}
 ];
 var NOTES={
@@ -559,14 +686,16 @@ var NOTES={
  "c-crop":"順序調整：先選卡框再裁切，裁切框上會疊著選好的卡框（規格書 V3 的順序是先裁切）。規格 §02：先選比例再裁，固定比例框，拖曳移動、滑桿（手機可雙指）縮放，不做旋轉。切換比例時框會重新置中。",
  "c-template":"卡框用程式畫，任何比例都套得上，不用每個比例各畫一次。三個都是示意，數量之後再決定。",
  "c-material":"規格 §01：紙質＋效果＋閃法，共 15 種組合。這張圖沒有透明背景，所以半透卡只會作用在白邊卡框上——這是規格裡寫的規則。",
- "c-info":"「場次」會變成收卡人卡冊的分組依據，所以放在這裡讓創作者填，收卡的人不用自己打。",
+ "c-info":"正面的資訊：名字、身分、活動名稱／場次（徽章卡框右上角會顯示）、標籤（不印在卡上，分類和搜尋用）。上方是即時預覽，不會自動轉。",
+ "c-back":"背面：底色（5 個固定深色）、最多三個連結。文字和 QR 都是白色、QR 沒有白底（反白 QR）——和規格書 §04「深色碼配淺色底」不同。iPhone 相機、Google Lens 讀得到，部分舊掃描 App 讀不到，所以「出示給人掃」仍然是白底黑碼；收卡掃描要開啟反白 QR 辨識。",
  "c-key":"規格 §03：編輯連結的三道保險。勾選「我已經存好」才能發布，這是整個編輯器裡唯一的攔截。",
  "c-done":"創作者自己看到的展示頁。點卡片可以翻面看背面。原型裡的連結是假的，不會真的打開。",
- "c-show":"規格 §04：出示模式卡片停止轉動，白底大 QR。原型裡的 QR 是真的，內容是示意網址。",
+ "c-show":"出示模式：卡片靜止不轉，下面接一截同寬的票根放 QR。預設深色票根＋白色 QR（反白 QR）；「掃不到？換成白底」一鍵換成白底黑碼，這台裝置會記住。卡片大小依畫面高度自動放到最大。原型裡的 QR 是真的，內容是示意網址。",
  "c-share":"規格 §07：曬卡圖放短網址文字＋角落小 QR；連結預覽（OG）是貼網址時平台長出來的那張圖。兩張都停在最美的那一格。",
+ "r-scan":"在網頁裡直接開相機掃 QR（瀏覽器相機權限＋ QR 解碼，要開啟反白 QR 辨識：卡背的 QR 是白色碼），不用切到相機 App，掃完也留在 coolee 裡。相機被拒或不方便掃時，可以輸入卡片代碼。原型不會真的開相機。",
  "r-landing":"別人掃到、還沒收藏的狀態。一個主要動作：收進卡冊。不需要註冊。",
- "r-open":"規格 §08：拆卡套、卡片翻過來、開始轉。動畫中點畫面可以跳過；動畫結束後點卡片會翻面。連結直接列在卡片下面，不用翻到背面才看得到。",
- "r-album":"按場次分組，同一格大小、卡片照原比例縮放。格子裡的卡都是靜止的，只有點開的那張會轉（省電）。",
+ "r-open":"收卡動畫（約 2 秒）：空卡套出現 → 卡片滑進卡套 → 光澤掃過 → 在卡套上蓋「場次・日期・收藏」章（章蓋在卡套上，不蓋到卡面）。動畫中點畫面可以跳過；減少動態效果時直接顯示結果。連結直接列在卡片下面，不用翻到背面才看得到。",
+ "r-album":"兩欄瀑布流，卡片照原比例、不裁切。「全部」依收到時間新到舊；「依收卡日」照粉絲收卡的日期分組（不靠創作者填的活動名稱，寫法不一或沒填都不影響）。格子裡的卡都是靜止的，只有點開的那張會轉（省電）。",
  "r-detail":"連結的位置跟收卡後那一頁一致：列在卡片下面，不用翻面。卡冊存的是收下那一刻的快照，連材質、比例一起存——創作者之後改了卡，你手上這張不會變，絕版卡。",
  "p-paper":"規格 §05：只做 ibon 買得到的兩種紙。價格是網路攻略整理的，以現場為準。",
  "p-preview":"平面化：閃光和厚度拿掉、半透卡變白底。這是實際會下載的檔案，4×6 是 JPG、A4 是兩頁 PDF（背面左右鏡像）。",
@@ -577,10 +706,11 @@ var RENDER={};
 var cleanup=null;
 
 function hdr(title,back,right){
-  return '<div class="hdr">'+(back?'<button class="iconbtn" data-go="'+back+'" aria-label="上一步">'+I.back+'</button>':'<span style="width:40px"></span>')+
-   '<div class="t">'+title+'</div>'+(right||'<span style="width:40px"></span>')+'</div>';
+  return '<div class="hdr">'+(back?'<button class="iconbtn" data-go="'+back+'" aria-label="上一步">'+I.back+'</button>':'<span style="width:44px"></span>')+
+   '<div class="t">'+title+'</div>'+(right||'<span style="width:44px"></span>')+'</div>';
 }
-function stepTag(n){return '<span class="step">'+n+' / 6</span>';}
+function stepTag(n){return '<span class="step">'+n+' / 7</span>';}
+var PREV_BOX=[168,224];   // 填正面、填背面上方的預覽大小
 
 function demoCards(){
   var im=function(n){return {type:"img",src:"assets/demo-"+n+".webp",w:1024,h:1536,alpha:false};};
@@ -589,7 +719,7 @@ function demoCards(){
    {id:"h2",code:"Zk4v8N",art:im(2),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"texture",surface:"matte",holo:"flow",name:"紅心魔術師",role:"同人插畫 ／ 攤位 B03",tag:"CWT68",links:[{l:"X",v:"@heart_joker"}]},
    {id:"h3",code:"Wd9s3T",art:im(3),ratio:"3:4",zoom:1,cx:.5,cy:.4,tpl:"white",paper:"smooth",surface:"gloss",holo:"grid",name:"晴天滑板",role:"插畫 ／ 委託開放中",tag:"開拓動漫祭",links:[{l:"噗浪",v:"sunny_skate"}]},
    {id:"h4",code:"Lm2x7P",art:im(4),ratio:"3:4",zoom:1,cx:.5,cy:.4,tpl:"white",paper:"texture",surface:"holo",holo:"flow",name:"紫苑信箋",role:"插畫 ／ 攤位 E07",tag:"PF40",links:[{l:"IG",v:"@shion_letter"}]},
-   {id:"h5",code:"Rt6c1K",art:im(5),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"smooth",surface:"holo",holo:"sparkle",name:"晴空製圖",role:"同人插畫 ／ 攤位 A22",tag:"CWT68",links:[{l:"X",v:"@clear_sky_art"}]}
+   {id:"h5",code:"Rt6c1K",art:im(5),ratio:"2:3",zoom:1,cx:.5,cy:.5,tpl:"bleed",paper:"smooth",surface:"holo",holo:"sparkle",name:"晴空製圖",role:"同人插畫 ／ 攤位 A22",tag:"CWT68",tags:["咒術迴戰","五條悟","同人插畫"],links:[{l:"X",v:"@clear_sky_art"}]}
   ];
   return demo;
 }
@@ -613,7 +743,8 @@ RENDER["home"]=function(){
    U(I.album,"被收藏","粉絲的卡冊裡留著你，回家還記得你是誰")+
    '</ul>'+
    '<button class="entry hero" data-act="newCard"><span class="ic">'+I.plus+'</span><span><b>做一張我的卡</b><small>兩分鐘，不用註冊帳號</small></span></button>'+
-   '<button class="entry" data-go="r-album"><span class="ic">'+I.album+'</span><span><b>我的卡冊</b><small>'+(n?"已經收了 "+n+" 張，照場次整理好了":"收到的卡會照場次自動整理")+'</small></span></button>'+
+   '<div class="entryrow"><button class="entry" data-go="r-scan"><span class="ic">'+I.qr+'</span><span><b>收卡</b><small>掃對方的 QR</small></span></button>'+
+   '<button class="entry" data-go="r-album"><span class="ic">'+I.album+'</span><span><b>我的卡冊</b><small>'+(n?"已經收了 "+n+" 張":"收到的卡都在這裡")+'</small></span></button></div>'+
    '<button class="proto" data-go="r-landing">模擬：我是粉絲，剛掃到一張卡</button></div>',
    mount:function(){
      var i=0,front=document.getElementById("heroFront"),pl=document.getElementById("peekL"),pr=document.getElementById("peekR"),dots=document.getElementById("dots");
@@ -650,8 +781,8 @@ RENDER["c-crop"]=function(){
   return {html:hdr("裁切與比例","c-template",stepTag(3))+
    '<div class="body"><div class="crop-stage" id="cropStage"><img id="cropImg" src="'+imgSrc(c.art)+'" alt=""><div class="crop-frame" id="cropFrame"></div><div class="crop-tpl" id="cropTpl"></div></div>'+
    '<div class="zoomrow">'+I.zoomS+'<input type="range" id="zoom" min="1" max="3" step="0.01" value="'+c.zoom+'" aria-label="縮放">'+I.zoomL+'</div>'+
-   '<div class="lbl">比例<span>印出來的尺寸</span></div><div class="pills">'+
-   ["1:1","3:4","2:3"].map(function(r){return '<button class="pill'+(c.ratio===r?" on":"")+'" data-act="ratio" data-v="'+r+'">'+r+' · '+MM[r][0]+'×'+MM[r][1]+'mm</button>';}).join("")+
+   '<div class="lbl">比例</div><div class="pills">'+
+   ["1:1","3:4","2:3"].map(function(r){return '<button class="pill'+(c.ratio===r?" on":"")+'" data-act="ratio" data-v="'+r+'">'+r+(r==="2:3"?"（明信片）":"")+'</button>';}).join("")+
    '</div><p class="hint">拖曳圖片調整位置，滑桿縮放。切換比例時會重新置中。<br>框上疊的是你選的卡框，框內就是卡片上會出現的畫面。</p></div>'+
    '<div class="foot"><button class="btn primary" data-go="c-material">下一步：選材質</button></div>',
    mount:mountCrop};
@@ -707,43 +838,76 @@ RENDER["c-material"]=function(){
    '<div class="lbl">紙質<span>這是什麼卡</span></div>'+pills("paper",[["smooth","光滑卡紙"],["texture","紋理紙"],["clear","半透卡"]])+hint+
    '<div class="lbl">效果<span>表面怎麼反光</span></div>'+pills("surface",[["matte","霧面"],["gloss","亮面"],["holo","閃閃"]])+
    (c.surface==="holo"?'<div class="lbl">閃法<span>閃的樣子</span></div>'+pills("holo",[["flow","流光"],["sparkle","星砂"],["grid","格紋"]]):'')+'</div>'+
-   '<div class="foot"><button class="btn primary" data-go="c-info">下一步：填資訊</button></div>'};
+   '<div class="foot"><button class="btn primary" data-go="c-info">下一步：填正面</button></div>'};
 };
 
 RENDER["c-info"]=function(){
   var c=S.card;
-  var links=[0,1,2].map(function(i){var l=c.links[i]||{l:"",v:""};return '<div class="linkrow"><input class="input" data-link="'+i+'" data-f="l" value="'+esc(l.l)+'" placeholder="名稱" aria-label="連結名稱 '+(i+1)+'"><input class="input" data-link="'+i+'" data-f="v" value="'+esc(l.v)+'" placeholder="帳號或網址" aria-label="連結內容 '+(i+1)+'"></div>';}).join("");
-  return {html:hdr("填資訊","c-material",stepTag(5))+
-   '<div class="body"><div style="display:flex;gap:16px;align-items:center;margin:4px 0 16px"><div id="miniPrev">'+flatCard(c,[92,120])+'</div><p class="hint" style="margin:0">名字和身分會印在正面，連結和 QR 在背面。背面只放得下前三個連結。</p></div>'+
-   '<label class="field"><span>名字</span><input class="input" data-f="name" value="'+esc(c.name)+'" maxlength="20" placeholder="例如：夜貓 Nyx"></label>'+
-   '<label class="field"><span>身分・一句話</span><input class="input" data-f="role" value="'+esc(c.role)+'" maxlength="28" placeholder="例如：插畫 ／ 攤位 A15"></label>'+
-   '<label class="field"><span>場次</span><input class="input" data-f="tag" value="'+esc(c.tag)+'" maxlength="16" placeholder="例如：CWT68"></label>'+
-   '<div class="pills" style="margin:-4px 0 14px">'+["CWT68","FF44","開拓動漫祭"].map(function(t){return '<button class="pill'+(c.tag===t?" on":"")+'" data-act="tagpick" data-v="'+t+'">'+t+'</button>';}).join("")+'</div>'+
-   '<div class="field"><span>連結（背面）</span></div>'+links+'</div>'+
+  // 場次膠囊：只列這台裝置之前發布過的卡填過的場次，最新的在前，最多 5 個
+  var usedEvents=[];S.mine.forEach(function(m){if(m.tag&&usedEvents.indexOf(m.tag)<0)usedEvents.push(m.tag);});usedEvents=usedEvents.slice(0,5);
+  return {html:hdr("填正面","c-material",stepTag(5))+
+   '<div class="body"><div class="editprev"><div id="miniPrev">'+flatCard(c,PREV_BOX)+'</div><span class="side">正面</span></div>'+
+   '<label class="field"><span>名字（選填）</span><input class="input" data-f="name" value="'+esc(c.name)+'" maxlength="20" placeholder="例如：夜貓 Nyx"></label>'+
+   '<label class="field"><span>身分・一句話（選填）</span><input class="input" data-f="role" value="'+esc(c.role)+'" maxlength="28" placeholder="例如：插畫 ／ 攤位 A15"></label>'+
+   '<label class="field"><span>活動名稱／場次（選填）</span><input class="input" data-f="tag" value="'+esc(c.tag)+'" maxlength="16" placeholder="例如：CWT68"></label>'+
+   (usedEvents.length?'<div class="pills" style="margin:-4px 0 14px">'+usedEvents.map(function(t){return '<button class="pill'+(c.tag===t?" on":"")+'" data-act="tagpick" data-v="'+esc(t)+'">'+esc(t)+'</button>';}).join("")+'</div>':'')+
+   '<div class="field"><span>標籤（選填）</span></div>'+
+   '<div class="tagbox" id="tagbox">'+tagboxInner(c)+'</div>'+
+   '<p class="hint" style="margin:6px 0 16px">輸入後按 Enter 或逗號加入，最多 '+TAG_MAX+' 個。標籤不會印在卡上，是用來幫卡片分類，之後可以用標籤找到相關的卡。</p></div>'+
+   '<div class="foot"><button class="btn primary" data-go="c-back">下一步：填背面</button></div>',
+   mount:function(){
+     // 標籤：只重畫標籤區，不重畫整頁（離開輸入框直接按「下一步」時，才不會吃掉那一下）
+     var box=document.getElementById("tagbox");
+     function paintTags(focus){box.innerHTML=tagboxInner(c);bindTag();var n=document.getElementById("tagIn");if(focus&&n)n.focus();}
+     function bindTag(){
+       var ti=document.getElementById("tagIn");if(!ti)return;
+       var commit=function(focus){var v=ti.value;if(!v.trim())return;ti.value="";addTags(c,v);persist();paintTags(focus);};
+       ti.addEventListener("keydown",function(e){if(e.isComposing||e.keyCode===229)return;   // 中文輸入法選字時的 Enter 不算
+         if(e.key==="Enter"){e.preventDefault();commit(true);}
+         else if(e.key==="Backspace"&&!ti.value&&c.tags.length){c.tags.pop();persist();paintTags(true);}});
+       ti.addEventListener("input",function(){if(/[,，、]/.test(ti.value))commit(true);});
+       ti.addEventListener("blur",function(){commit(false);});
+     }
+     bindTag();
+     bindFields(c,function(){document.getElementById("miniPrev").innerHTML=flatCard(c,PREV_BOX);});
+   }};
+};
+
+// ---- 第 6 步：填背面（連結）。上方即時顯示卡背，不會自動轉
+RENDER["c-back"]=function(){
+  var c=S.card;
+  c.links=c.links||[];for(var li=0;li<3;li++){if(!c.links[li])c.links[li]={p:PLAT_DEFAULT[li],l:PLATS[PLAT_DEFAULT[li]].l,v:""};}   // 三列都補齊，存檔時才不會有空洞
+  return {html:hdr("填背面","c-info",stepTag(6))+
+   '<div class="body"><div class="editprev"><div id="miniPrev">'+flatBack(c,PREV_BOX)+'</div><span class="side">背面</span></div>'+
+   '<div class="field"><span>背面底色</span></div><div class="swatches">'+BACK_SWATCHES.map(function(o){var on=backColors(c).bg===o[0];
+      return '<button type="button" class="sw'+(on?" on":"")+'" data-act="backColor" data-v="'+o[0]+'" aria-label="'+o[1]+'" aria-pressed="'+on+'" style="background:'+o[0]+'"></button>';}).join("")+'</div>'+
+   '<p class="hint" style="margin:6px 0 16px">'+esc(BACK_SWATCHES.filter(function(o){return o[0]===backColors(c).bg;})[0][1])+'。文字和 QR 都是白色。</p>'+
+   '<p class="hint" style="margin:0 0 14px">背面放連結和 QR，粉絲掃了就能收卡。只放得下三個連結。</p>'+
+   '<div class="field"><span>連結（選填）</span></div>'+linkRows(c)+'</div>'+
    '<div class="foot"><button class="btn primary" data-go="c-key">下一步：發布</button></div>',
    mount:function(){
-     var t=null;document.querySelectorAll("[data-f]").forEach(function(inp){
-       inp.addEventListener("input",function(){
-         var f=inp.getAttribute("data-f"),li=inp.getAttribute("data-link");
-         if(li!=null){var i=+li;c.links[i]=c.links[i]||{l:"",v:""};c.links[i][f]=inp.value;}else c[f]=inp.value;
-         clearTimeout(t);t=setTimeout(function(){document.getElementById("miniPrev").innerHTML=flatCard(c,[92,120]);persist();},180);
-       });
-     });
+     // 換平台：更新簡稱（「其他」讓使用者自己取名），重畫這一頁
+     document.querySelectorAll("[data-plat]").forEach(function(sel){sel.addEventListener("change",function(){
+       var i=+sel.getAttribute("data-plat"),k=sel.value,old=c.links[i]||{v:""};
+       c.links[i]={p:k,l:k==="other"?"":PLATS[k].l,v:old.v||""};persist();go("c-back");
+     });});
+     bindFields(c,function(){document.getElementById("miniPrev").innerHTML=flatBack(c,PREV_BOX);});
    }};
 };
 
 RENDER["c-key"]=function(){
   var c=S.card,k=S.keySteps;
-  return {html:hdr("發布前","c-info",stepTag(6))+
+  return {html:hdr("發布前","c-back",stepTag(7))+
    '<div class="body"><h2 class="big">先把編輯鑰匙存好</h2><p class="lead">這一版不用註冊帳號。之後要改這張卡，靠的是下面這條編輯連結。</p>'+
    '<div class="keycard"><div class="kh">'+I.key+'編輯連結・只給自己</div><p>拿到這條連結的人都能修改你的卡。不要貼到社群，也不要放進 QR。</p>'+
    '<div class="urlbox"><code>'+esc(editUrl(c))+'</code><button class="btn sm" data-act="copyEdit">'+I.copy+'複製</button></div></div>'+
    '<ul class="safe">'+
    '<li class="'+(k.copy?"done":"")+'"><span class="n">1</span><span><b>複製並存到書籤或傳給自己</b><small>'+(k.copy?"已複製":"按上面的複製")+'</small></span></li>'+
    '<li class="'+(k.image?"done":"")+'"><span class="n">2</span><span><b>存一張鑰匙卡到相簿</b><small>比書籤更不容易弄丟</small></span><button class="btn sm" data-act="keyImg">'+I.dl+'存圖</button></li>'+
-   '<li class="done"><span class="n">3</span><span><b>這台裝置會記住</b><small>用同一支手機回來，不需要連結就能改</small></span></li></ul>'+
-   '<label class="check"><input type="checkbox" id="keyOk" '+(S.keyChecked?"checked":"")+'>我已經存好編輯連結了</label></div>'+
-   '<div class="foot"><button class="btn primary" id="pubBtn" data-act="publish" '+(S.keyChecked?"":"disabled")+'>發布這張卡</button></div>',
+   '</ul></div>'+
+   // 必勾的確認和發布按鈕放在一起：勾完馬上就能按
+   '<div class="foot stack"><label class="check plain"><input type="checkbox" id="keyOk" '+(S.keyChecked?"checked":"")+'>我已經存好編輯連結了</label>'+
+   '<button class="btn primary" id="pubBtn" data-act="publish" '+(S.keyChecked?"":"disabled")+'>發布這張卡</button></div>',
    mount:function(){var cb=document.getElementById("keyOk");cb.addEventListener("change",function(){S.keyChecked=cb.checked;document.getElementById("pubBtn").disabled=!cb.checked;});}};
 };
 
@@ -761,13 +925,31 @@ RENDER["c-done"]=function(){
    '<button class="proto" data-go="r-landing">模擬：粉絲掃到一張卡之後看到什麼</button></div>'};
 };
 
+// 出示給人掃：卡片下面接一截同寬的票根，票根上是 QR。
+// 預設深色票根＋白色 QR；「掃不到？換成白底」一鍵換成白底黑碼（最保險），這台裝置會記住
+function ticketHtml(c,W,light){
+  var h=Math.round(W/RATIO[c.ratio]);
+  return '<div class="ticket'+(light?" light":"")+'" style="width:'+W+'px;--ch:'+h+'px">'+flatCard(c,[W,h])+
+    '<div class="stub">'+(light?qrSvg(shareUrl(c),2):qrSvg(shareUrl(c),2,"#F4F5F9",null))+'<b>掃我收卡</b><small class="mono">'+esc(DOMAIN+"/c/"+c.code)+'</small></div></div>';
+}
 RENDER["c-show"]=function(){
-  var c=S.card;
-  return {cls:"show",html:'<div class="hdr"><span style="width:40px"></span><div class="t">出示給人掃</div><button class="iconbtn" data-go="c-done" aria-label="關閉">'+I.close+'</button></div>'+
-   '<div class="body" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:4px">'+
-   '<div style="display:flex;gap:12px;align-items:center;align-self:stretch;background:#fff;border-radius:16px;padding:10px 14px;box-shadow:0 8px 20px -14px rgba(20,23,34,.4)">'+flatCard(c,[46,60])+'<div><b style="display:block;font-size:15px">'+esc(nm(c))+'</b><small style="color:#6b7085;font-size:13px">'+esc(rl(c))+'</small></div></div>'+
-   '<div class="qrpanel" style="width:100%">'+qrSvg(shareUrl(c),2)+'<b>掃我收卡</b><small class="mono">'+esc(DOMAIN+"/c/"+c.code)+'</small></div>'+
-   '<p style="font-size:12px;color:#6b7085;margin:0">螢幕亮度已調到最高（示意）</p></div>'};
+  var c=S.card,light=!!lsGet("cc_proto_qrlight");
+  return {html:'<div class="hdr"><span style="width:44px"></span><div class="t">出示給人掃</div><button class="iconbtn" data-go="c-done" aria-label="關閉">'+I.close+'</button></div>'+
+   '<div class="body showbody"><div id="ticketBox">'+ticketHtml(c,220,light)+'</div>'+
+   '<button class="btn sm" id="qrLight" type="button">'+(light?"換回深色":"掃不到？換成白底")+'</button>'+
+   '<p class="showhint">螢幕亮度已調到最高（示意）</p></div>',
+   mount:function(){
+     var box=document.getElementById("ticketBox"),btn=document.getElementById("qrLight"),body=box.parentNode;
+     // 依畫面高度把卡片放到最大：票根高 ≈ 卡寬 + 46（QR 和文字），整張 = 卡高 + 票根
+     function size(){
+       var avail=body.clientHeight-btn.offsetHeight-100,r=RATIO[c.ratio];   // 100＝上下間距＋提示文字＋底部留白
+       var W=Math.floor(Math.max(150,Math.min(240,(avail-46)/(1/r+1),body.clientWidth-80)));
+       box.innerHTML=ticketHtml(c,W,light);
+     }
+     size();
+     btn.addEventListener("click",function(){light=!light;lsSet("cc_proto_qrlight",light);btn.textContent=light?"換回深色":"掃不到？換成白底";size();});
+     var ro=new ResizeObserver(size);ro.observe(body);cleanup=function(){ro.disconnect();};
+   }};
 };
 
 RENDER["c-share"]=function(){
@@ -782,11 +964,21 @@ RENDER["c-share"]=function(){
        if(!document.body.contains(area))return;
        var url=cv.toDataURL("image/png");
        area.innerHTML=t==="img"?'<img class="genimg" src="'+url+'" alt="曬卡圖預覽"><p class="hint">1080×1350。用手機滑到的人掃不了自己螢幕上的 QR，所以短網址文字比 QR 重要。</p>':
-        '<div class="ogmock"><img src="'+url+'" alt="連結預覽圖"><div><small>'+DOMAIN+'</small><b>'+esc(nm(S.card))+' 的卡・'+esc(S.card.tag)+'</b></div></div><p class="hint">把分享連結貼到 X、LINE、Discord 時會長出這張圖（1200×630）。卡片修改後要換圖片檔名，平台會快取舊的。</p>';
+        '<div class="ogmock"><img src="'+url+'" alt="連結預覽圖"><div><small>'+DOMAIN+'</small><b>'+(S.card.name?esc(S.card.name)+' 的卡':'一張 coolee 卡')+(S.card.tag?'・'+esc(S.card.tag):'')+'</b></div></div><p class="hint">把分享連結貼到 X、LINE、Discord 時會長出這張圖（1200×630）。卡片修改後要換圖片檔名，平台會快取舊的。</p>';
      });
    }};
 };
 
+// 收卡：在網頁裡直接開相機掃 QR，不用切到相機 App，掃完也留在 coolee 裡
+RENDER["r-scan"]=function(){
+  return {html:hdr("收卡","home","")+
+   '<div class="body"><div class="viewfinder" aria-label="相機畫面（示意）"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><div class="vf-line"></div></div>'+
+   '<p class="vf-tip">對準卡片背面，或對方手機上的 QR</p>'+
+   '<div class="lbl">沒辦法掃？<span>輸入卡片代碼</span></div>'+
+   '<div class="coderow"><input class="input" id="codeIn" maxlength="6" placeholder="例如：Ab3k9Q" aria-label="卡片代碼" autocomplete="off"><button class="btn sm" data-act="codeGo">收卡</button></div>'+
+   '<p class="hint">代碼是分享連結最後那一段：coolee.example/c/<b>Ab3k9Q</b></p>'+
+   '<button class="proto" data-go="r-landing">模擬：掃到一張卡</button></div>'};
+};
 RENDER["r-landing"]=function(){
   var c=recvCard(),has=S.album.some(function(a){return a.code===c.code;});
   return {html:hdr("","home","")+
@@ -796,27 +988,33 @@ RENDER["r-landing"]=function(){
 };
 
 RENDER["r-open"]=function(){
-  var c=recvCard(),s=fit(c.ratio,196,258),res=addToAlbum(c);
+  var c=recvCard(),box=[264,372],s=fit(c.ratio,box[0],box[1]),res=addToAlbum(c),today=new Date();
   return {html:'<div class="body" style="padding:0"><div class="open-stage s0" id="openStage" data-act="skipOpen">'+
    '<div class="burst"></div>'+
-   '<div class="pack" style="width:'+(s.w+26)+'px;height:'+(s.h+40)+'px"><div class="packtop"></div><div class="pl">COOLEE<small>'+esc(nm(c))+'</small></div></div>'+
-   '<div class="cardslot">'+liveCard(c,[196,258],{flipped:true,still:true})+'</div>'+
+   '<div class="cardslot"><div class="sleeve-wrap" style="width:'+(s.w+16)+'px;height:'+(s.h+16)+'px">'+
+    '<div class="incard">'+flatCard(c,box)+'</div><div class="sleeve"><div class="shine"></div></div>'+
+    '<div class="cstamp'+(c.tag?"":" noev")+'"><div>'+(c.tag?'<b>'+esc(c.tag)+'</b>':'')+(today.getMonth()+1)+'/'+today.getDate()+'<br>收藏</div></div></div></div>'+
    '<button class="skip" type="button">跳過</button>'+
-   '<div class="open-msg"><b>'+(res.again?"這張卡已經更新":"收進卡冊了")+'</b><small>'+esc(res.entry.event)+' · '+(res.again?"第 "+res.entry.meets+" 次相遇":"今天第 "+res.entry.dayNo+" 張")+'</small>'+
-   '<div class="links2">'+(c.links||[]).filter(function(l){return l.v;}).slice(0,3).map(function(l){return '<button class="linkbtn" data-act="openLink"><i>'+esc(l.l)+'</i><b>'+esc(l.v)+'</b>'+I.ext+'</button>';}).join("")+'</div>'+
+   '<div class="open-msg"><b>'+(res.again?"這張卡已經更新":"收進卡冊了")+'</b><small>'+(c.tag?esc(c.tag)+' · ':'')+(res.again?"第 "+res.entry.meets+" 次相遇":"今天第 "+res.entry.dayNo+" 張")+'</small>'+
+   '<div class="links2">'+(c.links||[]).filter(function(l){return l&&l.v;}).slice(0,3).map(function(l){return '<button class="linkbtn" data-act="openLink"><i>'+esc(l.l)+'</i><b>'+esc(l.v)+'</b>'+I.ext+'</button>';}).join("")+'</div>'+
    '<button class="btn primary" data-go="r-album" style="width:100%">查看全部小卡</button></div></div></div>',
    mount:function(){
      var st=document.getElementById("openStage"),T=[];
-     function set(n){st.className="open-stage s"+n;}
-     function flipIn(){var f=st.querySelector(".flipper"),sc=st.querySelector("[data-scene]");if(f)f.classList.remove("flipped");setTimeout(function(){if(sc)sc.classList.remove("still");},750);}
-     var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-     if(reduce){set(5);flipIn();return;}
-     T.push(setTimeout(function(){set(1);},60));
-     T.push(setTimeout(function(){set(2);},700));
-     T.push(setTimeout(function(){set(3);},1200));
-     T.push(setTimeout(function(){set(4);flipIn();},1750));
-     T.push(setTimeout(function(){set(5);},2800));
-     st._skip=function(){T.forEach(clearTimeout);set(5);flipIn();};
+     function set(n){var k="open-stage";for(var i=0;i<=n;i++)k+=" s"+i;st.className=k;}   // 累加：s0 s1 … sn
+     // 最後把卡片放在「畫面頂端到訊息區」中間；小螢幕放不下就等比例縮小
+     function place(){
+       var slot=st.querySelector(".cardslot"),msg=st.querySelector(".open-msg"),H=st.clientHeight,h=slot.offsetHeight;
+       var top=56,bottom=msg.offsetTop-20,k=Math.min(1,(bottom-top)/h),mid=(top+bottom)/2;
+       st.style.setProperty("--place","translateY("+Math.round(mid-H/2)+"px) scale("+k.toFixed(3)+")");
+     }
+     place();
+     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){set(5);return;}
+     T.push(setTimeout(function(){set(1);},60));     // 空卡套出現
+     T.push(setTimeout(function(){set(2);},400));    // 卡片滑進卡套
+     T.push(setTimeout(function(){set(3);},1100));   // 落定、光澤掃過
+     T.push(setTimeout(function(){set(4);},1420));   // 蓋場次章
+     T.push(setTimeout(function(){set(5);},2000));   // 顯示訊息和連結
+     st._skip=function(){T.forEach(clearTimeout);set(5);};
      cleanup=function(){T.forEach(clearTimeout);};
    }};
 };
@@ -834,8 +1032,8 @@ RENDER["r-album"]=function(){
   var A=S.album;
   var body;
   if(!A.length){
-    body='<div class="empty"><div class="slots"><i></i><i></i><i></i></div><b>你的第一張卡會出現在這裡</b><p>在場次現場掃創作者的 QR，<br>收下的卡會照場次自動整理好。</p>'+
-     '<button class="btn primary" data-go="r-landing" style="width:100%">模擬掃一張卡</button><button class="proto" data-act="seed">塞 12 張示範卡，看卡冊變厚的樣子</button></div>';
+    body='<div class="empty"><div class="slots"><i></i><i></i><i></i></div><b>你的第一張卡會出現在這裡</b><p>在場次現場掃創作者的 QR，<br>收下的卡會依收到的日期整理好。</p>'+
+     '<button class="btn primary" data-go="r-scan" style="width:100%">收第一張卡</button><button class="proto" data-act="seed">塞 12 張示範卡，看卡冊變厚的樣子</button></div>';
   } else {
     // 兩欄瀑布流：卡片照順序一張張放進目前比較短的那一欄，比例不同也能上下接在一起
     var W=Math.floor((screenEl.clientWidth-40-12)/2);
@@ -843,16 +1041,19 @@ RENDER["r-album"]=function(){
       var cols=[[],[]],h=[0,0];
       list.forEach(function(a){
         var k=h[0]<=h[1]?0:1,isNew=a.id===S.lastAdded;h[k]+=W/RATIO[a.card.ratio]+12;
-        cols[k].push('<button class="acard'+(isNew?" new":"")+'" data-act="open" data-v="'+a.id+'" aria-label="'+esc(nm(a.card))+'">'+(isNew?'<span class="newtag">NEW</span>':'')+flatCard(a.card,[W,W*1.5])+'</button>');
+        cols[k].push('<button class="acard'+(isNew?" new":"")+'" data-act="open" data-v="'+a.id+'" aria-label="'+esc(a.card.name||"卡片")+'">'+(isNew?'<span class="newtag">NEW</span>':'')+flatCard(a.card,[W,W*1.5])+'</button>');
       });
       return '<div class="mason"><div>'+cols[0].join("")+'</div><div>'+cols[1].join("")+'</div></div>';
     };
-    var byEvent=S.albumView==="event",groups={},order=[];
-    A.forEach(function(a){if(!groups[a.event]){groups[a.event]=[];order.push(a.event);}groups[a.event].push(a);});
-    body='<div class="albumhead"><div><b>'+A.length+'</b> <small>張卡・'+order.length+' 個場次</small></div><button class="btn sm" data-go="r-landing">'+I.qr+'掃卡</button></div>'+
-     '<div class="tabs aview"><button class="'+(byEvent?"":"on")+'" data-act="aview" data-v="all">全部</button><button class="'+(byEvent?"on":"")+'" data-act="aview" data-v="event">依場次</button></div>'+
-     (byEvent?order.map(function(ev){var g=groups[ev],d=new Date(g[g.length-1].at);
-       return '<section class="evsec"><h5>'+esc(ev)+'<span>'+(d.getMonth()+1)+'/'+d.getDate()+' · '+g.length+' 張</span></h5>'+mason(g)+'</section>';}).join("")
+    // 依收卡日分組：只看粉絲自己收卡的日期，不靠創作者填的活動名稱（寫法不一、也可能沒填）
+    var byDay=S.albumView==="day",groups={},order=[],now=new Date();
+    var dayKey=function(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();};
+    var dayLabel=function(d){var w="日一二三四五六"[d.getDay()];return (d.getFullYear()!==now.getFullYear()?d.getFullYear()+"/":"")+(d.getMonth()+1)+"/"+d.getDate()+"（"+w+"）";};
+    A.forEach(function(a){var k=dayKey(new Date(a.at));if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(a);});
+    body='<div class="albumhead"><div><b>'+A.length+'</b> <small>張卡・'+order.length+' 天</small></div><button class="btn sm" data-go="r-scan">'+I.qr+'收卡</button></div>'+
+     '<div class="tabs aview"><button class="'+(byDay?"":"on")+'" data-act="aview" data-v="all">全部</button><button class="'+(byDay?"on":"")+'" data-act="aview" data-v="day">依收卡日</button></div>'+
+     (byDay?order.map(function(k){var g=groups[k],d=new Date(g[0].at),today=dayKey(d)===dayKey(now);
+       return '<section class="evsec"><h5>'+(today?"今天 ":"")+dayLabel(d)+'<span>'+g.length+' 張</span></h5>'+mason(g)+'</section>';}).join("")
       :mason(A))+
      '<button class="proto" data-act="seed">再塞 12 張示範卡</button>';
   }
@@ -864,9 +1065,10 @@ RENDER["r-detail"]=function(){
   if(!a){S.screen="r-album";return RENDER["r-album"]();}
   var c=a.card,d=new Date(a.at);
   var mat={smooth:"光滑卡紙",texture:"紋理紙",clear:"半透卡"}[c.paper]+" · "+{matte:"霧面",gloss:"亮面",holo:"閃閃"}[c.surface]+(c.surface==="holo"?"（"+{flow:"流光",sparkle:"星砂",grid:"格紋"}[c.holo]+"）":"");
-  return {html:hdr(esc(nm(c)),"r-album","")+
+  return {html:hdr(esc(c.name||"卡片詳情"),"r-album","")+
    '<div class="body"><div class="done-top" style="height:318px">'+liveCard(c,[206,254])+'</div>'+
-   '<div class="links2" style="margin-top:16px">'+(c.links||[]).filter(function(l){return l.v;}).slice(0,3).map(function(l){return '<button class="linkbtn" data-act="openLink"><i>'+esc(l.l)+'</i><b>'+esc(l.v)+'</b>'+I.ext+'</button>';}).join("")+'</div>'+
+   '<div class="links2" style="margin-top:16px">'+(c.links||[]).filter(function(l){return l&&l.v;}).slice(0,3).map(function(l){return '<button class="linkbtn" data-act="openLink"><i>'+esc(l.l)+'</i><b>'+esc(l.v)+'</b>'+I.ext+'</button>';}).join("")+'</div>'+
+   ((c.tags||[]).length?'<div class="chips" style="margin:14px 0 4px">'+tagChips(c.tags,false)+'</div>':'')+
    '<div class="inforows"><div><span>收到時間</span>'+(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,"0")+':'+String(d.getMinutes()).padStart(2,"0")+'</div>'+
    '<div><span>場次</span>'+esc(a.event)+'</div><div><span>當天第幾張</span>第 '+a.dayNo+' 張'+(a.meets>1?" · 相遇 "+a.meets+" 次":"")+'</div><div><span>材質（收下時的快照）</span>'+mat+'</div><div><span>比例</span>'+c.ratio+'</div></div>'+
    '<label class="field" style="margin-top:16px"><span>備註・只有你看得到</span><textarea class="input" id="note" placeholder="例如：做陶的，十月有新品">'+esc(a.note||"")+'</textarea></label></div>',
@@ -928,6 +1130,7 @@ fitDevice();addEventListener("resize",fitDevice);
 function go(id){if(!RENDER[id])return;S.screen=id;render();}
 function render(){
   if(cleanup){try{cleanup();}catch(e){}cleanup=null;}
+  EDITING=EDIT_STEPS.indexOf(S.screen)>=0;
   var r=RENDER[S.screen]();
   screenEl.className="screen "+(r.cls||"");
   screenEl.innerHTML=r.html;
@@ -940,7 +1143,7 @@ function render(){
 navEl.innerHTML=FLOWS.map(function(f){return '<div class="flow"><h4><i>'+f.n+'</i>'+f.t+'</h4><ol>'+f.items.map(function(it){return '<li><button type="button" data-nav="'+it[0]+'">'+it[1]+'</button></li>';}).join("")+'</ol></div>';}).join("");
 navEl.addEventListener("click",function(e){var b=e.target.closest("[data-nav]");if(b)go(b.getAttribute("data-nav"));});
 document.getElementById("menubtn").addEventListener("click",function(){document.getElementById("panel").classList.toggle("open");});
-document.getElementById("reset").addEventListener("click",function(){lsDel("cc_proto_state");lsDel("cc_proto_album");lsDel("cc_proto_img");lsDel("cc_proto_mine");S.mine=[];userImg=null;S.card=defaultCard();S.published=false;S.album=[];S.keySteps={copy:false,image:false};S.keyChecked=false;S.lastAdded=null;go("home");toast("原型已重設");});
+document.getElementById("reset").addEventListener("click",function(){lsDel("cc_proto_state");lsDel("cc_proto_album");lsDel("cc_proto_img");lsDel("cc_proto_mine");lsDel("cc_proto_qrlight");S.mine=[];userImg=null;S.card=defaultCard();S.published=false;S.album=[];S.keySteps={copy:false,image:false};S.keyChecked=false;S.lastAdded=null;go("home");toast("原型已重設");});
 
 var tt;function toast(m){toastEl.textContent=m;toastEl.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove("show");},1900);}
 function copyText(t,okMsg){
@@ -964,6 +1167,8 @@ screenEl.addEventListener("click",function(e){
     case "tpl":c.tpl=v;persist();go("c-template");break;
     case "set":c[a.getAttribute("data-k")]=v;persist();go("c-material");break;
     case "tagpick":c.tag=v;persist();go("c-info");break;
+    case "backColor":c.backColor=v;persist();go("c-back");break;
+    case "tagDel":c.tags.splice(+v,1);persist();go("c-info");break;
     case "copyEdit":copyText(editUrl(c),"編輯連結已複製");S.keySteps.copy=true;go("c-key");break;
     case "copyShare":copyText(shareUrl(c),"分享連結已複製");break;
     case "keyImg":makeKeyImage(c).then(function(cv){showImage(cv,"編輯鑰匙卡","coolee-編輯鑰匙.png",function(){S.keySteps.image=true;if(S.screen==="c-key")go("c-key");});});break;
@@ -971,6 +1176,7 @@ screenEl.addEventListener("click",function(e){
     case "newCard":if(S.published)startNewCard();go("c-upload");break;
     case "stab":S.shareTab=v;go("c-share");break;
     case "aview":S.albumView=v;go("r-album");break;
+    case "codeGo":if((document.getElementById("codeIn").value||"").trim().length<4){toast("請輸入卡片代碼");break;}go("r-landing");break;
     case "dlShare":makeShareImage(c).then(function(cv){showImage(cv,"曬卡圖","coolee-"+c.code+".png");});break;
     case "skipOpen":var st=document.getElementById("openStage");if(st&&st._skip&&!st.classList.contains("s5"))st._skip();break;
     case "seed":seedAlbum();go("r-album");toast("塞了 12 張示範卡");break;
@@ -1003,7 +1209,9 @@ document.getElementById("file").addEventListener("change",function(e){
 function seedAlbum(){
   var names=["汐見","小熊軟糖","Nori 海苔","藍鯨社","夏蟬","米果工房","貓頭鷹郵局","橘子汽水","雨天備忘","星野","綠豆椪","白湯"];
   var roles=["插畫","漫畫・新刊","原創周邊","同人小說","壓克力吊飾","貼紙・紙膠帶"];
-  var t0=new Date();t0.setHours(11,20,0,0);var evs=[["CWT68",t0],["FF44",new Date(2026,7,10,13)],["開拓動漫祭",new Date(2026,6,19,15)]];
+  // 示範卡要比卡冊裡已經收到的卡都舊，「全部」依時間排序時才不會插到真的卡前面
+  var oldest=S.album.reduce(function(m,a){return Math.min(m,new Date(a.at).getTime());},Date.now());
+  var t0=new Date(oldest-90*60000);var evs=[["CWT68",t0],["FF44",new Date(2026,7,10,13)],["開拓動漫祭",new Date(2026,6,19,15)]];
   var pal=[["#2f3369","#6b5898","#f2c6a2"],["#0f3b3a","#2f9e92","#e9f5c9"],["#3a1c3f","#b04a7a","#ffd1a8"],["#101c3b","#3b5bb5","#9fe1ff"],["#2b2118","#8a5a2b","#f5d9a0"],["#1d1238","#6a3fd1","#ff9ac4"]];
   var ratios=["1:1","3:4","2:3"],papers=["smooth","texture","clear"],surf=["matte","gloss","holo"],holos=["flow","sparkle","grid"],tpls=["badge","bleed","white"];
   for(var i=0;i<12;i++){
@@ -1026,7 +1234,7 @@ function fontsReady(text){
   if(!document.fonts||!document.fonts.load)return Promise.resolve();
   return Promise.all([document.fonts.load('700 40px "Noto Sans TC"',text),document.fonts.load('400 40px "Noto Sans TC"',text),document.fonts.load('400 40px "IBM Plex Mono"',"abc")]).catch(function(){});
 }
-function textOf(c){return [nm(c),rl(c),c.tag].concat((c.links||[]).map(function(l){return l.l+l.v;})).join("")+"掃我收卡或輸入網址收下這張卡編輯鑰匙不要給別人拿到的人都能改你的卡建立於";}
+function textOf(c){return [nm(c),rl(c),c.tag].concat((c.links||[]).filter(Boolean).map(function(l){return l.l+l.v;})).join("")+"掃我收卡或輸入網址收下這張卡編輯鑰匙不要給別人拿到的人都能改你的卡建立於";}
 function F(w,px){return w+" "+px+'px "Noto Sans TC","PingFang TC",sans-serif';}
 function ell(ctx,t,maxW){t=String(t||"");if(ctx.measureText(t).width<=maxW)return t;while(t.length&&ctx.measureText(t+"…").width>maxW)t=t.slice(0,-1);return t+"…";}
 function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
@@ -1055,7 +1263,7 @@ function drawFront(ctx,c,img,x,y,w,h,o){
       var ins=w*.045;ctx.strokeStyle="rgba(255,255,255,.8)";ctx.lineWidth=Math.max(1,w*.006);rrect(ctx,x+ins,y+ins,w-ins*2,h-ins*2,w*.025);ctx.stroke();
       ctx.font=F(700,fs*1.4);var nw=ctx.measureText(nm(c)).width;ctx.font=F(400,fs*.78);var rw=ctx.measureText(rl(c)).width;
       var bw=Math.min(w*.83,Math.max(nw,rw)+fs*1.7),bh=fs*2.85,bx=x+w*.085,by=y+h-w*.085-bh;
-      ctx.fillStyle="rgba(10,12,22,.66)";rrect(ctx,bx,by,bw,bh,fs*.7);ctx.fill();
+      if(nm(c)||rl(c)){ctx.fillStyle="rgba(10,12,22,.66)";rrect(ctx,bx,by,bw,bh,fs*.7);ctx.fill();}
       ctx.fillStyle="#fff";ctx.font=F(700,fs*1.4);ctx.fillText(ell(ctx,nm(c),bw-fs*1.7),bx+fs*.85,by+fs*1.55);
       ctx.globalAlpha=.85;ctx.font=F(400,fs*.78);ctx.fillText(ell(ctx,rl(c),bw-fs*1.7),bx+fs*.85,by+fs*2.45);ctx.globalAlpha=1;
       if(c.tag){ctx.font='400 '+(fs*.62)+'px "IBM Plex Mono",monospace';var tw=ctx.measureText(c.tag).width+fs*1.4,th=fs*1.2,tx=x+w-w*.085-tw,ty=y+w*.085;
@@ -1075,16 +1283,18 @@ function drawFront(ctx,c,img,x,y,w,h,o){
 function drawBack(ctx,c,x,y,w,h,o){
   o=o||{};var fs=w*0.056,light=c.tpl==="white";ctx.save();
   if(o.round){rrect(ctx,x,y,w,h,w*0.045);ctx.clip();}
-  ctx.fillStyle=light?paperFill(c,true):"#131726";ctx.fillRect(x,y,w,h);
-  var fg=light?"#1b1d26":"#E6E8F0",pad=w*.09;
+  var bc=backColors(c);ctx.fillStyle=bc.bg;ctx.fillRect(x,y,w,h);
+  var fg=bc.fg,pad=w*.09;
   ctx.fillStyle=fg;ctx.font=F(700,fs*1.3);ctx.textBaseline="top";ctx.fillText(ell(ctx,nm(c),w-pad*2),x+pad,y+pad);
   ctx.globalAlpha=.7;ctx.font=F(400,fs*.74);ctx.fillText(ell(ctx,rl(c),w-pad*2),x+pad,y+pad+fs*1.75);ctx.globalAlpha=1;
   if(c.tag){ctx.font='400 '+(fs*.6)+'px "IBM Plex Mono",monospace';var tw=ctx.measureText(c.tag).width+fs*1.4,th=fs*1.15,ty=y+pad+fs*3.1;
     ctx.globalAlpha=.7;ctx.strokeStyle=fg;ctx.lineWidth=Math.max(1,w*.003);rrect(ctx,x+pad,ty,tw,th,th/2);ctx.stroke();ctx.fillText(c.tag,x+pad+fs*.7,ty+th*.18);ctx.globalAlpha=1;}
-  var qs=w*.38,qx=x+w-w*.08-qs,qy=y+h-w*.08-qs;
-  ctx.fillStyle="#fff";rrect(ctx,qx,qy,qs,qs,fs*.4);ctx.fill();drawQR(ctx,shareUrl(c),qx+qs*.05,qy+qs*.05,qs*.9,1);
-  var links=(c.links||[]).filter(function(l){return l.v;}).slice(0,3),ly=y+h-w*.08-links.length*fs*1.05;
-  links.forEach(function(l,i){ctx.fillStyle=fg;ctx.globalAlpha=.55;ctx.font='400 '+(fs*.62)+'px "IBM Plex Mono",monospace';var lw=ctx.measureText(l.l).width;ctx.fillText(l.l,x+pad,ly+i*fs*1.05);
+  var qs=w*.40,qx=x+w-w*.07-qs,qy=y+h-w*.07-qs;
+  drawQR(ctx,shareUrl(c),qx,qy,qs,2,fg,null);   // 白色 QR、沒有白底
+  var links=(c.links||[]).filter(function(l){return l&&l.v;}).slice(0,3),ly=y+h-w*.08-links.length*fs*1.05;
+  links.forEach(function(l,i){var k=platOf(l),rowY=ly+i*fs*1.05,lw;ctx.fillStyle=fg;ctx.globalAlpha=.8;
+    if(k!=="other"){lw=fs*.86;drawPlatIcon(ctx,k,x+pad,rowY-fs*.1,lw,fg);}
+    else{ctx.globalAlpha=.55;ctx.font='400 '+(fs*.62)+'px "IBM Plex Mono",monospace';lw=ctx.measureText(l.l).width;ctx.fillText(l.l,x+pad,rowY);}
     ctx.globalAlpha=1;ctx.font=F(400,fs*.66);ctx.fillText(ell(ctx,l.v,w*.52-lw-fs*.4),x+pad+lw+fs*.4,ly+i*fs*1.05);});
   ctx.restore();
 }
@@ -1128,7 +1338,7 @@ function makeKeyImage(c){
     var W=1080,H=1350,cv=document.createElement("canvas");cv.width=W;cv.height=H;var x=cv.getContext("2d");
     x.fillStyle="#EEF0F6";x.fillRect(0,0,W,H);
     x.fillStyle="#141722";x.textBaseline="alphabetic";x.font=F(700,72);x.fillText("編輯鑰匙",90,180);
-    x.fillStyle="#5c6275";x.font=F(400,32);x.fillText("用這條連結修改你的卡：「"+ell(x,nm(c),420)+"」",90,236);
+    x.fillStyle="#5c6275";x.font=F(400,32);x.fillText(nm(c)?"用這條連結修改你的卡：「"+ell(x,nm(c),420)+"」":"用這條連結修改你的卡",90,236);
     var s=cardSize(c,300,420);x.save();x.shadowColor="rgba(20,23,34,.35)";x.shadowBlur=30;x.shadowOffsetY=16;x.fillStyle="#000";rrect(x,90,300,s[0],s[1],s[0]*.045);x.fill();x.restore();
     drawFront(x,c,img,90,300,s[0],s[1],{round:true});
     x.fillStyle="#FFE3DD";rrect(x,90,790,W-180,150,22);x.fill();
