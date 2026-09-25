@@ -1,0 +1,17 @@
+{
+  "name": "Cooca",
+  "short_name": "Cooca",
+  "description": "把你的圖變成一張數位酷卡，互相掃 QR 就能交換。",
+  "lang": "zh-Hant",
+  "start_url": "./coolcard-prototype.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1119",
+  "theme_color": "#0E1119",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
